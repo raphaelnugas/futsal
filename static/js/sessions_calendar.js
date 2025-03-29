@@ -52,18 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
  * Configura os listeners de eventos
  */
 function setupEventListeners() {
-    // Fechar modal de criação
-    if (closeCreateSessionModal) {
-        closeCreateSessionModal.addEventListener('click', () => {
-            toggleModal('create-session-modal', false);
-        });
-    }
-    
-    // Cancelar criação
-    if (cancelCreateSession) {
-        cancelCreateSession.addEventListener('click', () => {
-            toggleModal('create-session-modal', false);
-        });
+    // Inicializar o modal Bootstrap se o elemento existir
+    if (createSessionModal) {
+        try {
+            createSessionModal.bsModal = new bootstrap.Modal(createSessionModal);
+        } catch (error) {
+            console.error('Erro ao inicializar o modal Bootstrap:', error);
+        }
     }
     
     // Confirmar criação
@@ -78,12 +73,6 @@ function setupEventListeners() {
     
     if (nextMonthBtn) {
         nextMonthBtn.addEventListener('click', goToNextMonth);
-    }
-    
-    // Configuração do modal usando Bootstrap
-    if (createSessionModal) {
-        // Não é mais necessário usar setupModalOutsideClick pois estamos usando o Bootstrap Modal
-        console.info('setupModalOutsideClick não é mais necessário para o modal create-session-modal');
     }
 }
 
@@ -410,8 +399,18 @@ function openCreateSessionModal(date) {
         activeSessionWarning.style.display = 'none';
     }
     
+    // Criar a instância do modal Bootstrap se ainda não existir
+    if (!createSessionModal.bsModal) {
+        try {
+            createSessionModal.bsModal = new bootstrap.Modal(createSessionModal);
+        } catch (error) {
+            console.error('Erro ao criar a instância do Bootstrap Modal:', error);
+            return;
+        }
+    }
+    
     // Exibir o modal
-    toggleModal('create-session-modal', true);
+    createSessionModal.bsModal.show();
 }
 
 /**
@@ -425,7 +424,11 @@ async function createSession() {
     
     try {
         showLoading(true);
-        toggleModal('create-session-modal', false);
+        
+        // Fechar o modal usando a API do Bootstrap
+        if (createSessionModal && createSessionModal.bsModal) {
+            createSessionModal.bsModal.hide();
+        }
         
         const response = await fetch('/api/sessions', {
             method: 'POST',

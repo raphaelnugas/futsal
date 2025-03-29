@@ -92,27 +92,28 @@
     </div>
 </div>
 
-<!-- Modal Criar Sessão -->
-<div id="create-session-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Criar Nova Sessão</h5>
-            <button id="close-create-session-modal" class="modal-close">&times;</button>
+<!-- Modal Criar Sessão (Bootstrap) -->
+<div class="modal fade" id="create-session-modal" tabindex="-1" aria-labelledby="createSessionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createSessionModalLabel">Criar Nova Sessão</h5>
+        <button type="button" class="btn-close" id="close-create-session-modal" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Você está prestes a criar uma nova sessão para o domingo <span id="session-date-display"></span>.</p>
+        <p class="mb-3">Ao confirmar, qualquer sessão ativa anterior será encerrada.</p>
+        
+        <div class="alert alert-warning" id="active-session-warning" style="display: none;">
+            <p class="mb-0"><strong>Atenção:</strong> Há uma sessão ativa que será encerrada.</p>
         </div>
-        <div class="modal-body">
-            <p>Você está prestes a criar uma nova sessão para o domingo <span id="session-date-display"></span>.</p>
-            <p class="mb-3">Ao confirmar, qualquer sessão ativa anterior será encerrada.</p>
-            
-            <div class="alert alert-warning" id="active-session-warning" style="display: none;">
-                <p><strong>Atenção:</strong> Há uma sessão ativa que será encerrada.</p>
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" id="cancel-create-session" class="btn btn-secondary">Cancelar</button>
-                <button type="button" id="confirm-create-session" class="btn btn-primary">Criar Sessão</button>
-            </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel-create-session" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirm-create-session">Criar Sessão</button>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
