@@ -266,10 +266,10 @@ function updatePlayersTable(players) {
                 ${player.is_goalkeeper ? '<span class="badge badge-blue ml-1">G</span>' : ''}
             </td>
             <td>${player.goals}</td>
-            <td class="hide-sm">${player.assists}</td>
-            <td class="hide-sm">${player.is_goalkeeper ? player.goals_conceded : '-'}</td>
-            <td class="hide-xs">${player.matches}</td>
-            <td class="hide-xs">${player.sessions}</td>
+            <td>${player.assists}</td>
+            <td>${player.is_goalkeeper ? player.goals_conceded : '-'}</td>
+            <td>${player.matches}</td>
+            <td class="d-none d-lg-table-cell">${player.sessions}</td>
         `;
         
         statsTableBody.appendChild(row);

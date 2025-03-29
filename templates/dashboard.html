@@ -92,23 +92,21 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Classificação Geral</h4>
-            <div class="d-flex gap-2 flex-wrap filter-buttons">
-                <button class="btn btn-sm btn-outline-primary filter-btn active" data-filter="goals">
-                    <i class="fas fa-futbol me-1 d-md-none"></i>
-                    <span class="d-none d-md-inline">Artilheiros</span>
-                    <span class="d-inline d-md-none">Gols</span>
+            <div class="filter-buttons">
+                <button class="btn btn-sm filter-btn active" data-filter="goals">
+                    <i class="fas fa-futbol me-1"></i>
+                    <span>Gols</span>
                 </button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="assists">
-                    <i class="fas fa-hands-helping me-1 d-md-none"></i>
+                <button class="btn btn-sm filter-btn" data-filter="assists">
+                    <i class="fas fa-hands-helping me-1"></i>
                     <span>Assistências</span>
                 </button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="goals_conceded">
-                    <i class="fas fa-shield-alt me-1 d-md-none"></i>
-                    <span class="d-none d-md-inline">Goleiros</span>
-                    <span class="d-inline d-md-none">G.S.</span>
+                <button class="btn btn-sm filter-btn" data-filter="goals_conceded">
+                    <i class="fas fa-shield-alt d-none"></i>
+                    <span>G.S.</span>
                 </button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="matches">
-                    <i class="fas fa-gamepad me-1 d-md-none"></i>
+                <button class="btn btn-sm filter-btn" data-filter="matches">
+                    <i class="fas fa-gamepad me-1"></i>
                     <span>Partidas</span>
                 </button>
             </div>
@@ -125,21 +123,20 @@
                                 <span class="d-none d-md-inline">Gols</span>
                                 <span class="d-inline d-md-none" title="Gols"><i class="fas fa-futbol"></i></span>
                             </th>
-                            <th class="col-stats hide-sm" data-sort="assists">
+                            <th class="col-stats" data-sort="assists">
                                 <span class="d-none d-md-inline">Assistências</span>
                                 <span class="d-inline d-md-none" title="Assistências"><i class="fas fa-hands-helping"></i></span>
                             </th>
-                            <th class="col-stats hide-sm" data-sort="goals_conceded">
+                            <th class="col-stats" data-sort="goals_conceded">
                                 <span class="d-none d-md-inline">Gols Sofridos</span>
-                                <span class="d-inline d-md-none" title="Gols Sofridos"><i class="fas fa-shield-alt"></i></span>
+                                <span class="d-inline d-md-none" title="Gols Sofridos">G.S.</span>
                             </th>
-                            <th class="col-stats hide-xs" data-sort="matches">
+                            <th class="col-stats" data-sort="matches">
                                 <span class="d-none d-md-inline">Partidas</span>
                                 <span class="d-inline d-md-none" title="Partidas"><i class="fas fa-gamepad"></i></span>
                             </th>
-                            <th class="col-stats hide-xs" data-sort="sessions">
-                                <span class="d-none d-md-inline">Domingos</span>
-                                <span class="d-inline d-md-none" title="Domingos"><i class="fas fa-calendar-day"></i></span>
+                            <th class="col-stats d-none d-lg-table-cell" data-sort="sessions">
+                                <span title="Domingos"><i class="fas fa-calendar-day"></i></span>
                             </th>
                         </tr>
                     </thead>

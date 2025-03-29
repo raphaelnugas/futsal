@@ -1226,12 +1226,46 @@ a:hover, a:focus {
 /* Botões de filtro */
 .filter-buttons {
     margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.filter-btn {
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid var(--primary);
+    background-color: white;
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.filter-btn i {
+    font-size: 0.9rem;
 }
 
 @media (max-width: 576px) {
     .filter-btn {
         font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
+        padding: 0.3rem 0.7rem;
+        min-width: 60px;
     }
 }
 
