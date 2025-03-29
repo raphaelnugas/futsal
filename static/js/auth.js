@@ -8,11 +8,15 @@
 
 // Elementos do DOM que serão manipulados
 const loginButton = document.getElementById('login-button');
+const mobileLoginButton = document.getElementById('mobile-login-button');
 const loginModal = document.getElementById('login-modal');
 const loginForm = document.getElementById('login-form');
 const loginError = document.getElementById('login-error');
 const closeModalButton = document.getElementById('close-modal');
 const logoutButton = document.getElementById('logout-button');
+const mobileLogoutButton = document.getElementById('mobile-logout-button');
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileDropdown = document.getElementById('mobile-dropdown');
 
 // Variável para armazenar a instância do modal Bootstrap
 let bsLoginModal = null;
@@ -23,6 +27,7 @@ let bsLoginModal = null;
 document.addEventListener('DOMContentLoaded', () => {
     // Configurar eventos apenas se os elementos existirem
     setupAuthEventListeners();
+    setupMobileMenu();
 });
 
 /**
@@ -181,5 +186,49 @@ async function handleLogout() {
         console.error('Erro ao realizar logout:', error);
         showError('Erro ao sair. Tente novamente.');
         showLoading(false);
+    }
+}
+
+/**
+ * Configura o menu mobile com funcionalidades de dropdown
+ */
+function setupMobileMenu() {
+    // Toggle menu mobile
+    if (mobileMenuToggle && mobileDropdown) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileDropdown.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuToggle.contains(event.target) && 
+                !mobileDropdown.contains(event.target)) {
+                mobileDropdown.classList.remove('active');
+            }
+        });
+    }
+    
+    // Login via menu mobile
+    if (mobileLoginButton) {
+        mobileLoginButton.addEventListener('click', () => {
+            // Fechar dropdown mobile
+            if (mobileDropdown) {
+                mobileDropdown.classList.remove('active');
+            }
+            // Abrir modal de login
+            toggleLoginModal(true);
+        });
+    }
+    
+    // Logout via menu mobile
+    if (mobileLogoutButton) {
+        mobileLogoutButton.addEventListener('click', () => {
+            // Fechar dropdown mobile
+            if (mobileDropdown) {
+                mobileDropdown.classList.remove('active');
+            }
+            // Executar logout
+            handleLogout();
+        });
     }
 }

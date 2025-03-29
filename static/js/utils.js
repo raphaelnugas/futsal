@@ -95,18 +95,23 @@ function showSuccess(message) {
 }
 
 /**
- * Mostra/oculta um modal
- * @param {string} modalId - ID do modal
- * @param {boolean} show - Se deve mostrar ou esconder
+ * Exibe ou oculta um modal
+ * @param {string} modalId - ID do modal a ser exibido/ocultado
+ * @param {boolean} show - Se true, exibe o modal; se false, oculta
  */
 function toggleModal(modalId, show) {
     const modal = document.getElementById(modalId);
-    if (!modal) return;
+    if (!modal) {
+        console.error(`Modal com ID ${modalId} não encontrado`);
+        return;
+    }
     
     if (show) {
         modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Previne rolagem do fundo
     } else {
         modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restaura rolagem do fundo
     }
 }
 

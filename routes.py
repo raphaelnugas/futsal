@@ -290,13 +290,15 @@ def get_session_by_date(date_str):
 def get_next_sundays():
     """API para obter os próximos domingos para o calendário."""
     today = date.today()
-    days_ahead = 6 - today.weekday()  # Calcular dias até o próximo domingo
-    if days_ahead < 0:  # Se hoje for domingo
-        days_ahead += 7
     
+    # Se hoje é domingo (6), days_ahead deve ser 0 (hoje)
+    # Se hoje é segunda (0), days_ahead deve ser 6 (próximo domingo)
+    days_ahead = (6 - today.weekday()) % 7  # Garante que se hoje for domingo, days_ahead = 0
+    
+    # Se hoje for domingo, considere o domingo de hoje
     next_sunday = today + timedelta(days=days_ahead)
     
-    # Gerar 10 domingos a partir do próximo
+    # Gerar 10 domingos a partir do próximo (ou do atual, se for domingo)
     sundays = []
     for i in range(10):
         sunday = next_sunday + timedelta(days=i*7)
