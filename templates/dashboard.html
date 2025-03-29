@@ -92,26 +92,55 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Classificação Geral</h4>
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-primary filter-btn active" data-filter="goals">Artilheiros</button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="assists">Assistências</button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="goals_conceded">Goleiros</button>
-                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="matches">Partidas</button>
+            <div class="d-flex gap-2 flex-wrap filter-buttons">
+                <button class="btn btn-sm btn-outline-primary filter-btn active" data-filter="goals">
+                    <i class="fas fa-futbol me-1 d-md-none"></i>
+                    <span class="d-none d-md-inline">Artilheiros</span>
+                    <span class="d-inline d-md-none">Gols</span>
+                </button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="assists">
+                    <i class="fas fa-hands-helping me-1 d-md-none"></i>
+                    <span>Assistências</span>
+                </button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="goals_conceded">
+                    <i class="fas fa-shield-alt me-1 d-md-none"></i>
+                    <span class="d-none d-md-inline">Goleiros</span>
+                    <span class="d-inline d-md-none">G.S.</span>
+                </button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="matches">
+                    <i class="fas fa-gamepad me-1 d-md-none"></i>
+                    <span>Partidas</span>
+                </button>
             </div>
         </div>
         <div class="card-body">
 
-            <div class="table-container">
+            <div class="table-responsive">
                 <table id="stats-table" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Jogador</th>
-                            <th data-sort="goals">Gols</th>
-                            <th data-sort="assists">Assistências</th>
-                            <th data-sort="goals_conceded">Gols Sofridos</th>
-                            <th data-sort="matches">Partidas</th>
-                            <th data-sort="sessions">Domingos</th>
+                            <th class="col-rank">#</th>
+                            <th class="col-player">Jogador</th>
+                            <th class="col-stats" data-sort="goals">
+                                <span class="d-none d-md-inline">Gols</span>
+                                <span class="d-inline d-md-none" title="Gols"><i class="fas fa-futbol"></i></span>
+                            </th>
+                            <th class="col-stats hide-sm" data-sort="assists">
+                                <span class="d-none d-md-inline">Assistências</span>
+                                <span class="d-inline d-md-none" title="Assistências"><i class="fas fa-hands-helping"></i></span>
+                            </th>
+                            <th class="col-stats hide-sm" data-sort="goals_conceded">
+                                <span class="d-none d-md-inline">Gols Sofridos</span>
+                                <span class="d-inline d-md-none" title="Gols Sofridos"><i class="fas fa-shield-alt"></i></span>
+                            </th>
+                            <th class="col-stats hide-xs" data-sort="matches">
+                                <span class="d-none d-md-inline">Partidas</span>
+                                <span class="d-inline d-md-none" title="Partidas"><i class="fas fa-gamepad"></i></span>
+                            </th>
+                            <th class="col-stats hide-xs" data-sort="sessions">
+                                <span class="d-none d-md-inline">Domingos</span>
+                                <span class="d-inline d-md-none" title="Domingos"><i class="fas fa-calendar-day"></i></span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="stats-table-body">
