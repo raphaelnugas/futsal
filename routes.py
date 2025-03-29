@@ -1072,28 +1072,6 @@ def update_settings():
     settings = Settings.query.first()
     if not settings:
         return jsonify({'success': False, 'message': 'Configurações não encontradas.'}), 404
-
-@app.route('/api/settings/reset', methods=['POST'])
-@login_required
-def reset_database():
-    """API para resetar todo o banco de dados."""
-    try:
-        # Deletar todos os registros de cada tabela
-        Goal.query.delete()
-        PlayerMatch.query.delete()
-        Match.query.delete()
-        Session.query.delete()
-        Player.query.delete()
-        EventLog.query.delete()
-        GlobalStats.query.delete()
-        
-        # Commit as mudanças
-        db.session.commit()
-        
-        return jsonify({'success': True, 'message': 'Banco de dados resetado com sucesso!'})
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'success': False, 'message': str(e)}), 500
     
     data = request.json
     
