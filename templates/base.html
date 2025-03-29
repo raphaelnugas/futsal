@@ -20,7 +20,9 @@
                 <div class="navbar-logo"></div>
                 Futsal de Domingo
             </a>
-            <div class="navbar-nav">
+            
+            <!-- Menu Desktop -->
+            <div class="navbar-nav hide-on-mobile">
                 {% if session.authenticated %}
                 <a href="/sessions" class="nav-btn nav-btn-orange mr-2"><i class="fas fa-calendar-alt"></i> Sessões</a>
                 <a href="/players" class="nav-btn nav-btn-black mr-2"><i class="fas fa-users"></i> Jogadores</a>
@@ -30,6 +32,31 @@
                 <a href="/" class="nav-btn nav-btn-blue mr-2"><i class="fas fa-trophy"></i> Rankings</a>
                 <button id="login-button" class="nav-btn nav-btn-green"><i class="fas fa-sign-in-alt"></i> Login</button>
                 {% endif %}
+            </div>
+            
+            <!-- Menu Mobile (Hamburger) -->
+            <div class="mobile-menu hide-on-desktop">
+                <button id="mobile-menu-toggle" class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Menu Mobile Dropdown -->
+                <div id="mobile-dropdown" class="mobile-dropdown">
+                    {% if session.authenticated %}
+                    <a href="/sessions" class="mobile-menu-item"><i class="fas fa-calendar-alt"></i> Sessões</a>
+                    <a href="/players" class="mobile-menu-item"><i class="fas fa-users"></i> Jogadores</a>
+                    <a href="/settings" class="mobile-menu-item"><i class="fas fa-cog"></i> Config</a>
+                    <a href="/" class="mobile-menu-item"><i class="fas fa-trophy"></i> Rankings</a>
+                    <button id="mobile-logout-button" class="mobile-menu-item mobile-menu-button">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
+                    {% else %}
+                    <a href="/" class="mobile-menu-item"><i class="fas fa-trophy"></i> Rankings</a>
+                    <button id="mobile-login-button" class="mobile-menu-item mobile-menu-button">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
