@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Jogadores | Futsal de Domingo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Gerenciar Jogadores</h1>
+        <button id="add-player-button" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Adicionar Jogador
+        </button>
+    </div>
+
+    <!-- Filtro -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="search-player" class="form-label">Buscar jogador:</label>
+                <input type="text" id="search-player" class="form-control" placeholder="Digite o nome do jogador...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Jogadores -->
+    <div id="player-list">
+        <!-- Dados serão carregados via JavaScript -->
+        <div class="loader-container">
+            <div class="spinner spinner-dark"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Adicionar Jogador -->
+<div id="add-player-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Adicionar Jogador</h5>
+            <button id="close-add-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="add-player-form">
+                <div class="form-group mb-3">
+                    <label for="player-name" class="form-label">Nome do Jogador</label>
+                    <input type="text" id="player-name" name="name" class="form-control" required>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" id="is-goalkeeper" name="is_goalkeeper" class="form-check-input">
+                    <label for="is-goalkeeper" class="form-check-label">É goleiro?</label>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="photo-url" class="form-label">URL da Foto (opcional)</label>
+                    <input type="url" id="photo-url" name="photo_url" class="form-control">
+                    <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-add" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Jogador -->
+<div id="edit-player-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Editar Jogador</h5>
+            <button id="close-edit-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="edit-player-form">
+                <div class="form-group mb-3">
+                    <label for="edit-player-name" class="form-label">Nome do Jogador</label>
+                    <input type="text" id="edit-player-name" name="name" class="form-control" required>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" id="edit-is-goalkeeper" name="is_goalkeeper" class="form-check-input">
+                    <label for="edit-is-goalkeeper" class="form-check-label">É goleiro?</label>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="edit-photo-url" class="form-label">URL da Foto (opcional)</label>
+                    <input type="url" id="edit-photo-url" name="photo_url" class="form-control">
+                    <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-edit" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/players.js') }}"></script>
+{% endblock %}

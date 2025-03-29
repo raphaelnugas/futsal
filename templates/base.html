@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Futsal de Domingo{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="navbar-brand">
+                <div class="navbar-logo"></div>
+                Futsal de Domingo
+            </a>
+            <div class="navbar-nav">
+                {% if session.authenticated %}
+                <a href="/sessions" class="navbar-link mr-3">Sessões</a>
+                <a href="/players" class="navbar-link mr-3">Jogadores</a>
+                <a href="/settings" class="navbar-link mr-3">Configurações</a>
+                <button id="logout-button" class="btn btn-sm btn-outline-secondary">Sair</button>
+                {% else %}
+                <a href="/" class="navbar-link mr-3">Rankings</a>
+                <button id="login-button" class="btn btn-sm btn-primary">Login</button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Criado por Raphael Nugas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="modal-overlay" style="display: none;">
+        <div class="loader-container">
+            <div class="spinner spinner-dark"></div>
+            <p class="mt-2">Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button id="close-modal" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Senha Mestra</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                    </div>
+                    <div id="login-error" class="text-danger mb-3"></div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Authentication -->
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <!-- Utils -->
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

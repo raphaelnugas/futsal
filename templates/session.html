@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+
+{% block title %}Sessão | Futsal de Domingo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Sessão <span id="session-date"></span></h1>
+        <div>
+            <button id="end-session-button" class="btn btn-danger" style="display: none;">
+                <i class="fas fa-stop-circle"></i> Encerrar Sessão
+            </button>
+        </div>
+    </div>
+    
+    <!-- Status da Sessão -->
+    <div id="session-status" class="mb-4">
+        <!-- Será preenchido via JavaScript -->
+    </div>
+    
+    <!-- Quadro de Chegada (antes de formar times) -->
+    <div id="arrival-board-container" class="mb-4" style="display: none;">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Quadro de Chegada</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="form-group">
+                        <label for="arrival-player-select" class="form-label">Selecione o jogador que chegou:</label>
+                        <div class="d-flex gap-2">
+                            <select id="arrival-player-select" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                <!-- Opções serão carregadas via JavaScript -->
+                            </select>
+                            <button id="add-arrival-button" class="btn btn-primary">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="arrival-board">
+                    <h6 class="mb-3">Jogadores (<span id="arrival-count">0</span>/10)</h6>
+                    <ol id="arrival-list" class="arrival-list">
+                        <!-- Lista será preenchida via JavaScript -->
+                    </ol>
+                </div>
+                
+                <div class="mt-3">
+                    <button id="draw-teams-button" class="btn btn-success btn-lg" disabled>
+                        <i class="fas fa-random"></i> Sortear Equipes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Times Formados -->
+    <div id="teams-container" class="mb-4" style="display: none;">
+        <div class="row">
+            <!-- Time Laranja -->
+            <div class="col-12 col-md-6 mb-3">
+                <div id="orange-team-board" class="team-board team-orange">
+                    <div class="team-title team-orange">
+                        <span>Time Laranja</span>
+                        <div id="orange-victory-count" class="victory-count">
+                            <!-- Contadores de vitória serão adicionados via JavaScript -->
+                        </div>
+                    </div>
+                    <div id="orange-team-list">
+                        <!-- Lista de jogadores será preenchida via JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Time Preto -->
+            <div class="col-12 col-md-6 mb-3">
+                <div id="black-team-board" class="team-board team-black">
+                    <div class="team-title team-black">
+                        <span>Time Preto</span>
+                        <div id="black-victory-count" class="victory-count">
+                            <!-- Contadores de vitória serão adicionados via JavaScript -->
+                        </div>
+                    </div>
+                    <div id="black-team-list">
+                        <!-- Lista de jogadores será preenchida via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-center mb-4">
+            <button id="edit-teams-button" class="btn btn-warning me-2">
+                <i class="fas fa-edit"></i> Editar Times
+            </button>
+            <button id="start-match-button" class="btn btn-primary">
+                <i class="fas fa-play-circle"></i> Iniciar Partida
+            </button>
+        </div>
+    </div>
+    
+    <!-- Jogadores de Fora -->
+    <div id="waiting-players-container" class="mb-4" style="display: none;">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Jogadores Aguardando</h5>
+            </div>
+            <div class="card-body">
+                <div id="waiting-players-list">
+                    <!-- Lista será preenchida via JavaScript -->
+                </div>
+                <div id="no-waiting-players" class="text-center py-3" style="display: none;">
+                    <p class="text-muted">Nenhum jogador aguardando.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Partidas da Sessão -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Partidas</h5>
+        </div>
+        <div class="card-body">
+            <div id="matches-container">
+                <!-- Lista de partidas será preenchida via JavaScript -->
+            </div>
+            <div id="no-matches" class="text-center py-3">
+                <p class="text-muted">Nenhuma partida realizada.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Times -->
+<div id="edit-teams-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Editar Times</h5>
+            <button id="close-edit-teams-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <!-- Seleção Time Laranja -->
+                <div class="col-12 col-md-6 mb-3">
+                    <h6 class="text-orange">Time Laranja</h6>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Goleiro</label>
+                        <select id="orange-goalkeeper-select" class="form-control">
+                            <option value="">-- Selecione o Goleiro --</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jogadores de Linha</label>
+                        <div id="orange-players-select" class="player-list">
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seleção Time Preto -->
+                <div class="col-12 col-md-6 mb-3">
+                    <h6 class="text-black">Time Preto</h6>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Goleiro</label>
+                        <select id="black-goalkeeper-select" class="form-control">
+                            <option value="">-- Selecione o Goleiro --</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jogadores de Linha</label>
+                        <div id="black-players-select" class="player-list">
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancel-edit-teams" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="save-teams" class="btn btn-primary">Salvar Times</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sortear Times -->
+<div id="draw-teams-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Sorteio de Times</h5>
+            <button id="close-draw-teams-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>O sorteio será realizado priorizando os goleiros primeiro e depois os jogadores de linha.</p>
+            
+            <div id="draw-result-container" style="display: none;">
+                <h6 class="mb-3">Resultado do Sorteio</h6>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header text-orange">Time Laranja</div>
+                            <div class="card-body">
+                                <div id="draw-orange-team">
+                                    <!-- Lista será preenchida via JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header text-black">Time Preto</div>
+                            <div class="card-body">
+                                <div id="draw-black-team">
+                                    <!-- Lista será preenchida via JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancel-draw" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="execute-draw" class="btn btn-primary">Realizar Sorteio</button>
+                <button type="button" id="confirm-draw" class="btn btn-success" style="display: none;">Confirmar Times</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fim da Partida -->
+<div id="end-match-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Fim da Partida</h5>
+            <button id="close-end-match-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="match-result-container">
+                <h4 class="text-center mb-3">Resultado</h4>
+                <div class="score-board mb-3">
+                    <div class="team-score orange">
+                        <span class="team-name">Time Laranja</span>
+                        <span id="result-orange-score" class="team-score-value">0</span>
+                    </div>
+                    <div class="score-divider">x</div>
+                    <div class="team-score black">
+                        <span class="team-name">Time Preto</span>
+                        <span id="result-black-score" class="team-score-value">0</span>
+                    </div>
+                </div>
+                
+                <div id="winner-container" class="text-center mb-3">
+                    <h5 id="winner-text"></h5>
+                </div>
+                
+                <div id="draw-resolution" class="mb-3" style="display: none;">
+                    <p class="text-center">Houve empate! Quem venceu o par ou ímpar?</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button id="orange-won-draw" class="btn btn-orange">Time Laranja</button>
+                        <button id="black-won-draw" class="btn btn-black">Time Preto</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancel-end-match" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="confirm-end-match" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirmação de Encerramento de Sessão -->
+<div id="end-session-confirm-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Encerrar Sessão</h5>
+            <button id="close-end-session-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Tem certeza que deseja encerrar esta sessão? Esta ação não pode ser desfeita.</p>
+            <p>Todas as partidas em andamento serão encerradas automaticamente.</p>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancel-end-session" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="confirm-end-session" class="btn btn-danger">Encerrar Sessão</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/session.js') }}"></script>
+{% endblock %}
