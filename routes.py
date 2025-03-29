@@ -484,6 +484,14 @@ def end_match(match_id):
     # Atualizar o resultado
     winner_team = data.get('winner_team')  # 'orange', 'black' ou null para empate
     
+    # Garantir que winner_team seja uma string válida ou None
+    if winner_team not in ['orange', 'black', None]:
+        if winner_team == "":
+            winner_team = None
+        elif not isinstance(winner_team, str):
+            return jsonify({'success': False, 'message': 'Valor inválido para winner_team'}), 400
+    
+    print(f"Recebido winner_team: {winner_team}")
     match.winner_team = winner_team
     match.is_active = False
     match.end_time = datetime.now()

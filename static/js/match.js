@@ -108,11 +108,21 @@ function setupEventListeners() {
     
     // Eventos para o modal de gol
     if (closeGoalModal) {
-        closeGoalModal.addEventListener('click', () => toggleModal('goal-modal', false));
+        closeGoalModal.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(goalModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     if (cancelGoalButton) {
-        cancelGoalButton.addEventListener('click', () => toggleModal('goal-modal', false));
+        cancelGoalButton.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(goalModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     if (goalForm) {
@@ -125,7 +135,12 @@ function setupEventListeners() {
     }
     
     if (closeEndMatchModal) {
-        closeEndMatchModal.addEventListener('click', () => toggleModal('end-match-modal', false));
+        closeEndMatchModal.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(endMatchModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     if (confirmEndMatch) {
@@ -133,7 +148,12 @@ function setupEventListeners() {
     }
     
     if (cancelEndMatch) {
-        cancelEndMatch.addEventListener('click', () => toggleModal('end-match-modal', false));
+        cancelEndMatch.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(endMatchModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     // Eventos para resolução de empate
@@ -157,7 +177,12 @@ function setupEventListeners() {
     
     // Eventos para o modal de excluir gol
     if (closeDeleteGoalModal) {
-        closeDeleteGoalModal.addEventListener('click', () => toggleModal('delete-goal-modal', false));
+        closeDeleteGoalModal.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(deleteGoalModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     if (confirmDeleteGoal) {
@@ -165,12 +190,22 @@ function setupEventListeners() {
     }
     
     if (cancelDeleteGoal) {
-        cancelDeleteGoal.addEventListener('click', () => toggleModal('delete-goal-modal', false));
+        cancelDeleteGoal.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(deleteGoalModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     // Evento para o modal de tempo esgotado
     if (closeTimeUpModal) {
-        closeTimeUpModal.addEventListener('click', () => toggleModal('time-up-modal', false));
+        closeTimeUpModal.addEventListener('click', () => {
+            const bsModal = bootstrap.Modal.getInstance(timeUpModal);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        });
     }
     
     // Modais Bootstrap fecham automaticamente ao clicar fora
@@ -664,13 +699,17 @@ async function handleEndMatch() {
             pauseTimer();
         }
         
+        // Verificar e garantir que winner_team seja uma string ou null
+        let winnerTeam = matchResult.winner;
+        console.log("Enviando winner_team:", winnerTeam);
+        
         const response = await fetch(`/api/matches/${matchId}/end`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                winner_team: matchResult.winner
+                winner_team: winnerTeam
             })
         });
         
