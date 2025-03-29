@@ -46,32 +46,25 @@ function setupEventListeners() {
     }
 
     if (resetDatabaseButton) {
-        resetDatabaseButton.addEventListener('click', function() {
-            const confirmModal = new bootstrap.Modal(document.getElementById('confirm-reset-modal'));
-            confirmModal.show();
-        });
-        
-        // Botão de confirmar reset no modal
-        document.getElementById('confirm-reset').addEventListener('click', async function() {
-            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirm-reset-modal'));
-            confirmModal.hide();
-            
-            try {
-                const response = await fetch('/api/reset-database', {
-                    method: 'POST'
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    showSuccess('Banco de dados resetado com sucesso!');
-                    loadLogs(); // Recarrega os logs
-                } else {
-                    showError(data.message || 'Erro ao resetar banco de dados');
+        resetDatabaseButton.addEventListener('click', async function() {
+            if (confirm('Tem certeza que deseja resetar o banco de dados? Esta ação é irreversível!')) {
+                try {
+                    const response = await fetch('/api/reset-database', {
+                        method: 'POST'
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        alert('Banco de dados resetado com sucesso!');
+                        loadLogs(); // Recarrega os logs
+                    } else {
+                        alert(data.message || 'Erro ao resetar banco de dados');
+                    }
+                } catch (error) {
+                    console.error('Erro ao resetar banco:', error);
+                    alert('Erro ao resetar banco de dados');
                 }
-            } catch (error) {
-                console.error('Erro ao resetar banco:', error);
-                showError('Erro ao resetar banco de dados');
             }
         });
     }
