@@ -109,20 +109,12 @@ function setupEventListeners() {
     }
     
     // Eventos para o modal de sorteio
-    if (closeDrawTeamsModal) {
-        closeDrawTeamsModal.addEventListener('click', () => toggleModal('draw-teams-modal', false));
-    }
-    
     if (executeDrawButton) {
         executeDrawButton.addEventListener('click', executeTeamsDraw);
     }
     
     if (confirmDrawButton) {
         confirmDrawButton.addEventListener('click', confirmDraw);
-    }
-    
-    if (cancelDrawButton) {
-        cancelDrawButton.addEventListener('click', () => toggleModal('draw-teams-modal', false));
     }
     
     // Botão para sortear/randomizar times
@@ -138,23 +130,14 @@ function setupEventListeners() {
     
     // Configurar drag-and-drop para os jogadores
     setupDragAndDrop();
-}
     
     // Eventos para encerrar sessão
     if (endSessionButton) {
         endSessionButton.addEventListener('click', () => toggleModal('end-session-confirm-modal', true));
     }
     
-    if (closeEndSessionModal) {
-        closeEndSessionModal.addEventListener('click', () => toggleModal('end-session-confirm-modal', false));
-    }
-    
     if (confirmEndSession) {
         confirmEndSession.addEventListener('click', endSession);
-    }
-    
-    if (cancelEndSession) {
-        cancelEndSession.addEventListener('click', () => toggleModal('end-session-confirm-modal', false));
     }
     
     // Eventos para resolução de empate
@@ -177,23 +160,9 @@ function setupEventListeners() {
     }
     
     // Eventos para modal de fim de partida
-    if (closeEndMatchModal) {
-        closeEndMatchModal.addEventListener('click', () => toggleModal('end-match-modal', false));
-    }
-    
     if (confirmEndMatch) {
         confirmEndMatch.addEventListener('click', confirmMatchEnd);
     }
-    
-    if (cancelEndMatch) {
-        cancelEndMatch.addEventListener('click', () => toggleModal('end-match-modal', false));
-    }
-    
-    // Fechar modais ao clicar fora
-    setupModalOutsideClick('draw-teams-modal');
-    setupModalOutsideClick('edit-teams-modal');
-    setupModalOutsideClick('end-session-confirm-modal');
-    setupModalOutsideClick('end-match-modal');
 }
 
 /**
@@ -449,8 +418,9 @@ function openDrawTeamsModal() {
         confirmDrawButton.style.display = 'none';
     }
     
-    // Abrir o modal
-    toggleModal('draw-teams-modal', true);
+    // Abrir o modal usando Bootstrap
+    const drawTeamsModal = new bootstrap.Modal(document.getElementById('draw-teams-modal'));
+    drawTeamsModal.show();
 }
 
 /**
@@ -577,8 +547,11 @@ function displayDrawResult() {
  * Confirma o sorteio e fecha o modal
  */
 function confirmDraw() {
-    // Fechar o modal
-    toggleModal('draw-teams-modal', false);
+    // Fechar o modal usando Bootstrap
+    const drawModal = bootstrap.Modal.getInstance(document.getElementById('draw-teams-modal'));
+    if (drawModal) {
+        drawModal.hide();
+    }
     
     // Atualizar interface para mostrar os times
     setupTeamsView();
@@ -967,8 +940,9 @@ function openEditTeamsModal() {
         }
     });
     
-    // Abrir o modal
-    toggleModal('edit-teams-modal', true);
+    // Abrir o modal usando Bootstrap
+    const editTeamsModal = new bootstrap.Modal(document.getElementById('edit-teams-modal'));
+    editTeamsModal.show();
 }
 
 /**
@@ -1063,8 +1037,11 @@ function saveEditedTeams() {
     updateTeamsView();
     updateWaitingPlayers();
     
-    // Fechar modal
-    toggleModal('edit-teams-modal', false);
+    // Fechar modal usando Bootstrap
+    const modal = bootstrap.Modal.getInstance(document.getElementById('edit-teams-modal'));
+    if (modal) {
+        modal.hide();
+    }
 }
 
 /**
@@ -1205,7 +1182,12 @@ function updateMatchesView() {
 async function endSession() {
     try {
         showLoading(true);
-        toggleModal('end-session-confirm-modal', false);
+        
+        // Fechar o modal usando Bootstrap
+        const modal = bootstrap.Modal.getInstance(document.getElementById('end-session-confirm-modal'));
+        if (modal) {
+            modal.hide();
+        }
         
         const response = await fetch(`/api/sessions/${sessionData.id}/end`, {
             method: 'POST'
@@ -1274,8 +1256,9 @@ function openEndMatchModal(matchId) {
         drawResolution.style.display = 'block';
     }
     
-    // Abrir o modal
-    toggleModal('end-match-modal', true);
+    // Abrir o modal usando Bootstrap
+    const endMatchModal = new bootstrap.Modal(document.getElementById('end-match-modal'));
+    endMatchModal.show();
 }
 
 /**
@@ -1294,7 +1277,12 @@ async function confirmMatchEnd() {
     
     try {
         showLoading(true);
-        toggleModal('end-match-modal', false);
+        
+        // Fechar o modal usando Bootstrap
+        const modal = bootstrap.Modal.getInstance(document.getElementById('end-match-modal'));
+        if (modal) {
+            modal.hide();
+        }
         
         const response = await fetch(`/api/matches/${matchResult.matchId}/end`, {
             method: 'POST',

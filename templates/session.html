@@ -125,52 +125,54 @@
 </div>
 
 <!-- Modal Editar Times -->
-<div id="edit-teams-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Editar Times</h5>
-            <button id="close-edit-teams-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <!-- Seleção Time Laranja -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-orange">Time Laranja</h6>
-                    <div class="form-group mb-3">
-                        <label class="form-label">Goleiro</label>
-                        <select id="orange-goalkeeper-select" class="form-control">
-                            <option value="">-- Selecione o Goleiro --</option>
-                            <!-- Opções serão carregadas via JavaScript -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Jogadores de Linha</label>
-                        <div id="orange-players-select" class="player-list">
-                            <!-- Opções serão carregadas via JavaScript -->
+<div id="edit-teams-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Times</h5>
+                <button id="close-edit-teams-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Seleção Time Laranja -->
+                    <div class="col-12 col-md-6 mb-3">
+                        <h6 class="text-orange">Time Laranja</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Goleiro</label>
+                            <select id="orange-goalkeeper-select" class="form-control">
+                                <option value="">-- Selecione o Goleiro --</option>
+                                <!-- Opções serão carregadas via JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jogadores de Linha</label>
+                            <div id="orange-players-select" class="player-list">
+                                <!-- Opções serão carregadas via JavaScript -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Seleção Time Preto -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-black">Time Preto</h6>
-                    <div class="form-group mb-3">
-                        <label class="form-label">Goleiro</label>
-                        <select id="black-goalkeeper-select" class="form-control">
-                            <option value="">-- Selecione o Goleiro --</option>
-                            <!-- Opções serão carregadas via JavaScript -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Jogadores de Linha</label>
-                        <div id="black-players-select" class="player-list">
-                            <!-- Opções serão carregadas via JavaScript -->
+                    
+                    <!-- Seleção Time Preto -->
+                    <div class="col-12 col-md-6 mb-3">
+                        <h6 class="text-black">Time Preto</h6>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Goleiro</label>
+                            <select id="black-goalkeeper-select" class="form-control">
+                                <option value="">-- Selecione o Goleiro --</option>
+                                <!-- Opções serão carregadas via JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jogadores de Linha</label>
+                            <div id="black-players-select" class="player-list">
+                                <!-- Opções serão carregadas via JavaScript -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="cancel-edit-teams" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="cancel-edit-teams" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" id="save-teams" class="btn btn-primary">Salvar Times</button>
             </div>
         </div>
@@ -178,43 +180,44 @@
 </div>
 
 <!-- Modal Sortear Times -->
-<div id="draw-teams-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Sorteio de Times</h5>
-            <button id="close-draw-teams-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>O sorteio será realizado priorizando os goleiros primeiro e depois os jogadores de linha.</p>
-            
-            <div id="draw-result-container" style="display: none;">
-                <h6 class="mb-3">Resultado do Sorteio</h6>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-orange">Time Laranja</div>
-                            <div class="card-body">
-                                <div id="draw-orange-team">
-                                    <!-- Lista será preenchida via JavaScript -->
+<div id="draw-teams-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sorteio de Times</h5>
+                <button id="close-draw-teams-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>O sorteio será realizado priorizando os goleiros primeiro e depois os jogadores de linha.</p>
+                
+                <div id="draw-result-container" style="display: none;">
+                    <h6 class="mb-3">Resultado do Sorteio</h6>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card bg-light mb-3">
+                                <div class="card-header text-orange">Time Laranja</div>
+                                <div class="card-body">
+                                    <div id="draw-orange-team">
+                                        <!-- Lista será preenchida via JavaScript -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-black">Time Preto</div>
-                            <div class="card-body">
-                                <div id="draw-black-team">
-                                    <!-- Lista será preenchida via JavaScript -->
+                        <div class="col-6">
+                            <div class="card bg-light mb-3">
+                                <div class="card-header text-black">Time Preto</div>
+                                <div class="card-body">
+                                    <div id="draw-black-team">
+                                        <!-- Lista será preenchida via JavaScript -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="modal-footer">
-                <button type="button" id="cancel-draw" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="cancel-draw" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" id="execute-draw" class="btn btn-primary">Realizar Sorteio</button>
                 <button type="button" id="confirm-draw" class="btn btn-success" style="display: none;">Confirmar Times</button>
             </div>
@@ -223,42 +226,43 @@
 </div>
 
 <!-- Modal Fim da Partida -->
-<div id="end-match-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Fim da Partida</h5>
-            <button id="close-end-match-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div id="match-result-container">
-                <h4 class="text-center mb-3">Resultado</h4>
-                <div class="score-board mb-3">
-                    <div class="team-score orange">
-                        <span class="team-name">Time Laranja</span>
-                        <span id="result-orange-score" class="team-score-value">0</span>
+<div id="end-match-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Fim da Partida</h5>
+                <button id="close-end-match-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="match-result-container">
+                    <h4 class="text-center mb-3">Resultado</h4>
+                    <div class="score-board mb-3">
+                        <div class="team-score orange">
+                            <span class="team-name">Time Laranja</span>
+                            <span id="result-orange-score" class="team-score-value">0</span>
+                        </div>
+                        <div class="score-divider">x</div>
+                        <div class="team-score black">
+                            <span class="team-name">Time Preto</span>
+                            <span id="result-black-score" class="team-score-value">0</span>
+                        </div>
                     </div>
-                    <div class="score-divider">x</div>
-                    <div class="team-score black">
-                        <span class="team-name">Time Preto</span>
-                        <span id="result-black-score" class="team-score-value">0</span>
+                    
+                    <div id="winner-container" class="text-center mb-3">
+                        <h5 id="winner-text"></h5>
                     </div>
-                </div>
-                
-                <div id="winner-container" class="text-center mb-3">
-                    <h5 id="winner-text"></h5>
-                </div>
-                
-                <div id="draw-resolution" class="mb-3" style="display: none;">
-                    <p class="text-center">Houve empate! Quem venceu o par ou ímpar?</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <button id="orange-won-draw" class="btn btn-orange">Time Laranja</button>
-                        <button id="black-won-draw" class="btn btn-black">Time Preto</button>
+                    
+                    <div id="draw-resolution" class="mb-3" style="display: none;">
+                        <p class="text-center">Houve empate! Quem venceu o par ou ímpar?</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button id="orange-won-draw" class="btn btn-orange">Time Laranja</button>
+                            <button id="black-won-draw" class="btn btn-black">Time Preto</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            
             <div class="modal-footer">
-                <button type="button" id="cancel-end-match" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="cancel-end-match" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" id="confirm-end-match" class="btn btn-primary">Confirmar</button>
             </div>
         </div>
@@ -266,18 +270,19 @@
 </div>
 
 <!-- Modal Confirmação de Encerramento de Sessão -->
-<div id="end-session-confirm-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Encerrar Sessão</h5>
-            <button id="close-end-session-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>Tem certeza que deseja encerrar esta sessão? Esta ação não pode ser desfeita.</p>
-            <p>Todas as partidas em andamento serão encerradas automaticamente.</p>
-            
+<div id="end-session-confirm-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Encerrar Sessão</h5>
+                <button id="close-end-session-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja encerrar esta sessão? Esta ação não pode ser desfeita.</p>
+                <p>Todas as partidas em andamento serão encerradas automaticamente.</p>
+            </div>
             <div class="modal-footer">
-                <button type="button" id="cancel-end-session" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="cancel-end-session" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" id="confirm-end-session" class="btn btn-danger">Encerrar Sessão</button>
             </div>
         </div>
