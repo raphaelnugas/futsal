@@ -92,6 +92,26 @@
             <h5 class="modal-title">Sucesso</h5>
             <button id="close-success-modal" class="modal-close">&times;</button>
         </div>
+
+<!-- Modal de Confirmação Reset -->
+<div class="modal fade" id="confirm-reset-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Reset</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja resetar o banco de dados? Esta ação é irreversível!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-reset">Confirmar Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+
         <div class="modal-body">
             <p id="success-message" class="text-center">Configurações salvas com sucesso!</p>
             
