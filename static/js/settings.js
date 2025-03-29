@@ -46,26 +46,8 @@ function setupEventListeners() {
     }
 
     if (resetDatabaseButton) {
-        resetDatabaseButton.addEventListener('click', async function() {
-            if (confirm('Tem certeza que deseja resetar o banco de dados? Esta ação é irreversível!')) {
-                try {
-                    const response = await fetch('/api/reset-database', {
-                        method: 'POST'
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        alert('Banco de dados resetado com sucesso!');
-                        loadLogs(); // Recarrega os logs
-                    } else {
-                        alert(data.message || 'Erro ao resetar banco de dados');
-                    }
-                } catch (error) {
-                    console.error('Erro ao resetar banco:', error);
-                    alert('Erro ao resetar banco de dados');
-                }
-            }
+        resetDatabaseButton.addEventListener('click', function() {
+            alert('Botão de reset clicado!');
         });
     }
 
