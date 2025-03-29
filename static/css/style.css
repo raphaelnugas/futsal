@@ -733,8 +733,8 @@ a:hover, a:focus {
 
 /* Photo Preview */
 .player-photo-preview {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     overflow: hidden;
     background-color: #e9ecef;
@@ -743,6 +743,14 @@ a:hover, a:focus {
     align-items: center;
     position: relative;
     box-shadow: 0 0 0 3px rgba(255, 127, 42, 0.2);
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+}
+
+.player-photo-preview:hover {
+    box-shadow: 0 0 0 3px rgba(255, 127, 42, 0.4);
+    transform: scale(1.02);
 }
 
 .player-photo-preview img {
