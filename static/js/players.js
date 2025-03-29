@@ -71,13 +71,7 @@ function setupEventListeners() {
         searchPlayerInput.addEventListener('input', filterPlayers);
     }
     
-    // Fechar modais ao clicar fora deles
-    window.addEventListener('click', (event) => {
-        if (event.target.classList.contains('modal-overlay')) {
-            toggleAddModal(false);
-            toggleEditModal(false);
-        }
-    });
+    // Os modais Bootstrap fecham automaticamente ao clicar fora
 }
 
 /**
@@ -208,16 +202,16 @@ function filterPlayers() {
 function toggleAddModal(show) {
     if (!addPlayerModal) return;
     
+    // Utilizar a função compartilhada toggleModal
+    toggleModal('add-player-modal', show);
+    
     if (show) {
-        addPlayerModal.classList.add('active');
         // Resetar formulário
         if (addPlayerForm) addPlayerForm.reset();
         // Focar no campo de nome
         setTimeout(() => {
             document.getElementById('player-name').focus();
         }, 100);
-    } else {
-        addPlayerModal.classList.remove('active');
     }
 }
 
@@ -227,10 +221,10 @@ function toggleAddModal(show) {
 function toggleEditModal(show) {
     if (!editPlayerModal) return;
     
-    if (show) {
-        editPlayerModal.classList.add('active');
-    } else {
-        editPlayerModal.classList.remove('active');
+    // Utilizar a função compartilhada toggleModal
+    toggleModal('edit-player-modal', show);
+    
+    if (!show) {
         currentEditingPlayer = null;
     }
 }

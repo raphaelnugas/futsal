@@ -31,63 +31,67 @@
 </div>
 
 <!-- Modal Adicionar Jogador -->
-<div id="add-player-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Adicionar Jogador</h5>
-            <button id="close-add-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="add-player-form">
-                <div class="form-group mb-3">
-                    <label for="player-name" class="form-label">Nome do Jogador</label>
-                    <input type="text" id="player-name" name="name" class="form-control" required>
-                </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" id="is-goalkeeper" name="is_goalkeeper" class="form-check-input">
-                    <label for="is-goalkeeper" class="form-check-label">É goleiro?</label>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="photo-url" class="form-label">URL da Foto (opcional)</label>
-                    <input type="url" id="photo-url" name="photo_url" class="form-control">
-                    <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="cancel-add" class="btn btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-            </form>
+<div id="add-player-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
+                <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Adicionar Jogador</h5>
+                <button id="close-add-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="add-player-form">
+                    <div class="form-group mb-3">
+                        <label for="player-name" class="form-label">Nome do Jogador</label>
+                        <input type="text" id="player-name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" id="is-goalkeeper" name="is_goalkeeper" class="form-check-input">
+                        <label for="is-goalkeeper" class="form-check-label">É goleiro?</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="photo-url" class="form-label">URL da Foto (opcional)</label>
+                        <input type="url" id="photo-url" name="photo_url" class="form-control">
+                        <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" id="cancel-add" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Editar Jogador -->
-<div id="edit-player-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Editar Jogador</h5>
-            <button id="close-edit-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="edit-player-form">
-                <div class="form-group mb-3">
-                    <label for="edit-player-name" class="form-label">Nome do Jogador</label>
-                    <input type="text" id="edit-player-name" name="name" class="form-control" required>
-                </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" id="edit-is-goalkeeper" name="is_goalkeeper" class="form-check-input">
-                    <label for="edit-is-goalkeeper" class="form-check-label">É goleiro?</label>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="edit-photo-url" class="form-label">URL da Foto (opcional)</label>
-                    <input type="url" id="edit-photo-url" name="photo_url" class="form-control">
-                    <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="cancel-edit" class="btn btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Atualizar</button>
-                </div>
-            </form>
+<div id="edit-player-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
+                <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Editar Jogador</h5>
+                <button id="close-edit-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="edit-player-form">
+                    <div class="form-group mb-3">
+                        <label for="edit-player-name" class="form-label">Nome do Jogador</label>
+                        <input type="text" id="edit-player-name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" id="edit-is-goalkeeper" name="is_goalkeeper" class="form-check-input">
+                        <label for="edit-is-goalkeeper" class="form-check-label">É goleiro?</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="edit-photo-url" class="form-label">URL da Foto (opcional)</label>
+                        <input type="url" id="edit-photo-url" name="photo_url" class="form-control">
+                        <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" id="cancel-edit" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
