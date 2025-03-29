@@ -17,10 +17,26 @@ const closeEditModalButton = document.getElementById('close-edit-modal');
 const addPlayerButton = document.getElementById('add-player-button');
 const searchPlayerInput = document.getElementById('search-player');
 const loadingElement = document.getElementById('loading');
+const playerPhotoInput = document.getElementById('player-photo');
+const photoPreview = document.getElementById('photo-preview');
+const photoEditorControls = document.getElementById('photo-editor-controls');
+const editPlayerPhotoInput = document.getElementById('edit-player-photo');
+const editPhotoPreview = document.getElementById('edit-photo-preview');
+const editPhotoEditorControls = document.getElementById('edit-photo-editor-controls');
 
 // Estado da aplicação
 let players = [];
 let currentEditingPlayer = null;
+let currentPhotoState = {
+    scale: 1,
+    rotation: 0,
+    photoData: null
+};
+let currentEditPhotoState = {
+    scale: 1,
+    rotation: 0,
+    photoData: null
+};
 
 /**
  * Inicialização da página de jogadores
@@ -71,7 +87,324 @@ function setupEventListeners() {
         searchPlayerInput.addEventListener('input', filterPlayers);
     }
     
+    // Eventos para upload de foto e manipulação de imagem
+    if (playerPhotoInput) {
+        playerPhotoInput.addEventListener('change', handlePhotoUpload);
+    }
+    
+    if (editPlayerPhotoInput) {
+        editPlayerPhotoInput.addEventListener('change', handleEditPhotoUpload);
+    }
+    
+    // Eventos para controles de edição de foto
+    setupPhotoEditorControls();
+    
     // Os modais Bootstrap fecham automaticamente ao clicar fora
+}
+
+/**
+ * Configura os controles do editor de fotos
+ */
+function setupPhotoEditorControls() {
+    // Controles do modo de adicionar
+    const zoomInButton = document.getElementById('zoom-in');
+    const zoomOutButton = document.getElementById('zoom-out');
+    const rotateCwButton = document.getElementById('rotate-cw');
+    const resetPhotoButton = document.getElementById('reset-photo');
+    
+    if (zoomInButton) {
+        zoomInButton.addEventListener('click', () => {
+            currentPhotoState.scale += 0.1;
+            updatePhotoPreview();
+        });
+    }
+    
+    if (zoomOutButton) {
+        zoomOutButton.addEventListener('click', () => {
+            if (currentPhotoState.scale > 0.5) {
+                currentPhotoState.scale -= 0.1;
+                updatePhotoPreview();
+            }
+        });
+    }
+    
+    if (rotateCwButton) {
+        rotateCwButton.addEventListener('click', () => {
+            currentPhotoState.rotation += 90;
+            updatePhotoPreview();
+        });
+    }
+    
+    if (resetPhotoButton) {
+        resetPhotoButton.addEventListener('click', () => {
+            currentPhotoState.scale = 1;
+            currentPhotoState.rotation = 0;
+            updatePhotoPreview();
+        });
+    }
+    
+    // Controles do modo de editar
+    const editZoomInButton = document.getElementById('edit-zoom-in');
+    const editZoomOutButton = document.getElementById('edit-zoom-out');
+    const editRotateCwButton = document.getElementById('edit-rotate-cw');
+    const editResetPhotoButton = document.getElementById('edit-reset-photo');
+    
+    if (editZoomInButton) {
+        editZoomInButton.addEventListener('click', () => {
+            currentEditPhotoState.scale += 0.1;
+            updateEditPhotoPreview();
+        });
+    }
+    
+    if (editZoomOutButton) {
+        editZoomOutButton.addEventListener('click', () => {
+            if (currentEditPhotoState.scale > 0.5) {
+                currentEditPhotoState.scale -= 0.1;
+                updateEditPhotoPreview();
+            }
+        });
+    }
+    
+    if (editRotateCwButton) {
+        editRotateCwButton.addEventListener('click', () => {
+            currentEditPhotoState.rotation += 90;
+            updateEditPhotoPreview();
+        });
+    }
+    
+    if (editResetPhotoButton) {
+        editResetPhotoButton.addEventListener('click', () => {
+            currentEditPhotoState.scale = 1;
+            currentEditPhotoState.rotation = 0;
+            updateEditPhotoPreview();
+        });
+    }
+}
+
+/**
+ * Manipula o upload de foto no formulário de adicionar
+ */
+function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Resetar o estado da foto
+        currentPhotoState = {
+            scale: 1,
+            rotation: 0,
+            photoData: null
+        };
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                // Armazenar os dados da imagem original
+                currentPhotoState.photoData = e.target.result;
+                
+                // Atualizar a visualização
+                updatePhotoPreview();
+                
+                // Mostrar controles de edição
+                if (photoEditorControls) {
+                    photoEditorControls.style.display = 'block';
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        // Esconder controles se nenhum arquivo for selecionado
+        if (photoEditorControls) {
+            photoEditorControls.style.display = 'none';
+        }
+        
+        // Limpar visualização
+        if (photoPreview) {
+            photoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
+        }
+    }
+}
+
+/**
+ * Manipula o upload de foto no formulário de editar
+ */
+function handleEditPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Resetar o estado da foto
+        currentEditPhotoState = {
+            scale: 1,
+            rotation: 0,
+            photoData: null
+        };
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                // Armazenar os dados da imagem original
+                currentEditPhotoState.photoData = e.target.result;
+                
+                // Atualizar a visualização
+                updateEditPhotoPreview();
+                
+                // Mostrar controles de edição
+                if (editPhotoEditorControls) {
+                    editPhotoEditorControls.style.display = 'block';
+                }
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        // Esconder controles se nenhum arquivo for selecionado
+        if (editPhotoEditorControls) {
+            editPhotoEditorControls.style.display = 'none';
+        }
+        
+        // Limpar visualização
+        if (editPhotoPreview) {
+            editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
+        }
+    }
+}
+
+/**
+ * Atualiza a visualização da foto com base no estado atual (escala e rotação)
+ */
+function updatePhotoPreview() {
+    if (!photoPreview || !currentPhotoState.photoData) return;
+    
+    // Limpar a visualização atual
+    photoPreview.innerHTML = '';
+    
+    // Criar a imagem
+    const img = document.createElement('img');
+    img.src = currentPhotoState.photoData;
+    img.style.transform = `rotate(${currentPhotoState.rotation}deg) scale(${currentPhotoState.scale})`;
+    
+    // Adicionar a imagem ao contêiner
+    photoPreview.appendChild(img);
+    
+    // Atualizar o campo oculto com os dados processados da imagem
+    updatePhotoDataField();
+}
+
+/**
+ * Atualiza a visualização da foto no modo de edição
+ */
+function updateEditPhotoPreview() {
+    if (!editPhotoPreview || !currentEditPhotoState.photoData) return;
+    
+    // Limpar a visualização atual
+    editPhotoPreview.innerHTML = '';
+    
+    // Criar a imagem
+    const img = document.createElement('img');
+    img.src = currentEditPhotoState.photoData;
+    img.style.transform = `rotate(${currentEditPhotoState.rotation}deg) scale(${currentEditPhotoState.scale})`;
+    
+    // Adicionar a imagem ao contêiner
+    editPhotoPreview.appendChild(img);
+    
+    // Atualizar o campo oculto com os dados processados da imagem
+    updateEditPhotoDataField();
+}
+
+/**
+ * Atualiza o campo oculto com os dados da imagem processada
+ */
+function updatePhotoDataField() {
+    const photoDataField = document.getElementById('photo-data');
+    if (!photoDataField || !currentPhotoState.photoData) return;
+    
+    // Criar um canvas temporário para renderizar a imagem com as transformações
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    img.onload = function() {
+        // Dimensionar o canvas para acomodar a imagem quadrada
+        canvas.width = 300;
+        canvas.height = 300;
+        
+        // Limpar o canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Salvar o estado atual do contexto
+        ctx.save();
+        
+        // Mover o ponto de origem para o centro do canvas
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        
+        // Aplicar rotação
+        ctx.rotate(currentPhotoState.rotation * Math.PI / 180);
+        
+        // Aplicar escala
+        ctx.scale(currentPhotoState.scale, currentPhotoState.scale);
+        
+        // Desenhar a imagem com seu centro alinhado ao centro do canvas
+        ctx.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
+        
+        // Restaurar o estado do contexto
+        ctx.restore();
+        
+        // Obter os dados da imagem processada como URL de dados
+        const processedImageData = canvas.toDataURL('image/jpeg', 0.9);
+        
+        // Definir o valor do campo oculto
+        photoDataField.value = processedImageData;
+    };
+    
+    img.src = currentPhotoState.photoData;
+}
+
+/**
+ * Atualiza o campo oculto com os dados da imagem processada no modo de edição
+ */
+function updateEditPhotoDataField() {
+    const photoDataField = document.getElementById('edit-photo-data');
+    if (!photoDataField || !currentEditPhotoState.photoData) return;
+    
+    // Criar um canvas temporário para renderizar a imagem com as transformações
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    img.onload = function() {
+        // Dimensionar o canvas para acomodar a imagem quadrada
+        canvas.width = 300;
+        canvas.height = 300;
+        
+        // Limpar o canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Salvar o estado atual do contexto
+        ctx.save();
+        
+        // Mover o ponto de origem para o centro do canvas
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        
+        // Aplicar rotação
+        ctx.rotate(currentEditPhotoState.rotation * Math.PI / 180);
+        
+        // Aplicar escala
+        ctx.scale(currentEditPhotoState.scale, currentEditPhotoState.scale);
+        
+        // Desenhar a imagem com seu centro alinhado ao centro do canvas
+        ctx.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
+        
+        // Restaurar o estado do contexto
+        ctx.restore();
+        
+        // Obter os dados da imagem processada como URL de dados
+        const processedImageData = canvas.toDataURL('image/jpeg', 0.9);
+        
+        // Definir o valor do campo oculto
+        photoDataField.value = processedImageData;
+    };
+    
+    img.src = currentEditPhotoState.photoData;
 }
 
 /**
@@ -240,11 +573,22 @@ function openEditModal(player) {
     // Preencher o formulário com os dados do jogador
     const nameField = editPlayerForm.querySelector('#edit-player-name');
     const isGoalkeeperField = editPlayerForm.querySelector('#edit-is-goalkeeper');
-    const photoUrlField = editPlayerForm.querySelector('#edit-photo-url');
     
     if (nameField) nameField.value = player.name;
     if (isGoalkeeperField) isGoalkeeperField.checked = player.is_goalkeeper;
-    if (photoUrlField) photoUrlField.value = player.photo_url || '';
+    
+    // Se o jogador já tiver uma foto, exibi-la na prévia
+    if (player.photo_url && editPhotoPreview) {
+        editPhotoPreview.innerHTML = `<img src="${player.photo_url}" alt="${player.name}">`;
+    } else if (editPhotoPreview) {
+        // Se não tiver foto, mostrar espaço para placeholder
+        editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
+    }
+    
+    // Esconder controles de edição de foto até que uma nova foto seja selecionada
+    if (editPhotoEditorControls) {
+        editPhotoEditorControls.style.display = 'none';
+    }
     
     // Exibir o modal
     toggleEditModal(true);
@@ -258,7 +602,7 @@ async function handleAddPlayer(event) {
     
     const nameField = document.getElementById('player-name');
     const isGoalkeeperField = document.getElementById('is-goalkeeper');
-    const photoUrlField = document.getElementById('photo-url');
+    const photoDataField = document.getElementById('photo-data');
     
     // Validar campos
     if (!nameField.value.trim()) {
@@ -270,7 +614,7 @@ async function handleAddPlayer(event) {
     const playerData = {
         name: nameField.value.trim(),
         is_goalkeeper: isGoalkeeperField.checked,
-        photo_url: photoUrlField.value.trim() || null
+        photo_url: photoDataField.value || null
     };
     
     try {
@@ -321,7 +665,7 @@ async function handleEditPlayer(event) {
     
     const nameField = document.getElementById('edit-player-name');
     const isGoalkeeperField = document.getElementById('edit-is-goalkeeper');
-    const photoUrlField = document.getElementById('edit-photo-url');
+    const photoDataField = document.getElementById('edit-photo-data');
     
     // Validar campos
     if (!nameField.value.trim()) {
@@ -333,7 +677,7 @@ async function handleEditPlayer(event) {
     const playerData = {
         name: nameField.value.trim(),
         is_goalkeeper: isGoalkeeperField.checked,
-        photo_url: photoUrlField.value.trim() || null
+        photo_url: photoDataField.value || currentEditingPlayer.photo_url || null
     };
     
     try {

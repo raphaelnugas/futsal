@@ -49,9 +49,28 @@
                         <label for="is-goalkeeper" class="form-check-label">É goleiro?</label>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="photo-url" class="form-label">URL da Foto (opcional)</label>
-                        <input type="url" id="photo-url" name="photo_url" class="form-control">
-                        <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                        <label for="player-photo" class="form-label">Foto do Jogador (opcional)</label>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="player-photo-preview me-3" id="photo-preview">
+                                <div class="photo-placeholder">Foto</div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <input type="file" id="player-photo" name="player_photo" class="form-control" accept="image/*">
+                                <small class="form-text text-muted">Selecione uma foto do seu dispositivo.</small>
+                            </div>
+                        </div>
+                        <div id="photo-editor-controls" class="mt-2" style="display: none;">
+                            <div class="mb-2">
+                                <label class="form-label">Ajustes da imagem:</label>
+                                <div class="d-flex gap-2">
+                                    <button type="button" id="zoom-in" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
+                                    <button type="button" id="zoom-out" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
+                                    <button type="button" id="rotate-cw" class="btn btn-sm btn-outline-secondary"><i class="fas fa-redo"></i></button>
+                                    <button type="button" id="reset-photo" class="btn btn-sm btn-outline-secondary">Resetar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="photo-data" name="photo_data">
                     </div>
                     <div class="d-flex justify-content-end mt-4">
                         <button type="button" id="cancel-add" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
@@ -82,9 +101,28 @@
                         <label for="edit-is-goalkeeper" class="form-check-label">É goleiro?</label>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="edit-photo-url" class="form-label">URL da Foto (opcional)</label>
-                        <input type="url" id="edit-photo-url" name="photo_url" class="form-control">
-                        <small class="form-text text-muted">Deixe em branco para usar iniciais.</small>
+                        <label for="edit-player-photo" class="form-label">Foto do Jogador (opcional)</label>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="player-photo-preview me-3" id="edit-photo-preview">
+                                <div class="photo-placeholder">Foto</div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <input type="file" id="edit-player-photo" name="player_photo" class="form-control" accept="image/*">
+                                <small class="form-text text-muted">Selecione uma foto do seu dispositivo.</small>
+                            </div>
+                        </div>
+                        <div id="edit-photo-editor-controls" class="mt-2" style="display: none;">
+                            <div class="mb-2">
+                                <label class="form-label">Ajustes da imagem:</label>
+                                <div class="d-flex gap-2">
+                                    <button type="button" id="edit-zoom-in" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
+                                    <button type="button" id="edit-zoom-out" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
+                                    <button type="button" id="edit-rotate-cw" class="btn btn-sm btn-outline-secondary"><i class="fas fa-redo"></i></button>
+                                    <button type="button" id="edit-reset-photo" class="btn btn-sm btn-outline-secondary">Resetar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="edit-photo-data" name="photo_data">
                     </div>
                     <div class="d-flex justify-content-end mt-4">
                         <button type="button" id="cancel-edit" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
