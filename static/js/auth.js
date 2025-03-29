@@ -65,20 +65,52 @@ function setupAuthEventListeners() {
  * @param {boolean} show - Se deve mostrar ou esconder o modal
  */
 function toggleLoginModal(show) {
-    if (!loginModal) return;
+    if (!loginModal) {
+        console.error('Modal de login não encontrado');
+        return;
+    }
     
     if (show) {
+        // Forçar exibição do modal
+        loginModal.style.opacity = '1';
+        loginModal.style.visibility = 'visible';
+        loginModal.style.display = 'flex';
         loginModal.classList.add('active');
+        
+        // Animar a entrada
+        const modalContent = loginModal.querySelector('.modal');
+        if (modalContent) {
+            modalContent.style.transform = 'translateY(0)';
+        }
+        
         // Focar no campo de senha
         setTimeout(() => {
             const passwordField = document.getElementById('password');
             if (passwordField) passwordField.focus();
         }, 100);
     } else {
+        // Esconder modal com transição
         loginModal.classList.remove('active');
+        loginModal.style.opacity = '0';
+        loginModal.style.visibility = 'hidden';
+        
+        // Animar a saída
+        const modalContent = loginModal.querySelector('.modal');
+        if (modalContent) {
+            modalContent.style.transform = 'translateY(-20px)';
+        }
+        
         // Limpar campos
         if (loginForm) loginForm.reset();
-        if (loginError) loginError.textContent = '';
+        if (loginError) {
+            loginError.textContent = '';
+            loginError.style.display = 'none';
+        }
+        
+        // Remover display após a transição
+        setTimeout(() => {
+            loginModal.style.display = 'none';
+        }, 300);
     }
 }
 
@@ -96,7 +128,10 @@ async function handleLogin(event) {
     
     // Validação básica
     if (!password) {
-        if (loginError) loginError.textContent = 'Digite a senha.';
+        if (loginError) {
+            loginError.textContent = 'Digite a senha.';
+            loginError.style.display = 'block';
+        }
         return;
     }
     
@@ -120,13 +155,19 @@ async function handleLogin(event) {
             window.location.reload();
         } else {
             // Exibir mensagem de erro
-            if (loginError) loginError.textContent = data.message || 'Senha incorreta.';
+            if (loginError) {
+                loginError.textContent = data.message || 'Senha incorreta.';
+                loginError.style.display = 'block';
+            }
         }
         
         showLoading(false);
     } catch (error) {
         console.error('Erro ao realizar login:', error);
-        if (loginError) loginError.textContent = 'Erro ao conectar. Tente novamente.';
+        if (loginError) {
+            loginError.textContent = 'Erro ao conectar. Tente novamente.';
+            loginError.style.display = 'block';
+        }
         showLoading(false);
     }
 }

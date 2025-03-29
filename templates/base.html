@@ -57,24 +57,29 @@
     </div>
 
     <!-- Login Modal -->
-    <div id="login-modal" class="modal-overlay">
-        <div class="modal">
+    <div id="login-modal" class="modal-overlay" style="display: none;">
+        <div class="modal" style="transform: translateY(0);">
             <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
+                <h5 class="modal-title">Acesso ao Sistema</h5>
                 <button id="close-modal" class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="login-form">
                     <div class="form-group mb-3">
-                        <h3 class="mb-3">Acesso ao Sistema</h3>
-                        <p class="mb-3">Digite a senha mestra para acessar as funções administrativas.</p>
+                        <div class="text-center mb-4">
+                            <i class="fas fa-lock fa-3x mb-3" style="color: var(--orange);"></i>
+                            <h3 class="mb-3">Área Restrita</h3>
+                            <p class="mb-3">Digite a senha mestra para acessar as funções administrativas.</p>
+                        </div>
                         <label for="password" class="form-label">Senha Mestra</label>
-                        <input type="password" id="password" name="password" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control form-control-lg">
                         <small class="text-muted">Senha padrão: nautico2025</small>
                     </div>
-                    <div id="login-error" class="text-danger mb-3"></div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-lg btn-primary">Entrar</button>
+                    <div id="login-error" class="alert alert-danger mb-3" style="display: none;"></div>
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-lg btn-primary">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Entrar
+                        </button>
                     </div>
                 </form>
             </div>

@@ -13,6 +13,7 @@ const topGoalkeeperElement = document.getElementById('top-goalkeeper');
 const statsTableBody = document.getElementById('stats-table-body');
 const statsLoader = document.getElementById('stats-loader');
 const statsTable = document.getElementById('stats-table');
+const loadingElement = document.getElementById('loading');
 // Autenticação gerenciada pelo auth.js, não declarando os elementos aqui
 
 const filterButtons = document.querySelectorAll('.filter-btn');
