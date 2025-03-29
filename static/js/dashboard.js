@@ -27,6 +27,33 @@ let currentSort = {
 };
 
 /**
+ * Abrevia um nome para exibição em telas menores
+ * @param {string} name - Nome completo
+ * @returns {string} Nome abreviado
+ */
+function abbreviateName(name) {
+    if (!name) return '';
+    const nameParts = name.split(' ');
+    
+    // Se for um nome único, retorna como está
+    if (nameParts.length === 1) {
+        return nameParts[0];
+    }
+    
+    // Se for nome e sobrenome, retorna nome completo + inicial do sobrenome
+    if (nameParts.length === 2) {
+        const firstName = nameParts[0];
+        const lastInitial = nameParts[1].charAt(0) + '.';
+        return `${firstName} ${lastInitial}`;
+    }
+    
+    // Se for nome composto, usa primeiro nome + inicial do sobrenome
+    const firstName = nameParts[0];
+    const lastInitial = nameParts[nameParts.length - 1].charAt(0) + '.';
+    return `${firstName} ${lastInitial}`;
+}
+
+/**
  * Inicialização do Dashboard
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -226,18 +253,23 @@ function updatePlayersTable(players) {
     players.forEach((player, index) => {
         const row = document.createElement('tr');
         
+        // Criar um nome abreviado para dispositivos móveis
+        const playerName = player.name;
+        const shortName = abbreviateName(playerName);
+        
         // Criar células
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>
-                ${player.name}
+                <span class="d-none d-md-inline">${playerName}</span>
+                <span class="d-inline d-md-none player-name-abbr" title="${playerName}">${shortName}</span>
                 ${player.is_goalkeeper ? '<span class="badge badge-blue ml-1">G</span>' : ''}
             </td>
             <td>${player.goals}</td>
-            <td>${player.assists}</td>
-            <td>${player.is_goalkeeper ? player.goals_conceded : '-'}</td>
-            <td>${player.matches}</td>
-            <td>${player.sessions}</td>
+            <td class="hide-sm">${player.assists}</td>
+            <td class="hide-sm">${player.is_goalkeeper ? player.goals_conceded : '-'}</td>
+            <td class="hide-xs">${player.matches}</td>
+            <td class="hide-xs">${player.sessions}</td>
         `;
         
         statsTableBody.appendChild(row);
