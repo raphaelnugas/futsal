@@ -180,26 +180,26 @@ function setupPhotoEditorControls() {
             cropBoxResizable: false,
             toggleDragModeOnDblclick: false,
         });
-        
+
         // Atualizar controles de zoom
         if (zoomInButton) {
             zoomInButton.addEventListener('click', () => {
                 cropper.zoom(0.1);
             });
         }
-        
+
         if (zoomOutButton) {
             zoomOutButton.addEventListener('click', () => {
                 cropper.zoom(-0.1);
             });
         }
-        
+
         if (rotateCwButton) {
             rotateCwButton.addEventListener('click', () => {
                 cropper.rotate(90);
             });
         }
-        
+
         if (resetPhotoButton) {
             resetPhotoButton.addEventListener('click', () => {
                 cropper.reset();
@@ -490,22 +490,20 @@ function renderPlayerList(playerList) {
         // Obter iniciais para exibir no avatar, se não tiver foto
         const initials = getPlayerInitials(player.name);
 
+        const avatarContent = player.photo_url 
+        ? `<img src="${player.photo_url}" alt="${player.name}" class="img-fluid">` 
+        : initials;
+
         playerCard.innerHTML = `
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div class="player-avatar mr-3">
-                        ${player.photo_url 
-                            ? `<img src="${player.photo_url}" alt="${player.name}" class="img-fluid">` 
-                            : initials
-                        }
+                        ${avatarContent}
                     </div>
                     <div class="player-info">
                         <h5 class="card-title mb-1">${player.name}</h5>
                         <p class="card-text">
-                            ${player.is_goalkeeper 
-                                ? '<span class="badge badge-blue">Goleiro</span>' 
-                                : '<span class="badge badge-orange">Jogador</span>'
-                            }
+                            <span class="badge ${player.is_goalkeeper ? 'badge-primary' : 'badge-secondary'}">${player.is_goalkeeper ? 'Goleiro' : 'Jogador'}</span>
                         </p>
                     </div>
                     <div class="ml-auto">
@@ -826,4 +824,17 @@ function showSuccess(message) {
     setTimeout(() => {
         alertElement.remove();
     }, 3000);
+}
+
+function toggleModal(modalId, show) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = show ? 'block' : 'none';
+    }
+}
+
+function getInitials(name) {
+    if (!name) return '?';
+    const names = name.split(' ');
+    return (names[0].charAt(0) + (names.length > 1 ? names[names.length - 1].charAt(0) : '')).toUpperCase();
 }
