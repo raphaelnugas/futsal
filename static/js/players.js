@@ -96,6 +96,19 @@ function setupEventListeners() {
         editPlayerPhotoInput.addEventListener('change', handleEditPhotoUpload);
     }
     
+    // Eventos de clique nos círculos de foto para abrir o seletor de arquivo
+    if (photoPreview) {
+        photoPreview.addEventListener('click', () => {
+            playerPhotoInput.click();
+        });
+    }
+    
+    if (editPhotoPreview) {
+        editPhotoPreview.addEventListener('click', () => {
+            editPlayerPhotoInput.click();
+        });
+    }
+    
     // Eventos para controles de edição de foto
     setupPhotoEditorControls();
     
