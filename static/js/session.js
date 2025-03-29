@@ -29,11 +29,10 @@ const drawOrangeTeamElement = document.getElementById('draw-orange-team');
 const drawBlackTeamElement = document.getElementById('draw-black-team');
 const orangeTeamBoard = document.getElementById('orange-team-board');
 const blackTeamBoard = document.getElementById('black-team-board');
-const orangeTeamList = document.getElementById('orange-team-list');
-const blackTeamList = document.getElementById('black-team-list');
+const orangeTeamContainer = document.getElementById('orange-team-container');
+const blackTeamContainer = document.getElementById('black-team-container');
 const orangeVictoryCount = document.getElementById('orange-victory-count');
 const blackVictoryCount = document.getElementById('black-victory-count');
-const editTeamsButton = document.getElementById('edit-teams-button');
 const startMatchButton = document.getElementById('start-match-button');
 const editTeamsModal = document.getElementById('edit-teams-modal');
 const closeEditTeamsModal = document.getElementById('close-edit-teams-modal');
@@ -43,8 +42,6 @@ const orangePlayersSelect = document.getElementById('orange-players-select');
 const blackPlayersSelect = document.getElementById('black-players-select');
 const saveTeamsButton = document.getElementById('save-teams');
 const cancelEditTeams = document.getElementById('cancel-edit-teams');
-const waitingPlayersList = document.getElementById('waiting-players-list');
-const noWaitingPlayers = document.getElementById('no-waiting-players');
 const endSessionButton = document.getElementById('end-session-button');
 const endSessionConfirmModal = document.getElementById('end-session-confirm-modal');
 const closeEndSessionModal = document.getElementById('close-end-session-modal');
@@ -128,27 +125,20 @@ function setupEventListeners() {
         cancelDrawButton.addEventListener('click', () => toggleModal('draw-teams-modal', false));
     }
     
-    // Eventos para editar times
-    if (editTeamsButton) {
-        editTeamsButton.addEventListener('click', openEditTeamsModal);
-    }
-    
-    if (closeEditTeamsModal) {
-        closeEditTeamsModal.addEventListener('click', () => toggleModal('edit-teams-modal', false));
-    }
-    
-    if (saveTeamsButton) {
-        saveTeamsButton.addEventListener('click', saveEditedTeams);
-    }
-    
-    if (cancelEditTeams) {
-        cancelEditTeams.addEventListener('click', () => toggleModal('edit-teams-modal', false));
+    // Botão para sortear/randomizar times
+    const randomizeTeamsButton = document.getElementById('randomize-teams-button');
+    if (randomizeTeamsButton) {
+        randomizeTeamsButton.addEventListener('click', randomizeTeams);
     }
     
     // Evento para iniciar partida
     if (startMatchButton) {
         startMatchButton.addEventListener('click', startMatch);
     }
+    
+    // Configurar drag-and-drop para os jogadores
+    setupDragAndDrop();
+}
     
     // Eventos para encerrar sessão
     if (endSessionButton) {
@@ -619,46 +609,93 @@ function setupTeamsView() {
  * Atualiza a visualização dos times
  */
 function updateTeamsView() {
-    if (!orangeTeamList || !blackTeamList) return;
+    if (!orangeTeamContainer || !blackTeamContainer) return;
     
-    // Limpar listas
-    orangeTeamList.innerHTML = '';
-    blackTeamList.innerHTML = '';
+    // Estrutura para time laranja
+    orangeTeamContainer.innerHTML = `
+        <div class="team-header">
+            <h5>Time Laranja <span id="orange-team-count" class="badge badge-orange">${orangeTeam.length}</span></h5>
+            <div class="team-actions">
+                <button id="randomize-teams-button" class="btn btn-sm btn-secondary" title="Reorganizar times aleatoriamente">
+                    <i class="fas fa-random"></i>
+                </button>
+            </div>
+        </div>
+        <div class="goalkeeper-area">
+            <h6>Goleiro</h6>
+            <div class="goalkeeper-dropzone" data-area="orange" data-team="orange">
+                ${orangeTeam.filter(p => p.played_as_goalkeeper).map(player => `
+                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
+                        <div class="player-avatar">${getInitials(player.name)}</div>
+                        <div class="player-info">
+                            <div class="player-name">
+                                ${player.name}
+                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        <div class="players-area">
+            <h6>Jogadores</h6>
+            <div class="players-dropzone" data-area="orange" data-team="orange">
+                ${orangeTeam.filter(p => !p.played_as_goalkeeper).map(player => `
+                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
+                        <div class="player-avatar">${getInitials(player.name)}</div>
+                        <div class="player-info">
+                            <div class="player-name">
+                                ${player.name}
+                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    // Estrutura para time preto
+    blackTeamContainer.innerHTML = `
+        <div class="team-header">
+            <h5>Time Preto <span id="black-team-count" class="badge badge-dark">${blackTeam.length}</span></h5>
+        </div>
+        <div class="goalkeeper-area">
+            <h6>Goleiro</h6>
+            <div class="goalkeeper-dropzone" data-area="black" data-team="black">
+                ${blackTeam.filter(p => p.played_as_goalkeeper).map(player => `
+                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
+                        <div class="player-avatar">${getInitials(player.name)}</div>
+                        <div class="player-info">
+                            <div class="player-name">
+                                ${player.name}
+                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        <div class="players-area">
+            <h6>Jogadores</h6>
+            <div class="players-dropzone" data-area="black" data-team="black">
+                ${blackTeam.filter(p => !p.played_as_goalkeeper).map(player => `
+                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
+                        <div class="player-avatar">${getInitials(player.name)}</div>
+                        <div class="player-info">
+                            <div class="player-name">
+                                ${player.name}
+                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
     
     // Atualizar contadores de vitória
     updateVictoryCounters();
-    
-    // Preencher time laranja
-    orangeTeam.forEach(player => {
-        const playerItem = document.createElement('div');
-        playerItem.className = 'player-item';
-        playerItem.innerHTML = `
-            <div class="d-flex align-items-center">
-                <div class="player-avatar mr-2">${getInitials(player.name)}</div>
-                <div class="player-name">
-                    ${player.name}
-                    ${player.played_as_goalkeeper ? '<span class="badge badge-blue ml-1">Goleiro</span>' : ''}
-                </div>
-            </div>
-        `;
-        orangeTeamList.appendChild(playerItem);
-    });
-    
-    // Preencher time preto
-    blackTeam.forEach(player => {
-        const playerItem = document.createElement('div');
-        playerItem.className = 'player-item';
-        playerItem.innerHTML = `
-            <div class="d-flex align-items-center">
-                <div class="player-avatar mr-2">${getInitials(player.name)}</div>
-                <div class="player-name">
-                    ${player.name}
-                    ${player.played_as_goalkeeper ? '<span class="badge badge-blue ml-1">Goleiro</span>' : ''}
-                </div>
-            </div>
-        `;
-        blackTeamList.appendChild(playerItem);
-    });
 }
 
 /**
@@ -704,37 +741,37 @@ function updateVictoryCounters() {
  * Atualiza a lista de jogadores aguardando
  */
 function updateWaitingPlayers() {
-    if (!waitingPlayersList || !noWaitingPlayers) return;
+    if (!waitingPlayersContainer) return;
     
-    waitingPlayersList.innerHTML = '';
+    // Atualizar container de jogadores aguardando
+    waitingPlayersContainer.innerHTML = `
+        <h5>Jogadores Aguardando <span id="waiting-players-count" class="badge badge-secondary">${waitingPlayers.length}</span></h5>
+        ${waitingPlayers.length === 0 ? 
+            '<p class="text-muted">Não há jogadores aguardando.</p>' : 
+            `<div class="waiting-dropzone" data-area="waiting">
+                ${waitingPlayers.map(player => `
+                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
+                        <div class="player-avatar">${getInitials(player.name)}</div>
+                        <div class="player-info">
+                            <div class="player-name">
+                                ${player.name}
+                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`
+        }
+    `;
     
-    if (waitingPlayers.length === 0) {
-        noWaitingPlayers.style.display = 'block';
-        return;
+    // Atualizar evento de randomização após adicionar o botão
+    const randomizeTeamsButton = document.getElementById('randomize-teams-button');
+    if (randomizeTeamsButton) {
+        randomizeTeamsButton.addEventListener('click', randomizeTeams);
     }
     
-    noWaitingPlayers.style.display = 'none';
-    
-    // Criar uma lista com os jogadores de fora
-    const waitingList = document.createElement('div');
-    waitingList.className = 'player-list';
-    
-    waitingPlayers.forEach(player => {
-        const playerItem = document.createElement('div');
-        playerItem.className = 'player-item';
-        playerItem.innerHTML = `
-            <div class="d-flex align-items-center">
-                <div class="player-avatar mr-2">${getInitials(player.name)}</div>
-                <div class="player-name">
-                    ${player.name}
-                    ${player.is_goalkeeper ? '<span class="badge badge-blue ml-1">Goleiro</span>' : ''}
-                </div>
-            </div>
-        `;
-        waitingList.appendChild(playerItem);
-    });
-    
-    waitingPlayersList.appendChild(waitingList);
+    // Configurar drag-and-drop para os novos elementos
+    setupDragAndDrop();
 }
 
 /**
@@ -1288,4 +1325,258 @@ async function confirmMatchEnd() {
         showError('Erro ao conectar com o servidor. Tente novamente.');
         showLoading(false);
     }
+}
+
+/**
+ * Configuração de drag-and-drop para gerenciamento de times
+ */
+
+/**
+ * Configura a funcionalidade de drag-and-drop para formação de times
+ */
+function setupDragAndDrop() {
+    // Elementos arrastáveis
+    const draggableElements = document.querySelectorAll('.player-item');
+    
+    // Áreas onde os elementos podem ser soltos
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    
+    // Adicionar eventos para cada elemento arrastável
+    draggableElements.forEach(element => {
+        element.setAttribute('draggable', 'true');
+        
+        // Eventos de drag para os elementos
+        element.addEventListener('dragstart', dragStart);
+        element.addEventListener('dragend', dragEnd);
+        
+        // Impedir comportamento padrão de links dentro dos elementos arrastáveis
+        const links = element.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', e => {
+                if (element.classList.contains('dragging')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+    
+    // Adicionar eventos para cada área de destino
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', dragOver);
+        dropzone.addEventListener('dragleave', dragLeave);
+        dropzone.addEventListener('drop', drop);
+    });
+}
+
+/**
+ * Função chamada quando um elemento começa a ser arrastado
+ */
+function dragStart(e) {
+    this.classList.add('dragging');
+    
+    // Guardar o ID do jogador e a área de origem nos dados de transferência
+    const playerId = this.getAttribute('data-player-id');
+    const sourceArea = this.parentElement.getAttribute('data-area');
+    const isGoalkeeper = this.getAttribute('data-goalkeeper') === 'true';
+    
+    e.dataTransfer.setData('text/plain', JSON.stringify({
+        playerId: playerId,
+        sourceArea: sourceArea,
+        isGoalkeeper: isGoalkeeper
+    }));
+    
+    // Efeito de movimento
+    e.dataTransfer.effectAllowed = 'move';
+}
+
+/**
+ * Função chamada quando um elemento termina de ser arrastado
+ */
+function dragEnd() {
+    this.classList.remove('dragging');
+}
+
+/**
+ * Função chamada quando um elemento está sobre uma área de destino
+ */
+function dragOver(e) {
+    e.preventDefault();
+    this.classList.add('drag-over');
+    e.dataTransfer.dropEffect = 'move';
+}
+
+/**
+ * Função chamada quando um elemento sai de uma área de destino
+ */
+function dragLeave() {
+    this.classList.remove('drag-over');
+}
+
+/**
+ * Função chamada quando um elemento é solto em uma área de destino
+ */
+function drop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    
+    // Obter os dados do elemento arrastado
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    const playerId = parseInt(data.playerId);
+    const sourceArea = data.sourceArea;
+    const isGoalkeeper = data.isGoalkeeper;
+    
+    // Obter informações da área de destino
+    const targetArea = this.getAttribute('data-area');
+    const targetTeam = this.getAttribute('data-team');
+    const isGoalkeeperZone = this.classList.contains('goalkeeper-dropzone');
+    
+    // Validar se o jogador pode ser solto nesta área
+    // Para área de goleiro, somente goleiros (ou jogadores que possam atuar como goleiro)
+    if (isGoalkeeperZone && !isGoalkeeper && !confirm('Este jogador não é goleiro. Confirma que deseja colocá-lo como goleiro?')) {
+        return;
+    }
+    
+    // Encontrar o elemento arrastado
+    const draggedElement = document.querySelector(`.player-item[data-player-id="${playerId}"]`);
+    
+    if (!draggedElement) return;
+    
+    // Mover o elemento para a área de destino
+    this.appendChild(draggedElement);
+    
+    // Atualizar os arrays de times
+    updateTeamArrays(playerId, sourceArea, targetArea, targetTeam, isGoalkeeperZone);
+}
+
+/**
+ * Atualiza os arrays de times após uma operação de drag-and-drop
+ */
+function updateTeamArrays(playerId, sourceArea, targetArea, targetTeam, isGoalkeeperZone) {
+    let player;
+    
+    // Remover o jogador da área de origem
+    if (sourceArea === 'orange') {
+        player = orangeTeam.find(p => p.id === playerId);
+        orangeTeam = orangeTeam.filter(p => p.id !== playerId);
+    } else if (sourceArea === 'black') {
+        player = blackTeam.find(p => p.id === playerId);
+        blackTeam = blackTeam.filter(p => p.id !== playerId);
+    } else if (sourceArea === 'waiting') {
+        player = waitingPlayers.find(p => p.id === playerId);
+        waitingPlayers = waitingPlayers.filter(p => p.id !== playerId);
+    }
+    
+    if (!player) {
+        // Buscar o jogador na lista completa se não encontrou no time
+        player = allPlayers.find(p => p.id === playerId);
+    }
+    
+    if (!player) return;
+    
+    // Adicionar à área de destino
+    if (targetArea === 'orange') {
+        player.played_as_goalkeeper = isGoalkeeperZone;
+        orangeTeam.push(player);
+    } else if (targetArea === 'black') {
+        player.played_as_goalkeeper = isGoalkeeperZone;
+        blackTeam.push(player);
+    } else if (targetArea === 'waiting') {
+        waitingPlayers.push(player);
+    }
+    
+    // Atualizar o contador de jogadores nos times
+    updateTeamsCount();
+}
+
+/**
+ * Atualiza os contadores de jogadores nos times
+ */
+function updateTeamsCount() {
+    const orangeCount = document.getElementById('orange-team-count');
+    const blackCount = document.getElementById('black-team-count');
+    const waitingCount = document.getElementById('waiting-players-count');
+    
+    if (orangeCount) orangeCount.textContent = orangeTeam.length;
+    if (blackCount) blackCount.textContent = blackTeam.length;
+    if (waitingCount) waitingCount.textContent = waitingPlayers.length;
+    
+    // Habilitar ou desabilitar botão de iniciar partida com base no número de jogadores
+    if (startMatchButton) {
+        const minPlayersPerTeam = 5; // Mínimo de 5 jogadores por time (1 goleiro + 4 jogadores)
+        const orangeHasGoalkeeper = orangeTeam.some(p => p.played_as_goalkeeper);
+        const blackHasGoalkeeper = blackTeam.some(p => p.played_as_goalkeeper);
+        
+        startMatchButton.disabled = orangeTeam.length < minPlayersPerTeam || 
+                                   blackTeam.length < minPlayersPerTeam ||
+                                   !orangeHasGoalkeeper ||
+                                   !blackHasGoalkeeper;
+    }
+}
+
+/**
+ * Função para randomizar os times usando drag-and-drop
+ */
+function randomizeTeams() {
+    // Juntar todos os jogadores
+    const allPlayersInTeams = [...orangeTeam, ...blackTeam, ...waitingPlayers];
+    
+    // Separar goleiros e jogadores de linha
+    const goalkeepers = allPlayersInTeams.filter(p => p.is_goalkeeper);
+    const fieldPlayers = allPlayersInTeams.filter(p => !p.is_goalkeeper);
+    
+    // Limpar os times existentes
+    orangeTeam = [];
+    blackTeam = [];
+    waitingPlayers = [];
+    
+    // Embaralhar os arrays
+    const shuffledGoalkeepers = shuffleArray(goalkeepers);
+    const shuffledFieldPlayers = shuffleArray(fieldPlayers);
+    
+    // Distribuir goleiros
+    if (shuffledGoalkeepers.length >= 2) {
+        // Dois ou mais goleiros disponíveis
+        orangeTeam.push({ ...shuffledGoalkeepers[0], played_as_goalkeeper: true });
+        blackTeam.push({ ...shuffledGoalkeepers[1], played_as_goalkeeper: true });
+        
+        // Adicionar goleiros excedentes como jogadores de linha
+        for (let i = 2; i < shuffledGoalkeepers.length; i++) {
+            const team = i % 2 === 0 ? orangeTeam : blackTeam;
+            team.push({ ...shuffledGoalkeepers[i], played_as_goalkeeper: false });
+        }
+    } else if (shuffledGoalkeepers.length === 1) {
+        // Apenas um goleiro disponível
+        orangeTeam.push({ ...shuffledGoalkeepers[0], played_as_goalkeeper: true });
+        
+        // Usar jogador de linha como goleiro
+        if (shuffledFieldPlayers.length > 0) {
+            blackTeam.push({ ...shuffledFieldPlayers.shift(), played_as_goalkeeper: true });
+        }
+    } else {
+        // Nenhum goleiro disponível
+        if (shuffledFieldPlayers.length >= 2) {
+            orangeTeam.push({ ...shuffledFieldPlayers.shift(), played_as_goalkeeper: true });
+            blackTeam.push({ ...shuffledFieldPlayers.shift(), played_as_goalkeeper: true });
+        }
+    }
+    
+    // Distribuir jogadores de linha (4 para cada time)
+    const playersPerTeam = Math.min(4, Math.floor(shuffledFieldPlayers.length / 2));
+    
+    for (let i = 0; i < playersPerTeam * 2; i++) {
+        const player = { ...shuffledFieldPlayers[i], played_as_goalkeeper: false };
+        
+        if (i % 2 === 0) {
+            orangeTeam.push(player);
+        } else {
+            blackTeam.push(player);
+        }
+    }
+    
+    // Jogadores que ficaram de fora
+    waitingPlayers = shuffledFieldPlayers.slice(playersPerTeam * 2);
+    
+    // Atualizar a interface para refletir as mudanças
+    updateTeamsView();
+    updateWaitingPlayers();
 }

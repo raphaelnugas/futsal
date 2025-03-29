@@ -942,20 +942,66 @@ a:hover, a:focus {
     align-items: center;
     padding: var(--spacing-sm);
     border-bottom: 1px solid var(--light-gray);
-    cursor: pointer;
-    transition: background-color var(--transition-fast);
+    cursor: grab;
+    transition: all var(--transition-fast);
+    background-color: var(--white);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 .player-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
 }
 
 .player-item:hover {
     background-color: rgba(0, 0, 0, 0.02);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .player-item.selected {
     background-color: rgba(255, 127, 42, 0.1);
+}
+
+.player-item.dragging {
+    opacity: 0.7;
+    box-shadow: var(--shadow-lg);
+    cursor: grabbing;
+}
+
+/* Estilização para áreas de arrastar e soltar */
+.goalkeeper-area, .players-area {
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone {
+    min-height: 60px;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-sm);
+    transition: background-color var(--transition-fast);
+}
+
+.team-orange .goalkeeper-dropzone, 
+.team-orange .players-dropzone {
+    background-color: rgba(255, 127, 42, 0.05);
+}
+
+.team-black .goalkeeper-dropzone, 
+.team-black .players-dropzone {
+    background-color: rgba(38, 38, 38, 0.05);
+}
+
+.waiting-dropzone {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Estado da área quando estiver sobre ela durante o arrasto */
+.drag-over {
+    background-color: rgba(109, 189, 255, 0.15) !important;
+    border-color: rgba(13, 110, 253, 0.5) !important;
 }
 
 .player-avatar {
