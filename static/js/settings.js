@@ -98,7 +98,12 @@ async function handleSettingsSubmit(event) {
 
         if (!response.ok) throw new Error('Erro ao salvar configurações');
 
-        showSuccess('Configurações salvas com sucesso!');
+        const result = await response.json();
+        if (result.success) {
+            showSuccess('Configurações salvas com sucesso!');
+        } else {
+            showError(result.message || 'Erro ao salvar configurações');
+        }
     } catch (error) {
         console.error('Erro ao salvar configurações:', error);
         showError('Erro ao salvar configurações');
@@ -109,7 +114,7 @@ async function handleSettingsSubmit(event) {
  * Reseta o banco de dados
  */
 async function resetDatabase() {
-    if (!confirm('ATENÇÃO: Esta ação irá apagar todos os dados do sistema! Deseja continuar?')) {
+    if (!confirm('Tem certeza que deseja resetar todo o banco de dados? Esta ação é irreversível!')) {
         return;
     }
 
@@ -123,12 +128,12 @@ async function resetDatabase() {
 
         if (!response.ok) throw new Error('Erro ao resetar banco de dados');
 
-        const data = await response.json();
-        if (data.success) {
+        const result = await response.json();
+        if (result.success) {
             showSuccess('Banco de dados resetado com sucesso!');
-            setTimeout(() => window.location.reload(), 1500);
+            loadLogs(); // Recarrega os logs após resetar
         } else {
-            throw new Error(data.message || 'Erro ao resetar banco de dados');
+            showError(result.message || 'Erro ao resetar banco de dados');
         }
     } catch (error) {
         console.error('Erro ao resetar banco de dados:', error);
@@ -141,9 +146,8 @@ async function resetDatabase() {
  */
 async function loadLogs() {
     try {
-        if (logsLoader) {
-            logsLoader.style.display = 'flex';
-        }
+        if (logsLoader) logsLoader.style.display = 'block';
+        if (noLogs) noLogs.style.display = 'none';
 
         const response = await fetch('/api/logs');
         if (!response.ok) throw new Error('Erro ao carregar logs');
@@ -154,9 +158,7 @@ async function loadLogs() {
         console.error('Erro ao carregar logs:', error);
         showError('Erro ao carregar logs');
     } finally {
-        if (logsLoader) {
-            logsLoader.style.display = 'none';
-        }
+        if (logsLoader) logsLoader.style.display = 'none';
     }
 }
 
@@ -215,7 +217,8 @@ function formatEventType(eventType) {
         'match_end': 'Fim de Partida',
         'goal': 'Gol',
         'goal_deleted': 'Gol Removido',
-        'players_updated': 'Jogadores Atualizados'
+        'players_updated': 'Jogadores Atualizados',
+        'database_reset': 'Reset do Banco de Dados'
     };
     return eventTypeMap[eventType] || eventType;
 }
