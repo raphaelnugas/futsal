@@ -14,6 +14,9 @@ const loginError = document.getElementById('login-error');
 const closeModalButton = document.getElementById('close-modal');
 const logoutButton = document.getElementById('logout-button');
 
+// Variável para armazenar a instância do modal Bootstrap
+let bsLoginModal = null;
+
 /**
  * Inicialização
  */
@@ -26,17 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
  * Configura os listeners de eventos para autenticação
  */
 function setupAuthEventListeners() {
+    // Inicializar o modal Bootstrap se o elemento existir
+    if (loginModal) {
+        try {
+            bsLoginModal = new bootstrap.Modal(loginModal);
+            
+            // Configurar evento para focar o campo de senha quando o modal for mostrado
+            loginModal.addEventListener('shown.bs.modal', function () {
+                const passwordField = document.getElementById('password');
+                if (passwordField) passwordField.focus();
+            });
+        } catch (error) {
+            console.error('Erro ao inicializar o modal:', error);
+        }
+    }
+    
     // Evento para o botão de login
     if (loginButton) {
         loginButton.addEventListener('click', () => {
             toggleLoginModal(true);
-        });
-    }
-    
-    // Evento para o botão de fechar o modal
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', () => {
-            toggleLoginModal(false);
         });
     }
     
@@ -49,19 +60,10 @@ function setupAuthEventListeners() {
     if (logoutButton) {
         logoutButton.addEventListener('click', handleLogout);
     }
-    
-    // Evento para fechar o modal ao clicar fora
-    if (loginModal) {
-        loginModal.addEventListener('click', (event) => {
-            if (event.target === loginModal) {
-                toggleLoginModal(false);
-            }
-        });
-    }
 }
 
 /**
- * Exibe/oculta o modal de login
+ * Exibe/oculta o modal de login usando Bootstrap
  * @param {boolean} show - Se deve mostrar ou esconder o modal
  */
 function toggleLoginModal(show) {
@@ -70,39 +72,22 @@ function toggleLoginModal(show) {
         return;
     }
     
+    // Criar a instância do modal se ainda não existir
+    if (!bsLoginModal) {
+        try {
+            bsLoginModal = new bootstrap.Modal(loginModal);
+        } catch (error) {
+            console.error('Erro ao criar instância do Bootstrap Modal:', error);
+            return;
+        }
+    }
+    
     if (show) {
-        // Forçar exibição do modal
-        loginModal.style.display = 'flex';
-        
-        // Usar setTimeout para garantir uma transição suave
-        setTimeout(() => {
-            loginModal.style.opacity = '1';
-            loginModal.style.visibility = 'visible';
-            loginModal.classList.add('active');
-        }, 10);
-        
-        // Animar a entrada
-        const modalContent = loginModal.querySelector('.modal');
-        if (modalContent) {
-            modalContent.style.transform = 'translateY(0)';
-        }
-        
-        // Focar no campo de senha
-        setTimeout(() => {
-            const passwordField = document.getElementById('password');
-            if (passwordField) passwordField.focus();
-        }, 100);
+        // Mostrar o modal usando a instância já criada
+        bsLoginModal.show();
     } else {
-        // Esconder modal com transição
-        loginModal.classList.remove('active');
-        loginModal.style.opacity = '0';
-        loginModal.style.visibility = 'hidden';
-        
-        // Animar a saída
-        const modalContent = loginModal.querySelector('.modal');
-        if (modalContent) {
-            modalContent.style.transform = 'translateY(-20px)';
-        }
+        // Esconder o modal
+        bsLoginModal.hide();
         
         // Limpar campos
         if (loginForm) loginForm.reset();
@@ -110,11 +95,6 @@ function toggleLoginModal(show) {
             loginError.textContent = '';
             loginError.style.display = 'none';
         }
-        
-        // Remover display após a transição
-        setTimeout(() => {
-            loginModal.style.display = 'none';
-        }, 300);
     }
 }
 
