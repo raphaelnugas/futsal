@@ -14,11 +14,12 @@ const statsTableBody = document.getElementById('stats-table-body');
 const statsLoader = document.getElementById('stats-loader');
 const statsTable = document.getElementById('stats-table');
 // Autenticação gerenciada pelo auth.js, não declarando os elementos aqui
-const searchInput = document.getElementById('search-player');
+
 const filterButtons = document.querySelectorAll('.filter-btn');
 
 // Estado da aplicação
 let players = [];
+let dashboardData = null;
 let currentSort = {
     column: 'goals',
     direction: 'desc'
@@ -41,10 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Eventos de autenticação gerenciados pelo auth.js
     
-    // Evento para o input de busca
-    if (searchInput) {
-        searchInput.addEventListener('input', filterPlayers);
-    }
+
     
     // Eventos para os botões de filtro
     if (filterButtons) {
@@ -83,11 +81,28 @@ async function loadDashboardData() {
         
         // Carregar estatísticas do dashboard
         const dashboardResponse = await fetch('/api/stats/dashboard');
-        const dashboardData = await dashboardResponse.json();
+        dashboardData = await dashboardResponse.json();
+        
+        if (!dashboardData) {
+            dashboardData = {
+                total_players: 0,
+                total_sessions: 0,
+                total_matches: 0,
+                total_goals: 0,
+                avg_goals_per_match: 0,
+                top_scorer: null,
+                top_assistant: null,
+                top_goalkeeper: null
+            };
+        }
         
         // Carregar lista de jogadores com estatísticas
         const playersResponse = await fetch('/api/stats/player_list');
         players = await playersResponse.json();
+        
+        if (!Array.isArray(players)) {
+            players = [];
+        }
         
         // Atualizar a UI com os dados
         updateDashboardUI(dashboardData);
@@ -97,6 +112,23 @@ async function loadDashboardData() {
     } catch (error) {
         console.error('Erro ao carregar dados do dashboard:', error);
         showError('Não foi possível carregar os dados. Tente novamente mais tarde.');
+        
+        // Se tiver erro, ainda tentar montar UI com dados vazios
+        players = [];
+        dashboardData = {
+            total_players: 0,
+            total_sessions: 0,
+            total_matches: 0,
+            total_goals: 0,
+            avg_goals_per_match: 0,
+            top_scorer: null,
+            top_assistant: null,
+            top_goalkeeper: null
+        };
+        
+        updateDashboardUI(dashboardData);
+        updatePlayersTable(players);
+        
         showLoading(false);
     }
 }
@@ -274,26 +306,7 @@ function updateSortIndicators() {
     });
 }
 
-/**
- * Filtra os jogadores com base no texto digitado na busca
- */
-function filterPlayers() {
-    const searchText = searchInput.value.toLowerCase();
-    
-    if (!searchText) {
-        // Se a busca estiver vazia, mostrar todos
-        updatePlayersTable(players);
-        return;
-    }
-    
-    // Filtrar jogadores pelo nome
-    const filteredPlayers = players.filter(player => 
-        player.name.toLowerCase().includes(searchText)
-    );
-    
-    // Atualizar tabela com jogadores filtrados
-    updatePlayersTable(filteredPlayers);
-}
+
 
 // Funções de autenticação gerenciadas pelo auth.js
 
