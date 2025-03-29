@@ -641,6 +641,28 @@ def update_match_players(match_id):
     # Adicionar jogadores atualizados
     orange_players = data.get('orange_team', [])
     black_players = data.get('black_team', [])
+
+@app.route('/api/reset-database', methods=['POST'])
+@login_required
+def reset_database():
+    """API para resetar o banco de dados."""
+    try:
+        # Deletar todos os dados das tabelas
+        Goal.query.delete()
+        PlayerMatch.query.delete()
+        Match.query.delete()
+        Session.query.delete()
+        Player.query.delete()
+        Log.query.delete()
+        
+        # Commit as mudanças
+        db.session.commit()
+        
+        return jsonify({'success': True, 'message': 'Banco de dados resetado com sucesso!'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': str(e)}), 500
+
     
     for player_data in orange_players:
         player_match = PlayerMatch(

@@ -6,14 +6,15 @@
  * Data: 2023
  */
 
-// Elementos do DOM que serão manipulados
+// Elementos do DOM
 const settingsForm = document.getElementById('settings-form');
-const matchDurationField = document.getElementById('match-duration');
-const masterPasswordField = document.getElementById('master-password');
+const matchDurationInput = document.getElementById('match-duration');
+const masterPasswordInput = document.getElementById('master-password');
 const togglePasswordButton = document.getElementById('toggle-password');
+const resetDatabaseButton = document.getElementById('reset-database');
 const logsTableBody = document.getElementById('logs-table-body');
 const logsLoader = document.getElementById('logs-loader');
-const noLogsElement = document.getElementById('no-logs');
+const noLogs = document.getElementById('no-logs');
 const successModal = document.getElementById('success-modal');
 const closeSuccessModal = document.getElementById('close-success-modal');
 const successMessage = document.getElementById('success-message');
@@ -30,38 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Carregar dados
     loadSettings();
     loadLogs();
-    
+
     // Configurar eventos
     setupEventListeners();
-    
-    // Configurar botão de reset
-    const resetButton = document.getElementById('reset-database');
-    if (resetButton) {
-        resetButton.addEventListener('click', async () => {
-            if (confirm('Tem certeza que deseja resetar todo o banco de dados? Esta ação é irreversível!')) {
-                try {
-                    const response = await fetch('/api/settings/reset', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        alert('Banco de dados resetado com sucesso!');
-                        window.location.reload();
-                    } else {
-                        alert('Erro ao resetar banco de dados: ' + data.message);
-                    }
-                } catch (error) {
-                    console.error('Erro ao resetar banco de dados:', error);
-                    alert('Erro ao resetar banco de dados');
-                }
-            }
-        });
-    }
 });
 
 /**
@@ -70,25 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Evento para o formulário de configurações
     if (settingsForm) {
-        settingsForm.addEventListener('submit', handleSaveSettings);
+        settingsForm.addEventListener('submit', saveSettings);
     }
-    
+
     // Evento para mostrar/ocultar senha
     if (togglePasswordButton) {
         togglePasswordButton.addEventListener('click', togglePasswordVisibility);
     }
-    
+
     // Eventos para o modal de sucesso
     if (closeSuccessModal) {
         closeSuccessModal.addEventListener('click', () => toggleModal('success-modal', false));
     }
-    
+
     if (confirmSuccessButton) {
         confirmSuccessButton.addEventListener('click', () => toggleModal('success-modal', false));
     }
-    
+
     // Fechar modal ao clicar fora
     setupModalOutsideClick('success-modal');
+
+    // Event listener for reset button
+    if (resetDatabaseButton) {
+        resetDatabaseButton.addEventListener('click', resetDatabase);
+    }
 }
 
 /**
@@ -96,21 +73,14 @@ function setupEventListeners() {
  */
 async function loadSettings() {
     try {
-        showLoading(true);
-        
         const response = await fetch('/api/settings');
-        settings = await response.json();
-        
-        // Preencher campos do formulário
-        if (matchDurationField) {
-            matchDurationField.value = settings.match_duration || 10;
-        }
-        
-        showLoading(false);
+        if (!response.ok) throw new Error('Erro ao carregar configurações');
+
+        const settings = await response.json();
+        matchDurationInput.value = settings.match_duration || '';
     } catch (error) {
         console.error('Erro ao carregar configurações:', error);
-        showError('Não foi possível carregar as configurações do sistema.');
-        showLoading(false);
+        showError('Erro ao carregar configurações');
     }
 }
 
@@ -122,24 +92,24 @@ async function loadLogs() {
         if (logsLoader) {
             logsLoader.style.display = 'flex';
         }
-        
+
         const response = await fetch('/api/logs');
         logs = await response.json();
-        
+
         // Atualizar tabela de logs
         updateLogsTable();
-        
+
         if (logsLoader) {
             logsLoader.style.display = 'none';
         }
     } catch (error) {
         console.error('Erro ao carregar logs:', error);
-        
-        if (noLogsElement) {
-            noLogsElement.style.display = 'block';
-            noLogsElement.textContent = 'Erro ao carregar logs. Tente novamente.';
+
+        if (noLogs) {
+            noLogs.style.display = 'block';
+            noLogs.textContent = 'Erro ao carregar logs. Tente novamente.';
         }
-        
+
         if (logsLoader) {
             logsLoader.style.display = 'none';
         }
@@ -150,30 +120,30 @@ async function loadLogs() {
  * Atualiza a tabela de logs
  */
 function updateLogsTable() {
-    if (!logsTableBody || !noLogsElement) return;
-    
+    if (!logsTableBody || !noLogs) return;
+
     if (logs.length === 0) {
         logsTableBody.innerHTML = '';
-        noLogsElement.style.display = 'block';
+        noLogs.style.display = 'block';
         return;
     }
-    
-    noLogsElement.style.display = 'none';
+
+    noLogs.style.display = 'none';
     logsTableBody.innerHTML = '';
-    
+
     // Criar linha para cada log
     logs.forEach(log => {
         const row = document.createElement('tr');
-        
+
         const timestamp = new Date(log.timestamp);
         const formattedDate = formatDate(log.timestamp, true);
-        
+
         row.innerHTML = `
             <td>${formattedDate}</td>
             <td>${formatEventType(log.event_type)}</td>
             <td>${log.description || ''}</td>
         `;
-        
+
         logsTableBody.appendChild(row);
     });
 }
@@ -181,62 +151,28 @@ function updateLogsTable() {
 /**
  * Manipula o envio do formulário de configurações
  */
-async function handleSaveSettings(event) {
+async function saveSettings(event) {
     event.preventDefault();
-    
-    const matchDuration = parseInt(matchDurationField.value);
-    const masterPassword = masterPasswordField.value;
-    
-    // Validar campos
-    if (isNaN(matchDuration) || matchDuration < 1 || matchDuration > 60) {
-        showError('A duração da partida deve ser entre 1 e 60 minutos.');
-        return;
-    }
-    
-    // Preparar dados
+
     const data = {
-        match_duration: matchDuration
+        match_duration: parseInt(matchDurationInput.value),
+        master_password: masterPasswordInput.value
     };
-    
-    // Adicionar senha mestra se foi preenchida
-    if (masterPassword) {
-        data.master_password = masterPassword;
-    }
-    
+
     try {
-        showLoading(true);
-        
         const response = await fetch('/api/settings', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        
-        const responseData = await response.json();
-        
-        if (responseData.success) {
-            // Limpar campo de senha
-            if (masterPasswordField) {
-                masterPasswordField.value = '';
-            }
-            
-            // Mostrar mensagem de sucesso
-            if (successMessage) {
-                successMessage.textContent = 'Configurações salvas com sucesso!';
-            }
-            
-            toggleModal('success-modal', true);
-        } else {
-            showError(responseData.message || 'Erro ao salvar configurações.');
-        }
-        
-        showLoading(false);
+
+        if (!response.ok) throw new Error('Erro ao salvar configurações');
+
+        showSuccess('Configurações salvas com sucesso!');
+        masterPasswordInput.value = '';
     } catch (error) {
         console.error('Erro ao salvar configurações:', error);
-        showError('Erro ao conectar com o servidor. Tente novamente.');
-        showLoading(false);
+        showError('Erro ao salvar configurações');
     }
 }
 
@@ -244,13 +180,60 @@ async function handleSaveSettings(event) {
  * Alterna a visibilidade da senha
  */
 function togglePasswordVisibility() {
-    if (!masterPasswordField || !togglePasswordButton) return;
-    
-    if (masterPasswordField.type === 'password') {
-        masterPasswordField.type = 'text';
-        togglePasswordButton.innerHTML = '<i class="fas fa-eye-slash"></i>';
-    } else {
-        masterPasswordField.type = 'password';
-        togglePasswordButton.innerHTML = '<i class="fas fa-eye"></i>';
+    const type = masterPasswordInput.type === 'password' ? 'text' : 'password';
+    masterPasswordInput.type = type;
+    togglePasswordButton.innerHTML = `<i class="fas fa-eye${type === 'password' ? '' : '-slash'}"></i>`;
+}
+
+// Reset do banco de dados
+async function resetDatabase() {
+    if (!confirm('ATENÇÃO: Esta ação irá apagar todos os dados do sistema! Deseja continuar?')) {
+        return;
     }
+
+    try {
+        const response = await fetch('/api/reset-database', {
+            method: 'POST'
+        });
+
+        if (!response.ok) throw new Error('Erro ao resetar banco de dados');
+
+        showSuccess('Banco de dados resetado com sucesso!');
+        setTimeout(() => window.location.reload(), 1500);
+    } catch (error) {
+        console.error('Erro ao resetar banco de dados:', error);
+        showError('Erro ao resetar banco de dados');
+    }
+}
+
+
+// Placeholder functions -  These need to be defined elsewhere in your project.
+function showError(message) {
+    //Implementation to show error message
+    console.error(message)
+}
+
+function showSuccess(message) {
+    //Implementation to show success message
+    console.log(message)
+}
+
+function toggleModal(modalId, show) {
+    //Implementation to show/hide modal
+    console.log(`modal ${modalId} toggled to ${show}`)
+}
+
+function setupModalOutsideClick(modalId) {
+    //Implementation to close modal on outside click
+    console.log(`setup outside click for modal ${modalId}`)
+}
+
+function formatDate(timestamp, withTime) {
+    //Implementation for date formatting
+    return new Date(timestamp).toLocaleString()
+}
+
+function formatEventType(eventType) {
+    //Implementation for event type formatting
+    return eventType
 }
