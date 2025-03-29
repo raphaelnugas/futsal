@@ -17,6 +17,7 @@ const logoutButton = document.getElementById('logout-button');
 const mobileLogoutButton = document.getElementById('mobile-logout-button');
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const mobileDropdown = document.getElementById('mobile-dropdown');
+const togglePasswordButton = document.getElementById('toggle-password');
 
 // Variável para armazenar a instância do modal Bootstrap
 let bsLoginModal = null;
@@ -64,6 +65,11 @@ function setupAuthEventListeners() {
     // Evento para o botão de logout
     if (logoutButton) {
         logoutButton.addEventListener('click', handleLogout);
+    }
+    
+    // Evento para o botão de alternar visibilidade da senha
+    if (togglePasswordButton) {
+        togglePasswordButton.addEventListener('click', togglePasswordVisibility);
     }
 }
 
@@ -186,6 +192,26 @@ async function handleLogout() {
         console.error('Erro ao realizar logout:', error);
         showError('Erro ao sair. Tente novamente.');
         showLoading(false);
+    }
+}
+
+/**
+ * Alterna a visibilidade da senha (mostrar/esconder)
+ */
+function togglePasswordVisibility() {
+    const passwordField = document.getElementById('password');
+    const toggleIcon = togglePasswordButton.querySelector('i');
+    
+    if (!passwordField || !toggleIcon) return;
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
     }
 }
 
