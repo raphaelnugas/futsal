@@ -1097,6 +1097,13 @@ a:hover, a:focus {
     margin-right: var(--spacing-sm);
     font-weight: 700;
     color: var(--gray);
+    overflow: hidden;
+}
+
+.player-avatar .player-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .player-info {
