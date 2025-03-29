@@ -28,14 +28,18 @@ const editPhotoEditorControls = document.getElementById('edit-photo-editor-contr
 let players = [];
 let currentEditingPlayer = null;
 let currentPhotoState = {
-    scale: 1,
+    zoom: 1,
     rotation: 0,
-    photoData: null
+    photoData: null,
+    offsetX: 0,
+    offsetY: 0
 };
 let currentEditPhotoState = {
-    scale: 1,
+    zoom: 1,
     rotation: 0,
-    photoData: null
+    photoData: null,
+    offsetX: 0,
+    offsetY: 0
 };
 
 /**
@@ -44,7 +48,7 @@ let currentEditPhotoState = {
 document.addEventListener('DOMContentLoaded', () => {
     // Carregar jogadores da API
     loadPlayers();
-    
+
     // Configurar listeners de eventos
     setupEventListeners();
 });
@@ -59,59 +63,59 @@ function setupEventListeners() {
             toggleAddModal(true);
         });
     }
-    
+
     // Eventos para fechar modais
     if (closeAddModalButton) {
         closeAddModalButton.addEventListener('click', () => {
             toggleAddModal(false);
         });
     }
-    
+
     if (closeEditModalButton) {
         closeEditModalButton.addEventListener('click', () => {
             toggleEditModal(false);
         });
     }
-    
+
     // Eventos para formulários
     if (addPlayerForm) {
         addPlayerForm.addEventListener('submit', handleAddPlayer);
     }
-    
+
     if (editPlayerForm) {
         editPlayerForm.addEventListener('submit', handleEditPlayer);
     }
-    
+
     // Evento para input de busca
     if (searchPlayerInput) {
         searchPlayerInput.addEventListener('input', filterPlayers);
     }
-    
+
     // Eventos para upload de foto e manipulação de imagem
     if (playerPhotoInput) {
         playerPhotoInput.addEventListener('change', handlePhotoUpload);
     }
-    
+
     if (editPlayerPhotoInput) {
         editPlayerPhotoInput.addEventListener('change', handleEditPhotoUpload);
     }
-    
+
     // Eventos de clique nos círculos de foto para abrir o seletor de arquivo
     if (photoPreview) {
         photoPreview.addEventListener('click', () => {
             playerPhotoInput.click();
         });
     }
-    
+
     if (editPhotoPreview) {
         editPhotoPreview.addEventListener('click', () => {
             editPlayerPhotoInput.click();
         });
     }
-    
+
     // Eventos para controles de edição de foto
     setupPhotoEditorControls();
-    
+
     // Os modais Bootstrap fecham automaticamente ao clicar fora
 }
 
@@ -119,77 +123,150 @@ function setupEventListeners() {
  * Configura os controles do editor de fotos
  */
 function setupPhotoEditorControls() {
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
     // Controles do modo de adicionar
     const zoomInButton = document.getElementById('zoom-in');
     const zoomOutButton = document.getElementById('zoom-out');
     const rotateCwButton = document.getElementById('rotate-cw');
     const resetPhotoButton = document.getElementById('reset-photo');
-    
+
     if (zoomInButton) {
         zoomInButton.addEventListener('click', () => {
-            currentPhotoState.scale += 0.1;
+            currentPhotoState.zoom *= 1.1;
             updatePhotoPreview();
         });
     }
-    
+
     if (zoomOutButton) {
         zoomOutButton.addEventListener('click', () => {
-            if (currentPhotoState.scale > 0.5) {
-                currentPhotoState.scale -= 0.1;
-                updatePhotoPreview();
-            }
+            currentPhotoState.zoom *= 0.9;
+            updatePhotoPreview();
         });
     }
-    
+
     if (rotateCwButton) {
         rotateCwButton.addEventListener('click', () => {
             currentPhotoState.rotation += 90;
             updatePhotoPreview();
         });
     }
-    
+
     if (resetPhotoButton) {
         resetPhotoButton.addEventListener('click', () => {
-            currentPhotoState.scale = 1;
+            currentPhotoState.zoom = 1;
             currentPhotoState.rotation = 0;
+            currentPhotoState.offsetX = 0;
+            currentPhotoState.offsetY = 0;
             updatePhotoPreview();
         });
     }
-    
+
+    // Configurar Cropper.js para manipulação da imagem
+    const photoPreviewElement = document.querySelector('.player-photo-preview img');
+    if (photoPreviewElement) {
+        const cropper = new Cropper(photoPreviewElement, {
+            aspectRatio: 1,
+            viewMode: 1,
+            dragMode: 'move',
+            autoCropArea: 1,
+            restore: false,
+            modal: true,
+            guides: false,
+            highlight: false,
+            cropBoxMovable: false,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+        });
+        
+        // Atualizar controles de zoom
+        if (zoomInButton) {
+            zoomInButton.addEventListener('click', () => {
+                cropper.zoom(0.1);
+            });
+        }
+        
+        if (zoomOutButton) {
+            zoomOutButton.addEventListener('click', () => {
+                cropper.zoom(-0.1);
+            });
+        }
+        
+        if (rotateCwButton) {
+            rotateCwButton.addEventListener('click', () => {
+                cropper.rotate(90);
+            });
+        }
+        
+        if (resetPhotoButton) {
+            resetPhotoButton.addEventListener('click', () => {
+                cropper.reset();
+            });
+        }
+    }
+
+
     // Controles do modo de editar
     const editZoomInButton = document.getElementById('edit-zoom-in');
     const editZoomOutButton = document.getElementById('edit-zoom-out');
     const editRotateCwButton = document.getElementById('edit-rotate-cw');
     const editResetPhotoButton = document.getElementById('edit-reset-photo');
-    
+
     if (editZoomInButton) {
         editZoomInButton.addEventListener('click', () => {
-            currentEditPhotoState.scale += 0.1;
+            currentEditPhotoState.zoom *= 1.1;
             updateEditPhotoPreview();
         });
     }
-    
+
     if (editZoomOutButton) {
         editZoomOutButton.addEventListener('click', () => {
-            if (currentEditPhotoState.scale > 0.5) {
-                currentEditPhotoState.scale -= 0.1;
-                updateEditPhotoPreview();
-            }
+            currentEditPhotoState.zoom *= 0.9;
+            updateEditPhotoPreview();
         });
     }
-    
+
     if (editRotateCwButton) {
         editRotateCwButton.addEventListener('click', () => {
             currentEditPhotoState.rotation += 90;
             updateEditPhotoPreview();
         });
     }
-    
+
     if (editResetPhotoButton) {
         editResetPhotoButton.addEventListener('click', () => {
-            currentEditPhotoState.scale = 1;
+            currentEditPhotoState.zoom = 1;
             currentEditPhotoState.rotation = 0;
+            currentEditPhotoState.offsetX = 0;
+            currentEditPhotoState.offsetY = 0;
             updateEditPhotoPreview();
+        });
+    }
+
+    // Adicionar controles de movimentação da imagem
+    const editPhotoPreviewElement = document.querySelector('.edit-player-photo-preview img');
+    if (editPhotoPreviewElement) {
+        editPhotoPreviewElement.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - currentEditPhotoState.offsetX;
+            startY = e.clientY - currentEditPhotoState.offsetY;
+            editPhotoPreviewElement.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentEditPhotoState.offsetX = e.clientX - startX;
+            currentEditPhotoState.offsetY = e.clientY - startY;
+            updateEditPhotoPreview();
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            if (editPhotoPreviewElement) {
+                editPhotoPreviewElement.style.cursor = 'grab';
+            }
         });
     }
 }
@@ -202,21 +279,23 @@ function handlePhotoUpload(event) {
     if (file) {
         // Resetar o estado da foto
         currentPhotoState = {
-            scale: 1,
+            zoom: 1,
             rotation: 0,
-            photoData: null
+            photoData: null,
+            offsetX: 0,
+            offsetY: 0
         };
-        
+
         const reader = new FileReader();
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
                 // Armazenar os dados da imagem original
                 currentPhotoState.photoData = e.target.result;
-                
+
                 // Atualizar a visualização
                 updatePhotoPreview();
-                
+
                 // Mostrar controles de edição
                 if (photoEditorControls) {
                     photoEditorControls.style.display = 'block';
@@ -230,7 +309,7 @@ function handlePhotoUpload(event) {
         if (photoEditorControls) {
             photoEditorControls.style.display = 'none';
         }
-        
+
         // Limpar visualização
         if (photoPreview) {
             photoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
@@ -246,21 +325,23 @@ function handleEditPhotoUpload(event) {
     if (file) {
         // Resetar o estado da foto
         currentEditPhotoState = {
-            scale: 1,
+            zoom: 1,
             rotation: 0,
-            photoData: null
+            photoData: null,
+            offsetX: 0,
+            offsetY: 0
         };
-        
+
         const reader = new FileReader();
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
                 // Armazenar os dados da imagem original
                 currentEditPhotoState.photoData = e.target.result;
-                
+
                 // Atualizar a visualização
                 updateEditPhotoPreview();
-                
+
                 // Mostrar controles de edição
                 if (editPhotoEditorControls) {
                     editPhotoEditorControls.style.display = 'block';
@@ -274,7 +355,7 @@ function handleEditPhotoUpload(event) {
         if (editPhotoEditorControls) {
             editPhotoEditorControls.style.display = 'none';
         }
-        
+
         // Limpar visualização
         if (editPhotoPreview) {
             editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
@@ -287,18 +368,20 @@ function handleEditPhotoUpload(event) {
  */
 function updatePhotoPreview() {
     if (!photoPreview || !currentPhotoState.photoData) return;
-    
+
     // Limpar a visualização atual
     photoPreview.innerHTML = '';
-    
+
     // Criar a imagem
     const img = document.createElement('img');
     img.src = currentPhotoState.photoData;
-    img.style.transform = `rotate(${currentPhotoState.rotation}deg) scale(${currentPhotoState.scale})`;
-    
+    img.style.transform = `rotate(${currentPhotoState.rotation}deg) scale(${currentPhotoState.zoom}) translate(${currentPhotoState.offsetX}px, ${currentPhotoState.offsetY}px)`;
+    img.style.cursor = 'grab';
+    img.classList.add('player-photo-preview');
+
     // Adicionar a imagem ao contêiner
     photoPreview.appendChild(img);
-    
+
     // Atualizar o campo oculto com os dados processados da imagem
     updatePhotoDataField();
 }
@@ -308,18 +391,20 @@ function updatePhotoPreview() {
  */
 function updateEditPhotoPreview() {
     if (!editPhotoPreview || !currentEditPhotoState.photoData) return;
-    
+
     // Limpar a visualização atual
     editPhotoPreview.innerHTML = '';
-    
+
     // Criar a imagem
     const img = document.createElement('img');
     img.src = currentEditPhotoState.photoData;
-    img.style.transform = `rotate(${currentEditPhotoState.rotation}deg) scale(${currentEditPhotoState.scale})`;
-    
+    img.style.transform = `rotate(${currentEditPhotoState.rotation}deg) scale(${currentEditPhotoState.zoom}) translate(${currentEditPhotoState.offsetX}px, ${currentEditPhotoState.offsetY}px)`;
+    img.style.cursor = 'grab';
+    img.classList.add('edit-player-photo-preview');
+
     // Adicionar a imagem ao contêiner
     editPhotoPreview.appendChild(img);
-    
+
     // Atualizar o campo oculto com os dados processados da imagem
     updateEditPhotoDataField();
 }
@@ -330,46 +415,14 @@ function updateEditPhotoPreview() {
 function updatePhotoDataField() {
     const photoDataField = document.getElementById('photo-data');
     if (!photoDataField || !currentPhotoState.photoData) return;
-    
-    // Criar um canvas temporário para renderizar a imagem com as transformações
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    
-    img.onload = function() {
-        // Dimensionar o canvas para acomodar a imagem quadrada
-        canvas.width = 300;
-        canvas.height = 300;
-        
-        // Limpar o canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Salvar o estado atual do contexto
-        ctx.save();
-        
-        // Mover o ponto de origem para o centro do canvas
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        
-        // Aplicar rotação
-        ctx.rotate(currentPhotoState.rotation * Math.PI / 180);
-        
-        // Aplicar escala
-        ctx.scale(currentPhotoState.scale, currentPhotoState.scale);
-        
-        // Desenhar a imagem com seu centro alinhado ao centro do canvas
-        ctx.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
-        
-        // Restaurar o estado do contexto
-        ctx.restore();
-        
-        // Obter os dados da imagem processada como URL de dados
-        const processedImageData = canvas.toDataURL('image/jpeg', 0.9);
-        
-        // Definir o valor do campo oculto
-        photoDataField.value = processedImageData;
-    };
-    
-    img.src = currentPhotoState.photoData;
+
+    photoDataField.value = JSON.stringify({
+        data: currentPhotoState.photoData,
+        zoom: currentPhotoState.zoom,
+        rotation: currentPhotoState.rotation,
+        offsetX: currentPhotoState.offsetX,
+        offsetY: currentPhotoState.offsetY
+    });
 }
 
 /**
@@ -378,46 +431,14 @@ function updatePhotoDataField() {
 function updateEditPhotoDataField() {
     const photoDataField = document.getElementById('edit-photo-data');
     if (!photoDataField || !currentEditPhotoState.photoData) return;
-    
-    // Criar um canvas temporário para renderizar a imagem com as transformações
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    
-    img.onload = function() {
-        // Dimensionar o canvas para acomodar a imagem quadrada
-        canvas.width = 300;
-        canvas.height = 300;
-        
-        // Limpar o canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Salvar o estado atual do contexto
-        ctx.save();
-        
-        // Mover o ponto de origem para o centro do canvas
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        
-        // Aplicar rotação
-        ctx.rotate(currentEditPhotoState.rotation * Math.PI / 180);
-        
-        // Aplicar escala
-        ctx.scale(currentEditPhotoState.scale, currentEditPhotoState.scale);
-        
-        // Desenhar a imagem com seu centro alinhado ao centro do canvas
-        ctx.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
-        
-        // Restaurar o estado do contexto
-        ctx.restore();
-        
-        // Obter os dados da imagem processada como URL de dados
-        const processedImageData = canvas.toDataURL('image/jpeg', 0.9);
-        
-        // Definir o valor do campo oculto
-        photoDataField.value = processedImageData;
-    };
-    
-    img.src = currentEditPhotoState.photoData;
+
+    photoDataField.value = JSON.stringify({
+        data: currentEditPhotoState.photoData,
+        zoom: currentEditPhotoState.zoom,
+        rotation: currentEditPhotoState.rotation,
+        offsetX: currentEditPhotoState.offsetX,
+        offsetY: currentEditPhotoState.offsetY
+    });
 }
 
 /**
@@ -426,16 +447,16 @@ function updateEditPhotoDataField() {
 async function loadPlayers() {
     try {
         showLoading(true);
-        
+
         const response = await fetch('/api/players');
         players = await response.json();
-        
+
         // Ordenar jogadores por nome
         players.sort((a, b) => a.name.localeCompare(b.name));
-        
+
         // Renderizar lista
         renderPlayerList(players);
-        
+
         showLoading(false);
     } catch (error) {
         console.error('Erro ao carregar jogadores:', error);
@@ -449,9 +470,9 @@ async function loadPlayers() {
  */
 function renderPlayerList(playerList) {
     if (!playerListElement) return;
-    
+
     playerListElement.innerHTML = '';
-    
+
     if (playerList.length === 0) {
         playerListElement.innerHTML = `
             <div class="text-center py-3">
@@ -460,15 +481,15 @@ function renderPlayerList(playerList) {
         `;
         return;
     }
-    
+
     playerList.forEach(player => {
         const playerCard = document.createElement('div');
         playerCard.className = 'card mb-2';
         playerCard.dataset.playerId = player.id;
-        
+
         // Obter iniciais para exibir no avatar, se não tiver foto
         const initials = getPlayerInitials(player.name);
-        
+
         playerCard.innerHTML = `
             <div class="card-body">
                 <div class="d-flex align-items-center">
@@ -498,13 +519,13 @@ function renderPlayerList(playerList) {
                 </div>
             </div>
         `;
-        
+
         playerListElement.appendChild(playerCard);
-        
+
         // Adicionar eventos aos botões
         const editButton = playerCard.querySelector('.edit-player-btn');
         const deleteButton = playerCard.querySelector('.delete-player-btn');
-        
+
         editButton.addEventListener('click', () => openEditModal(player));
         deleteButton.addEventListener('click', () => confirmDeletePlayer(player));
     });
@@ -515,7 +536,7 @@ function renderPlayerList(playerList) {
  */
 function getPlayerInitials(name) {
     if (!name) return '?';
-    
+
     const nameParts = name.split(' ');
     if (nameParts.length === 1) {
         return nameParts[0].substring(0, 2).toUpperCase();
@@ -529,16 +550,16 @@ function getPlayerInitials(name) {
  */
 function filterPlayers() {
     const searchText = searchPlayerInput.value.toLowerCase();
-    
+
     if (!searchText) {
         renderPlayerList(players);
         return;
     }
-    
+
     const filteredPlayers = players.filter(player => 
         player.name.toLowerCase().includes(searchText)
     );
-    
+
     renderPlayerList(filteredPlayers);
 }
 
@@ -547,10 +568,10 @@ function filterPlayers() {
  */
 function toggleAddModal(show) {
     if (!addPlayerModal) return;
-    
+
     // Utilizar a função compartilhada toggleModal
     toggleModal('add-player-modal', show);
-    
+
     if (show) {
         // Resetar formulário
         if (addPlayerForm) addPlayerForm.reset();
@@ -566,10 +587,10 @@ function toggleAddModal(show) {
  */
 function toggleEditModal(show) {
     if (!editPlayerModal) return;
-    
+
     // Utilizar a função compartilhada toggleModal
     toggleModal('edit-player-modal', show);
-    
+
     if (!show) {
         currentEditingPlayer = null;
     }
@@ -580,16 +601,16 @@ function toggleEditModal(show) {
  */
 function openEditModal(player) {
     currentEditingPlayer = player;
-    
+
     if (!editPlayerForm) return;
-    
+
     // Preencher o formulário com os dados do jogador
     const nameField = editPlayerForm.querySelector('#edit-player-name');
     const isGoalkeeperField = editPlayerForm.querySelector('#edit-is-goalkeeper');
-    
+
     if (nameField) nameField.value = player.name;
     if (isGoalkeeperField) isGoalkeeperField.checked = player.is_goalkeeper;
-    
+
     // Se o jogador já tiver uma foto, exibi-la na prévia
     if (player.photo_url && editPhotoPreview) {
         editPhotoPreview.innerHTML = `<img src="${player.photo_url}" alt="${player.name}">`;
@@ -597,12 +618,12 @@ function openEditModal(player) {
         // Se não tiver foto, mostrar espaço para placeholder
         editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
     }
-    
+
     // Esconder controles de edição de foto até que uma nova foto seja selecionada
     if (editPhotoEditorControls) {
         editPhotoEditorControls.style.display = 'none';
     }
-    
+
     // Exibir o modal
     toggleEditModal(true);
 }
@@ -612,27 +633,27 @@ function openEditModal(player) {
  */
 async function handleAddPlayer(event) {
     event.preventDefault();
-    
+
     const nameField = document.getElementById('player-name');
     const isGoalkeeperField = document.getElementById('is-goalkeeper');
     const photoDataField = document.getElementById('photo-data');
-    
+
     // Validar campos
     if (!nameField.value.trim()) {
         showError('O nome do jogador é obrigatório.');
         return;
     }
-    
+
     // Preparar dados
     const playerData = {
         name: nameField.value.trim(),
         is_goalkeeper: isGoalkeeperField.checked,
         photo_url: photoDataField.value || null
     };
-    
+
     try {
         showLoading(true);
-        
+
         // Enviar para a API
         const response = await fetch('/api/players', {
             method: 'POST',
@@ -641,9 +662,9 @@ async function handleAddPlayer(event) {
             },
             body: JSON.stringify(playerData)
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             // Adicionar jogador à lista
             players.push(data.player);
@@ -656,7 +677,7 @@ async function handleAddPlayer(event) {
         } else {
             showError(data.message || 'Erro ao adicionar jogador.');
         }
-        
+
         showLoading(false);
     } catch (error) {
         console.error('Erro ao adicionar jogador:', error);
@@ -670,32 +691,32 @@ async function handleAddPlayer(event) {
  */
 async function handleEditPlayer(event) {
     event.preventDefault();
-    
+
     if (!currentEditingPlayer) {
         showError('Erro ao editar jogador: nenhum jogador selecionado.');
         return;
     }
-    
+
     const nameField = document.getElementById('edit-player-name');
     const isGoalkeeperField = document.getElementById('edit-is-goalkeeper');
     const photoDataField = document.getElementById('edit-photo-data');
-    
+
     // Validar campos
     if (!nameField.value.trim()) {
         showError('O nome do jogador é obrigatório.');
         return;
     }
-    
+
     // Preparar dados
     const playerData = {
         name: nameField.value.trim(),
         is_goalkeeper: isGoalkeeperField.checked,
         photo_url: photoDataField.value || currentEditingPlayer.photo_url || null
     };
-    
+
     try {
         showLoading(true);
-        
+
         // Enviar para a API
         const response = await fetch(`/api/players/${currentEditingPlayer.id}`, {
             method: 'PUT',
@@ -704,16 +725,16 @@ async function handleEditPlayer(event) {
             },
             body: JSON.stringify(playerData)
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             // Atualizar o jogador na lista
             const index = players.findIndex(p => p.id === currentEditingPlayer.id);
             if (index !== -1) {
                 players[index] = data.player;
             }
-            
+
             // Atualizar a lista
             renderPlayerList(players);
             // Fechar o modal
@@ -723,7 +744,7 @@ async function handleEditPlayer(event) {
         } else {
             showError(data.message || 'Erro ao atualizar jogador.');
         }
-        
+
         showLoading(false);
     } catch (error) {
         console.error('Erro ao atualizar jogador:', error);
@@ -747,13 +768,13 @@ function confirmDeletePlayer(player) {
 async function deletePlayer(playerId) {
     try {
         showLoading(true);
-        
+
         const response = await fetch(`/api/players/${playerId}`, {
             method: 'DELETE'
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             // Remover jogador da lista
             players = players.filter(player => player.id !== playerId);
@@ -764,7 +785,7 @@ async function deletePlayer(playerId) {
         } else {
             showError(data.message || 'Erro ao excluir jogador.');
         }
-        
+
         showLoading(false);
     } catch (error) {
         console.error('Erro ao excluir jogador:', error);
@@ -797,10 +818,10 @@ function showSuccess(message) {
     const alertElement = document.createElement('div');
     alertElement.className = 'alert alert-success';
     alertElement.textContent = message;
-    
+
     // Adicionar ao topo da página
     document.body.insertBefore(alertElement, document.body.firstChild);
-    
+
     // Remover após 3 segundos
     setTimeout(() => {
         alertElement.remove();
