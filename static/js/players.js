@@ -164,47 +164,33 @@ function setupPhotoEditorControls() {
         });
     }
 
-    // Configurar Cropper.js para manipulação da imagem
+    // Adicionar controles de movimentação da imagem
     const photoPreviewElement = document.querySelector('.player-photo-preview img');
     if (photoPreviewElement) {
-        const cropper = new Cropper(photoPreviewElement, {
-            aspectRatio: 1,
-            viewMode: 1,
-            dragMode: 'move',
-            autoCropArea: 1,
-            restore: false,
-            modal: true,
-            guides: false,
-            highlight: false,
-            cropBoxMovable: false,
-            cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,
+        photoPreviewElement.style.cursor = 'grab';
+        
+        photoPreviewElement.addEventListener('mousedown', (e) => {
+            e.preventDefault(); // Previne seleção de texto
+            isDragging = true;
+            startX = e.clientX - currentPhotoState.offsetX;
+            startY = e.clientY - currentPhotoState.offsetY;
+            photoPreviewElement.style.cursor = 'grabbing';
         });
-        
-        // Atualizar controles de zoom
-        if (zoomInButton) {
-            zoomInButton.addEventListener('click', () => {
-                cropper.zoom(0.1);
-            });
-        }
-        
-        if (zoomOutButton) {
-            zoomOutButton.addEventListener('click', () => {
-                cropper.zoom(-0.1);
-            });
-        }
-        
-        if (rotateCwButton) {
-            rotateCwButton.addEventListener('click', () => {
-                cropper.rotate(90);
-            });
-        }
-        
-        if (resetPhotoButton) {
-            resetPhotoButton.addEventListener('click', () => {
-                cropper.reset();
-            });
-        }
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentPhotoState.offsetX = e.clientX - startX;
+            currentPhotoState.offsetY = e.clientY - startY;
+            updatePhotoPreview();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            if (photoPreviewElement) {
+                photoPreviewElement.style.cursor = 'grab';
+            }
+        });
     }
 
 
