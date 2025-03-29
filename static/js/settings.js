@@ -2,7 +2,7 @@
 const settingsForm = document.getElementById('settings-form');
 const matchDurationInput = document.getElementById('match-duration');
 const masterPasswordInput = document.getElementById('master-password');
-const togglePasswordButton = document.getElementById('toggle-password');
+const settingsTogglePasswordButton = document.getElementById('toggle-password');
 const resetDatabaseButton = document.getElementById('reset-database');
 const successMessage = document.getElementById('success-message');
 
@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function setupEventListeners() {
     // Toggle password visibility
-    if (togglePasswordButton && masterPasswordInput) {
-        togglePasswordButton.addEventListener('click', function() {
+    if (settingsTogglePasswordButton && masterPasswordInput) {
+        settingsTogglePasswordButton.addEventListener('click', function() {
             const type = masterPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             masterPasswordInput.setAttribute('type', type);
-            togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            settingsTogglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
         });
     }
 
