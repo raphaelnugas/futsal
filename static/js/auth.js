@@ -72,10 +72,14 @@ function toggleLoginModal(show) {
     
     if (show) {
         // Forçar exibição do modal
-        loginModal.style.opacity = '1';
-        loginModal.style.visibility = 'visible';
         loginModal.style.display = 'flex';
-        loginModal.classList.add('active');
+        
+        // Usar setTimeout para garantir uma transição suave
+        setTimeout(() => {
+            loginModal.style.opacity = '1';
+            loginModal.style.visibility = 'visible';
+            loginModal.classList.add('active');
+        }, 10);
         
         // Animar a entrada
         const modalContent = loginModal.querySelector('.modal');
