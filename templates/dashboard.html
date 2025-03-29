@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | Futsal de Domingo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Futsal de Domingo</h1>
+    <p class="mb-4">Estatísticas e rankings dos jogos de futsal aos domingos.</p>
+
+    <!-- Top Players Cards -->
+    <div class="row mb-4">
+        <!-- Artilheiro Card -->
+        <div class="col-12 col-md-4 mb-3">
+            <div class="highlight-card card-orange">
+                <div class="highlight-card-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <div class="highlight-card-title">Artilheiro</div>
+                <div class="highlight-card-subtitle">Maior goleador da temporada</div>
+                <div id="top-scorer">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assistências Card -->
+        <div class="col-12 col-md-4 mb-3">
+            <div class="highlight-card card-blue">
+                <div class="highlight-card-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="highlight-card-title">Assistências</div>
+                <div class="highlight-card-subtitle">Maior assistente da temporada</div>
+                <div id="top-assistant">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goleiro Card -->
+        <div class="col-12 col-md-4 mb-3">
+            <div class="highlight-card card-purple">
+                <div class="highlight-card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="highlight-card-title">Melhor Goleiro</div>
+                <div class="highlight-card-subtitle">Menos gols sofridos por partida</div>
+                <div id="top-goalkeeper">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- General Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 id="total-players">-</h3>
+                    <p class="text-muted">Jogadores</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 id="total-sessions">-</h3>
+                    <p class="text-muted">Domingos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 id="total-matches">-</h3>
+                    <p class="text-muted">Partidas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 id="total-goals">-</h3>
+                    <p class="text-muted">Gols</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Table -->
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Classificação Geral</h4>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary filter-btn active" data-filter="goals">Artilheiros</button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="assists">Assistências</button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="goals_conceded">Goleiros</button>
+                <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="matches">Partidas</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <input type="text" id="search-player" class="form-control" placeholder="Buscar jogador...">
+            </div>
+            <div class="table-container">
+                <table id="stats-table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jogador</th>
+                            <th data-sort="goals">Gols</th>
+                            <th data-sort="assists">Assistências</th>
+                            <th data-sort="goals_conceded">Gols Sofridos</th>
+                            <th data-sort="matches">Partidas</th>
+                            <th data-sort="sessions">Domingos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-table-body">
+                        <!-- Dados serão carregados via JavaScript -->
+                    </tbody>
+                </table>
+                <div id="stats-loader" class="loader-container">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

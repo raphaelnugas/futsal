@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendário de Sessões | Futsal de Domingo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Calendário de Sessões</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <p class="mb-3">Selecione um domingo para ver ou criar uma sessão de futsal.</p>
+            
+            <!-- Sessão Ativa (se houver) -->
+            <div id="active-session-container" class="mb-4" style="display: none;">
+                <div class="alert alert-success">
+                    <h5 class="mb-2">Sessão Ativa</h5>
+                    <div id="active-session-info">
+                        <!-- Informações da sessão ativa serão carregadas via JavaScript -->
+                    </div>
+                    <div class="mt-2">
+                        <a id="active-session-link" href="#" class="btn btn-primary">Ir para Sessão</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Próximos Domingos -->
+            <h5 class="mb-3">Próximos Domingos</h5>
+            <div id="next-sundays-container">
+                <!-- Lista de próximos domingos será carregada via JavaScript -->
+                <div class="loader-container">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sessões Anteriores -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Sessões Anteriores</h5>
+        </div>
+        <div class="card-body">
+            <div id="previous-sessions-container">
+                <!-- Lista de sessões anteriores será carregada via JavaScript -->
+                <div class="loader-container">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Criar Sessão -->
+<div id="create-session-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Criar Nova Sessão</h5>
+            <button id="close-create-session-modal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Você está prestes a criar uma nova sessão para o domingo <span id="session-date-display"></span>.</p>
+            <p class="mb-3">Ao confirmar, qualquer sessão ativa anterior será encerrada.</p>
+            
+            <div class="alert alert-warning" id="active-session-warning" style="display: none;">
+                <p><strong>Atenção:</strong> Há uma sessão ativa que será encerrada.</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancel-create-session" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="confirm-create-session" class="btn btn-primary">Criar Sessão</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/sessions_calendar.js') }}"></script>
+{% endblock %}
