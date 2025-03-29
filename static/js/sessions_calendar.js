@@ -3,7 +3,6 @@
  * Script responsável pelo gerenciamento do calendário de sessões
  * 
  * Autor: Raphael Nugas
- * Data: 2023
  */
 
 // Elementos do DOM que serão manipulados
@@ -18,12 +17,25 @@ const sessionDateDisplay = document.getElementById('session-date-display');
 const activeSessionWarning = document.getElementById('active-session-warning');
 const cancelCreateSession = document.getElementById('cancel-create-session');
 const confirmCreateSession = document.getElementById('confirm-create-session');
+const calendarMonthYear = document.getElementById('calendar-month-year');
+const calendarDaysGrid = document.getElementById('calendar-days-grid');
+const prevMonthBtn = document.getElementById('prev-month');
+const nextMonthBtn = document.getElementById('next-month');
 
 // Estado da aplicação
 let nextSundays = [];
 let previousSessions = [];
 let activeSession = null;
 let selectedDate = null;
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let allSessions = [];
+
+// Nomes dos meses em português
+const monthNames = [
+    'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+    'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+];
 
 /**
  * Inicialização
@@ -59,8 +71,20 @@ function setupEventListeners() {
         confirmCreateSession.addEventListener('click', createSession);
     }
     
-    // Fechar modal ao clicar fora
-    setupModalOutsideClick('create-session-modal');
+    // Navegação do calendário
+    if (prevMonthBtn) {
+        prevMonthBtn.addEventListener('click', goToPreviousMonth);
+    }
+    
+    if (nextMonthBtn) {
+        nextMonthBtn.addEventListener('click', goToNextMonth);
+    }
+    
+    // Configuração do modal usando Bootstrap
+    if (createSessionModal) {
+        // Não é mais necessário usar setupModalOutsideClick pois estamos usando o Bootstrap Modal
+        console.info('setupModalOutsideClick não é mais necessário para o modal create-session-modal');
+    }
 }
 
 /**
@@ -74,9 +98,9 @@ async function loadCalendarData() {
         const sunResponse = await fetch('/api/sessions/next-sundays');
         nextSundays = await sunResponse.json();
         
-        // Carregar sessões anteriores
+        // Carregar todas as sessões (presentes e passadas)
         const sessionsResponse = await fetch('/api/sessions');
-        const allSessions = await sessionsResponse.json();
+        allSessions = await sessionsResponse.json();
         
         // Separar a sessão ativa e as anteriores
         activeSession = allSessions.find(s => s.is_active);
@@ -102,11 +126,156 @@ function renderCalendar() {
     // Exibir sessão ativa, se houver
     renderActiveSession();
     
+    // Renderizar o calendário visual
+    renderCalendarMonth();
+    
     // Exibir próximos domingos
     renderNextSundays();
     
     // Exibir sessões anteriores
     renderPreviousSessions();
+}
+
+/**
+ * Renderiza o calendário visual do mês atual
+ */
+function renderCalendarMonth() {
+    if (!calendarMonthYear || !calendarDaysGrid) return;
+    
+    // Atualizar título do mês
+    calendarMonthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    
+    // Obter o primeiro dia do mês
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    // Obter o último dia do mês
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    
+    // Dia da semana do primeiro dia (0 = Domingo, 1 = Segunda, etc.)
+    const firstDayOfWeek = firstDay.getDay();
+    
+    // Número total de dias no mês
+    const totalDays = lastDay.getDate();
+    
+    // Limpar o grid atual
+    calendarDaysGrid.innerHTML = '';
+    
+    // Adicionar dias do mês anterior
+    for (let i = 0; i < firstDayOfWeek; i++) {
+        const prevMonth = new Date(currentYear, currentMonth, 0);
+        const prevMonthDay = prevMonth.getDate() - firstDayOfWeek + i + 1;
+        
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day other-month';
+        dayDiv.textContent = prevMonthDay;
+        
+        calendarDaysGrid.appendChild(dayDiv);
+    }
+    
+    // Adicionar dias do mês atual
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    for (let day = 1; day <= totalDays; day++) {
+        const date = new Date(currentYear, currentMonth, day);
+        
+        // Verificar se é domingo (0)
+        const isSunday = date.getDay() === 0;
+        
+        // Verificar se é hoje
+        const isToday = date.getTime() === today.getTime();
+        
+        // Verificar se é passado
+        const isPast = date < today;
+        
+        // Verificar se há sessão neste dia
+        const sessionForDay = allSessions.find(s => {
+            const sessionDate = new Date(s.date);
+            return sessionDate.getDate() === day && 
+                   sessionDate.getMonth() === currentMonth && 
+                   sessionDate.getFullYear() === currentYear;
+        });
+        
+        const hasSession = sessionForDay !== undefined;
+        const isActiveSession = hasSession && sessionForDay.is_active;
+        
+        // Criar o elemento do dia
+        const dayDiv = document.createElement('div');
+        dayDiv.textContent = day;
+        
+        // Adicionar classes com base nas condições
+        dayDiv.className = `calendar-day 
+                           ${isSunday ? 'sunday' : ''} 
+                           ${isToday ? 'today' : ''} 
+                           ${isPast ? 'past' : ''} 
+                           ${hasSession ? 'has-session' : ''} 
+                           ${isActiveSession ? 'active' : ''} 
+                           ${(isSunday || hasSession) ? 'selectable' : ''}`;
+        
+        // Adicionar data como atributo (formato ISO para usar depois)
+        const dateIso = date.toISOString().split('T')[0];
+        dayDiv.setAttribute('data-date', dateIso);
+        
+        // Adicionar evento de clique para domingos ou dias com sessão
+        if (isSunday || hasSession) {
+            dayDiv.addEventListener('click', () => handleDayClick(dateIso, hasSession));
+        }
+        
+        calendarDaysGrid.appendChild(dayDiv);
+    }
+    
+    // Adicionar dias do próximo mês para completar a última semana
+    const totalCells = firstDayOfWeek + totalDays;
+    const remainingCells = 7 - (totalCells % 7);
+    
+    // Só adiciona se for necessário completar a semana (e não for um múltiplo exato de 7)
+    if (remainingCells < 7) {
+        for (let i = 1; i <= remainingCells; i++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day other-month';
+            dayDiv.textContent = i;
+            
+            calendarDaysGrid.appendChild(dayDiv);
+        }
+    }
+}
+
+/**
+ * Manipula o clique em um dia do calendário
+ */
+function handleDayClick(dateStr, hasSession) {
+    if (hasSession) {
+        // Se já tem sessão, redireciona para a página da sessão
+        window.location.href = `/session/${dateStr}`;
+    } else {
+        // Se não tem sessão e é um domingo, abre modal para criar
+        openCreateSessionModal(dateStr);
+    }
+}
+
+/**
+ * Navega para o mês anterior
+ */
+function goToPreviousMonth() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    
+    renderCalendarMonth();
+}
+
+/**
+ * Navega para o próximo mês
+ */
+function goToNextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    
+    renderCalendarMonth();
 }
 
 /**
