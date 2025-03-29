@@ -167,21 +167,25 @@ function setupPhotoEditorControls() {
     // Adicionar controles de movimentação da imagem
     const photoPreviewElement = document.querySelector('.player-photo-preview img');
     if (photoPreviewElement) {
+        photoPreviewElement.style.cursor = 'grab';
+        
         photoPreviewElement.addEventListener('mousedown', (e) => {
+            e.preventDefault(); // Previne seleção de texto
             isDragging = true;
             startX = e.clientX - currentPhotoState.offsetX;
             startY = e.clientY - currentPhotoState.offsetY;
             photoPreviewElement.style.cursor = 'grabbing';
         });
 
-        document.addEventListener('mousemove', (e) => {
+        window.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
+            e.preventDefault();
             currentPhotoState.offsetX = e.clientX - startX;
             currentPhotoState.offsetY = e.clientY - startY;
             updatePhotoPreview();
         });
 
-        document.addEventListener('mouseup', () => {
+        window.addEventListener('mouseup', () => {
             isDragging = false;
             if (photoPreviewElement) {
                 photoPreviewElement.style.cursor = 'grab';
