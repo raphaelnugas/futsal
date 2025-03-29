@@ -369,10 +369,10 @@ function updateGoals() {
 function startTimer() {
     if (timer.isRunning) return;
     
-    // Habilitar/desabilitar botões
-    startTimerButton.disabled = true;
-    pauseTimerButton.disabled = false;
-    resetTimerButton.disabled = false;
+    // Desabilitar botão de iniciar
+    if (startTimerButton) {
+        startTimerButton.disabled = true;
+    }
     
     // Iniciar o intervalo
     timer.isRunning = true;
@@ -389,7 +389,10 @@ function startTimer() {
         if (timer.seconds >= matchDuration * 60 && !timer.alarmed) {
             playAlarm();
             timer.alarmed = true;
-            toggleModal('time-up-modal', true);
+            
+            // Abrir o modal usando Bootstrap
+            const timeUpModalBootstrap = new bootstrap.Modal(document.getElementById('time-up-modal'));
+            timeUpModalBootstrap.show();
         }
     }, 1000);
 }
@@ -464,8 +467,9 @@ function openGoalModal(team) {
         goalAssistantField.appendChild(option);
     });
     
-    // Abrir o modal
-    toggleModal('goal-modal', true);
+    // Abrir o modal usando Bootstrap
+    const goalModalBootstrap = new bootstrap.Modal(goalModal);
+    goalModalBootstrap.show();
 }
 
 /**
@@ -490,7 +494,12 @@ async function handleGoalSubmit(event) {
     
     try {
         showLoading(true);
-        toggleModal('goal-modal', false);
+        
+        // Fechar o modal usando Bootstrap
+        const bsModal = bootstrap.Modal.getInstance(goalModal);
+        if (bsModal) {
+            bsModal.hide();
+        }
         
         const response = await fetch(`/api/matches/${matchId}/goals`, {
             method: 'POST',
@@ -541,8 +550,9 @@ function openDeleteGoalModal(goal) {
     const teamName = goal.team === 'orange' ? 'Time Laranja' : 'Time Preto';
     deleteGoalInfo.textContent = `${teamName}: gol de ${goal.scorer_name}${goal.assistant_name ? ` (assist: ${goal.assistant_name})` : ''}`;
     
-    // Abrir o modal
-    toggleModal('delete-goal-modal', true);
+    // Abrir o modal usando Bootstrap
+    const deleteGoalModalBootstrap = new bootstrap.Modal(deleteGoalModal);
+    deleteGoalModalBootstrap.show();
 }
 
 /**
@@ -556,7 +566,12 @@ async function handleDeleteGoal() {
     
     try {
         showLoading(true);
-        toggleModal('delete-goal-modal', false);
+        
+        // Fechar o modal usando Bootstrap
+        const bsModal = bootstrap.Modal.getInstance(deleteGoalModal);
+        if (bsModal) {
+            bsModal.hide();
+        }
         
         const response = await fetch(`/api/matches/${matchId}/goals/${goalToDelete.id}`, {
             method: 'DELETE'
@@ -621,8 +636,9 @@ function openEndMatchModal() {
         drawResolution.style.display = 'block';
     }
     
-    // Abrir o modal
-    toggleModal('end-match-modal', true);
+    // Abrir o modal usando Bootstrap
+    const endMatchModalBootstrap = new bootstrap.Modal(endMatchModal);
+    endMatchModalBootstrap.show();
 }
 
 /**
@@ -636,7 +652,12 @@ async function handleEndMatch() {
     
     try {
         showLoading(true);
-        toggleModal('end-match-modal', false);
+        
+        // Fechar o modal usando Bootstrap
+        const bsModal = bootstrap.Modal.getInstance(endMatchModal);
+        if (bsModal) {
+            bsModal.hide();
+        }
         
         // Parar o cronômetro se estiver rodando
         if (timer.isRunning) {
