@@ -1,9 +1,6 @@
+
 /**
  * Configurações - Futsal de Domingo
- * Script responsável pelo gerenciamento das configurações do sistema
- * 
- * Autor: Raphael Nugas
- * Data: 2023
  */
 
 // Elementos do DOM
@@ -17,12 +14,8 @@ const logsLoader = document.getElementById('logs-loader');
 const noLogs = document.getElementById('no-logs');
 const successModal = document.getElementById('success-modal');
 const closeSuccessModal = document.getElementById('close-success-modal');
-const successMessage = document.getElementById('success-message');
 const confirmSuccessButton = document.getElementById('confirm-success');
-
-// Estado da aplicação
-let settings = null;
-let logs = [];
+const successMessage = document.getElementById('success-message');
 
 /**
  * Inicialização
@@ -35,42 +28,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar eventos
     setupEventListeners();
 
-    const togglePasswordButton = document.getElementById('toggle-password');
-    const passwordInput = document.getElementById('master-password'); //Corrected ID
-
-    if (togglePasswordButton && passwordInput) {
+    if (togglePasswordButton && masterPasswordInput) {
         togglePasswordButton.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
+            const type = masterPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            masterPasswordInput.setAttribute('type', type);
             togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
         });
     }
 });
 
 /**
- * Configura os listeners de eventos
+ * Configura os event listeners
  */
 function setupEventListeners() {
-    // Evento para o formulário de configurações
     if (settingsForm) {
-        settingsForm.addEventListener('submit', saveSettings);
+        settingsForm.addEventListener('submit', handleSettingsSubmit);
     }
 
-    // Eventos para o modal de sucesso
+    if (resetDatabaseButton) {
+        resetDatabaseButton.addEventListener('click', resetDatabase);
+    }
+
     if (closeSuccessModal) {
-        closeSuccessModal.addEventListener('click', () => toggleModal('success-modal', false));
+        closeSuccessModal.addEventListener('click', () => successModal.style.display = 'none');
     }
 
     if (confirmSuccessButton) {
-        confirmSuccessButton.addEventListener('click', () => toggleModal('success-modal', false));
-    }
-
-    // Fechar modal ao clicar fora
-    setupModalOutsideClick('success-modal');
-
-    // Event listener for reset button
-    if (resetDatabaseButton) {
-        resetDatabaseButton.addEventListener('click', resetDatabase);
+        confirmSuccessButton.addEventListener('click', () => successModal.style.display = 'none');
     }
 }
 
@@ -83,10 +67,72 @@ async function loadSettings() {
         if (!response.ok) throw new Error('Erro ao carregar configurações');
 
         const settings = await response.json();
-        matchDurationInput.value = settings.match_duration || '';
+        if (settings) {
+            matchDurationInput.value = settings.match_duration || '';
+        }
     } catch (error) {
         console.error('Erro ao carregar configurações:', error);
         showError('Erro ao carregar configurações');
+    }
+}
+
+/**
+ * Salva as configurações do sistema
+ */
+async function handleSettingsSubmit(event) {
+    event.preventDefault();
+    
+    const data = {
+        match_duration: parseInt(matchDurationInput.value),
+        master_password: masterPasswordInput.value
+    };
+
+    try {
+        const response = await fetch('/api/settings', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error('Erro ao salvar configurações');
+
+        showSuccess('Configurações salvas com sucesso!');
+    } catch (error) {
+        console.error('Erro ao salvar configurações:', error);
+        showError('Erro ao salvar configurações');
+    }
+}
+
+/**
+ * Reseta o banco de dados
+ */
+async function resetDatabase() {
+    if (!confirm('ATENÇÃO: Esta ação irá apagar todos os dados do sistema! Deseja continuar?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/reset-database', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Erro ao resetar banco de dados');
+
+        const data = await response.json();
+        if (data.success) {
+            showSuccess('Banco de dados resetado com sucesso!');
+            setTimeout(() => window.location.reload(), 1500);
+        } else {
+            throw new Error(data.message || 'Erro ao resetar banco de dados');
+        }
+    } catch (error) {
+        console.error('Erro ao resetar banco de dados:', error);
+        showError('Erro ao resetar banco de dados');
     }
 }
 
@@ -100,22 +146,14 @@ async function loadLogs() {
         }
 
         const response = await fetch('/api/logs');
-        logs = await response.json();
+        if (!response.ok) throw new Error('Erro ao carregar logs');
 
-        // Atualizar tabela de logs
-        updateLogsTable();
-
-        if (logsLoader) {
-            logsLoader.style.display = 'none';
-        }
+        const logs = await response.json();
+        updateLogsTable(logs);
     } catch (error) {
         console.error('Erro ao carregar logs:', error);
-
-        if (noLogs) {
-            noLogs.style.display = 'block';
-            noLogs.textContent = 'Erro ao carregar logs. Tente novamente.';
-        }
-
+        showError('Erro ao carregar logs');
+    } finally {
         if (logsLoader) {
             logsLoader.style.display = 'none';
         }
@@ -125,111 +163,50 @@ async function loadLogs() {
 /**
  * Atualiza a tabela de logs
  */
-function updateLogsTable() {
-    if (!logsTableBody || !noLogs) return;
+function updateLogsTable(logs) {
+    if (!logsTableBody) return;
 
-    if (logs.length === 0) {
-        logsTableBody.innerHTML = '';
-        noLogs.style.display = 'block';
+    if (!logs || logs.length === 0) {
+        if (noLogs) noLogs.style.display = 'block';
         return;
     }
 
-    noLogs.style.display = 'none';
-    logsTableBody.innerHTML = '';
-
-    // Criar linha para cada log
-    logs.forEach(log => {
-        const row = document.createElement('tr');
-
-        const timestamp = new Date(log.timestamp);
-        const formattedDate = formatDate(log.timestamp, true);
-
-        row.innerHTML = `
-            <td>${formattedDate}</td>
+    logsTableBody.innerHTML = logs.map(log => `
+        <tr>
+            <td>${formatDate(log.timestamp)}</td>
             <td>${formatEventType(log.event_type)}</td>
-            <td>${log.description || ''}</td>
-        `;
-
-        logsTableBody.appendChild(row);
-    });
+            <td>${log.description || '-'}</td>
+        </tr>
+    `).join('');
 }
 
 /**
- * Manipula o envio do formulário de configurações
+ * Exibe mensagem de sucesso
  */
-async function saveSettings(event) {
-    event.preventDefault();
-
-    const data = {
-        match_duration: parseInt(matchDurationInput.value),
-        master_password: masterPasswordInput.value
-    };
-
-    try {
-        const response = await fetch('/api/settings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) throw new Error('Erro ao salvar configurações');
-
-        showSuccess('Configurações salvas com sucesso!');
-        masterPasswordInput.value = '';
-    } catch (error) {
-        console.error('Erro ao salvar configurações:', error);
-        showError('Erro ao salvar configurações');
-    }
-}
-
-
-// Reset do banco de dados
-async function resetDatabase() {
-    if (!confirm('ATENÇÃO: Esta ação irá apagar todos os dados do sistema! Deseja continuar?')) {
-        return;
-    }
-
-    try {
-        const response = await fetch('/api/reset-database', {
-            method: 'POST'
-        });
-
-        if (!response.ok) throw new Error('Erro ao resetar banco de dados');
-
-        showSuccess('Banco de dados resetado com sucesso!');
-        setTimeout(() => window.location.reload(), 1500);
-    } catch (error) {
-        console.error('Erro ao resetar banco de dados:', error);
-        showError('Erro ao resetar banco de dados');
-    }
-}
-
-
-// Placeholder functions -  These need to be defined elsewhere in your project.
-function showError(message) {
-    //Implementation to show error message
-    console.error(message)
-}
-
 function showSuccess(message) {
-    //Implementation to show success message
-    console.log(message)
+    if (successMessage && successModal) {
+        successMessage.textContent = message;
+        successModal.style.display = 'flex';
+    }
 }
 
-function toggleModal(modalId, show) {
-    //Implementation to show/hide modal
-    console.log(`modal ${modalId} toggled to ${show}`)
+/**
+ * Exibe mensagem de erro
+ */
+function showError(message) {
+    alert(message);
 }
 
-function setupModalOutsideClick(modalId) {
-    //Implementation to close modal on outside click
-    console.log(`setup outside click for modal ${modalId}`)
-}
-
-function formatDate(timestamp, withTime) {
+/**
+ * Formata data para exibição
+ */
+function formatDate(timestamp) {
     return new Date(timestamp).toLocaleString();
 }
 
+/**
+ * Formata tipo de evento para exibição
+ */
 function formatEventType(eventType) {
     const eventTypeMap = {
         'session_start': 'Início de Sessão',

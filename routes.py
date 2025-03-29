@@ -653,10 +653,14 @@ def reset_database():
         Match.query.delete()
         Session.query.delete()
         Player.query.delete()
-        Log.query.delete()
+        EventLog.query.delete()
+        GlobalStats.query.delete()
         
         # Commit as mudanças
         db.session.commit()
+        
+        # Registrar o evento de reset
+        log_event('database_reset', 'Banco de dados resetado')
         
         return jsonify({'success': True, 'message': 'Banco de dados resetado com sucesso!'})
     except Exception as e:
