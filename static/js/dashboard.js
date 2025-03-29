@@ -13,13 +13,7 @@ const topGoalkeeperElement = document.getElementById('top-goalkeeper');
 const statsTableBody = document.getElementById('stats-table-body');
 const statsLoader = document.getElementById('stats-loader');
 const statsTable = document.getElementById('stats-table');
-const loginButton = document.getElementById('login-button');
-const loginModal = document.getElementById('login-modal');
-const loginForm = document.getElementById('login-form');
-const loginError = document.getElementById('login-error');
-const closeModalButton = document.getElementById('close-modal');
-const logoutButton = document.getElementById('logout-button');
-const loadingElement = document.getElementById('loading');
+// Autenticação gerenciada pelo auth.js, não declarando os elementos aqui
 const searchInput = document.getElementById('search-player');
 const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -45,29 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Configura os listeners de eventos
  */
 function setupEventListeners() {
-    // Evento para o botão de login
-    if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            toggleLoginModal(true);
-        });
-    }
-    
-    // Evento para o botão de fechar o modal
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', () => {
-            toggleLoginModal(false);
-        });
-    }
-    
-    // Evento para o formulário de login
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLogin);
-    }
-    
-    // Evento para o botão de logout
-    if (logoutButton) {
-        logoutButton.addEventListener('click', handleLogout);
-    }
+    // Eventos de autenticação gerenciados pelo auth.js
     
     // Evento para o input de busca
     if (searchInput) {
@@ -323,86 +295,7 @@ function filterPlayers() {
     updatePlayersTable(filteredPlayers);
 }
 
-/**
- * Controla a exibição do modal de login
- */
-function toggleLoginModal(show) {
-    if (!loginModal) return;
-    
-    if (show) {
-        loginModal.classList.add('active');
-        // Focar no campo de senha
-        setTimeout(() => {
-            document.getElementById('password').focus();
-        }, 100);
-    } else {
-        loginModal.classList.remove('active');
-        // Limpar campos
-        if (loginForm) loginForm.reset();
-        if (loginError) loginError.textContent = '';
-    }
-}
-
-/**
- * Manipula o envio do formulário de login
- */
-async function handleLogin(event) {
-    event.preventDefault();
-    
-    const password = document.getElementById('password').value;
-    
-    // Validação básica
-    if (!password) {
-        loginError.textContent = 'Digite a senha.';
-        return;
-    }
-    
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Login bem-sucedido
-            toggleLoginModal(false);
-            // Recarregar a página para atualizar estado de autenticação
-            window.location.reload();
-        } else {
-            // Exibir mensagem de erro
-            loginError.textContent = data.message || 'Senha incorreta.';
-        }
-    } catch (error) {
-        console.error('Erro ao realizar login:', error);
-        loginError.textContent = 'Erro ao conectar. Tente novamente.';
-    }
-}
-
-/**
- * Manipula o logout
- */
-async function handleLogout() {
-    try {
-        const response = await fetch('/api/logout', {
-            method: 'POST'
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Logout bem-sucedido
-            window.location.href = '/';
-        }
-    } catch (error) {
-        console.error('Erro ao realizar logout:', error);
-        showError('Erro ao sair. Tente novamente.');
-    }
-}
+// Funções de autenticação gerenciadas pelo auth.js
 
 /**
  * Controla a exibição do indicador de carregamento
