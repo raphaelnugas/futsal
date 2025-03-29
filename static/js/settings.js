@@ -27,13 +27,24 @@ let logs = [];
 /**
  * Inicialização
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Carregar dados
     loadSettings();
     loadLogs();
 
     // Configurar eventos
     setupEventListeners();
+
+    const togglePasswordButton = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('master-password'); //Corrected ID
+
+    if (togglePasswordButton && passwordInput) {
+        togglePasswordButton.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+    }
 });
 
 /**
@@ -43,11 +54,6 @@ function setupEventListeners() {
     // Evento para o formulário de configurações
     if (settingsForm) {
         settingsForm.addEventListener('submit', saveSettings);
-    }
-
-    // Evento para mostrar/ocultar senha
-    if (togglePasswordButton) {
-        togglePasswordButton.addEventListener('click', togglePasswordVisibility);
     }
 
     // Eventos para o modal de sucesso
@@ -176,14 +182,6 @@ async function saveSettings(event) {
     }
 }
 
-/**
- * Alterna a visibilidade da senha
- */
-function togglePasswordVisibility() {
-    const type = masterPasswordInput.type === 'password' ? 'text' : 'password';
-    masterPasswordInput.type = type;
-    togglePasswordButton.innerHTML = `<i class="fas fa-eye${type === 'password' ? '' : '-slash'}"></i>`;
-}
 
 // Reset do banco de dados
 async function resetDatabase() {
@@ -229,11 +227,18 @@ function setupModalOutsideClick(modalId) {
 }
 
 function formatDate(timestamp, withTime) {
-    //Implementation for date formatting
-    return new Date(timestamp).toLocaleString()
+    return new Date(timestamp).toLocaleString();
 }
 
 function formatEventType(eventType) {
-    //Implementation for event type formatting
-    return eventType
+    const eventTypeMap = {
+        'session_start': 'Início de Sessão',
+        'session_end': 'Fim de Sessão',
+        'match_start': 'Início de Partida',
+        'match_end': 'Fim de Partida',
+        'goal': 'Gol',
+        'goal_deleted': 'Gol Removido',
+        'players_updated': 'Jogadores Atualizados'
+    };
+    return eventTypeMap[eventType] || eventType;
 }
