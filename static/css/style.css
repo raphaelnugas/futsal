@@ -305,6 +305,79 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
+/* Botões de navegação modernos */
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    font-size: 14px;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.nav-btn-orange {
+    background-color: var(--team-orange);
+    color: var(--white);
+}
+
+.nav-btn-orange:hover {
+    background-color: #ff8c40;
+    color: var(--white);
+}
+
+.nav-btn-black {
+    background-color: var(--team-black);
+    color: var(--white);
+}
+
+.nav-btn-black:hover {
+    background-color: #3c3c3c;
+    color: var(--white);
+}
+
+.nav-btn-blue {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.nav-btn-blue:hover {
+    background-color: #2980b9;
+    color: var(--white);
+}
+
+.nav-btn-red {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.nav-btn-red:hover {
+    background-color: #c0392b;
+    color: var(--white);
+}
+
+.nav-btn-green {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.nav-btn-green:hover {
+    background-color: #218838;
+    color: var(--white);
+}
+
 /* Seção de conteúdo principal */
 .main-content {
     padding: var(--spacing-lg) 0;
@@ -675,7 +748,7 @@ a:hover, a:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1050;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transition-normal), visibility var(--transition-normal);
@@ -684,6 +757,7 @@ a:hover, a:focus {
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    display: flex !important;
 }
 
 .modal {
