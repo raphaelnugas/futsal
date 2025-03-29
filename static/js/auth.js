@@ -6,212 +6,54 @@
  * Data: 2023
  */
 
-// Elementos do DOM que serão manipulados
-const loginButton = document.getElementById('login-button');
-const mobileLoginButton = document.getElementById('mobile-login-button');
-const loginModal = document.getElementById('login-modal');
-const loginForm = document.getElementById('login-form');
-const loginError = document.getElementById('login-error');
-const closeModalButton = document.getElementById('close-modal');
-const logoutButton = document.getElementById('logout-button');
-const mobileLogoutButton = document.getElementById('mobile-logout-button');
-const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-const mobileDropdown = document.getElementById('mobile-dropdown');
-const togglePasswordButton = document.getElementById('toggle-password');
+// DOM Elements
+const loginButton = document.querySelector('#login-button');
+const loginModal = document.querySelector('#login-modal');
+const loginForm = document.querySelector('#login-form');
+const loginError = document.querySelector('#login-error');
+const togglePasswordButton = document.querySelector('#toggle-password');
+const passwordInput = document.querySelector('#password');
+const mobileMenuToggle = document.querySelector('#mobile-menu-toggle');
+const mobileDropdown = document.querySelector('#mobile-dropdown');
+const mobileLoginButton = document.querySelector('#mobile-login-button');
+const mobileLogoutButton = document.querySelector('#mobile-logout-button');
 
-// Variável para armazenar a instância do modal Bootstrap
-let bsLoginModal = null;
 
 /**
  * Inicialização
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Configurar eventos apenas se os elementos existirem
-    setupAuthEventListeners();
+    setupLoginModal();
+    setupPasswordToggle();
     setupMobileMenu();
 });
 
 /**
- * Configura os listeners de eventos para autenticação
+ * Configura os listeners de eventos para o modal de login e formulário
  */
-function setupAuthEventListeners() {
-    // Inicializar o modal Bootstrap se o elemento existir
-    if (loginModal) {
-        try {
-            bsLoginModal = new bootstrap.Modal(loginModal);
-            
-            // Configurar evento para focar o campo de senha quando o modal for mostrado
-            loginModal.addEventListener('shown.bs.modal', function () {
-                const passwordField = document.getElementById('password');
-                if (passwordField) passwordField.focus();
-            });
-        } catch (error) {
-            console.error('Erro ao inicializar o modal:', error);
-        }
-    }
-    
-    // Evento para o botão de login
+function setupLoginModal() {
     if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            toggleLoginModal(true);
-        });
+        loginButton.addEventListener('click', () => toggleLoginModal(true));
     }
-    
-    // Evento para o formulário de login
+
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
     }
-    
-    // Evento para o botão de logout
-    if (logoutButton) {
-        logoutButton.addEventListener('click', handleLogout);
-    }
-    
-    // Evento para o botão de alternar visibilidade da senha
-    if (togglePasswordButton) {
-        togglePasswordButton.addEventListener('click', togglePasswordVisibility);
-    }
 }
 
 /**
- * Exibe/oculta o modal de login usando Bootstrap
- * @param {boolean} show - Se deve mostrar ou esconder o modal
+ * Configura os listeners de eventos para alternar a visibilidade da senha
  */
-function toggleLoginModal(show) {
-    if (!loginModal) {
-        console.error('Modal de login não encontrado');
-        return;
-    }
-    
-    // Criar a instância do modal se ainda não existir
-    if (!bsLoginModal) {
-        try {
-            bsLoginModal = new bootstrap.Modal(loginModal);
-        } catch (error) {
-            console.error('Erro ao criar instância do Bootstrap Modal:', error);
-            return;
-        }
-    }
-    
-    if (show) {
-        // Mostrar o modal usando a instância já criada
-        bsLoginModal.show();
-    } else {
-        // Esconder o modal
-        bsLoginModal.hide();
-        
-        // Limpar campos
-        if (loginForm) loginForm.reset();
-        if (loginError) {
-            loginError.textContent = '';
-            loginError.style.display = 'none';
-        }
-    }
-}
-
-/**
- * Manipula o envio do formulário de login
- * @param {Event} event - Evento de submit
- */
-async function handleLogin(event) {
-    event.preventDefault();
-    
-    const passwordField = document.getElementById('password');
-    if (!passwordField) return;
-    
-    const password = passwordField.value;
-    
-    // Validação básica
-    if (!password) {
-        if (loginError) {
-            loginError.textContent = 'Digite a senha.';
-            loginError.style.display = 'block';
-        }
-        return;
-    }
-    
-    try {
-        showLoading(true);
-        
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password })
+function setupPasswordToggle() {
+    if (togglePasswordButton && passwordInput) {
+        togglePasswordButton.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePasswordButton.innerHTML = type === 'password' ? 
+                '<i class="fas fa-eye"></i>' : 
+                '<i class="fas fa-eye-slash"></i>';
         });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Login bem-sucedido
-            toggleLoginModal(false);
-            // Recarregar a página para atualizar estado de autenticação
-            window.location.reload();
-        } else {
-            // Exibir mensagem de erro
-            if (loginError) {
-                loginError.textContent = data.message || 'Senha incorreta.';
-                loginError.style.display = 'block';
-            }
-        }
-        
-        showLoading(false);
-    } catch (error) {
-        console.error('Erro ao realizar login:', error);
-        if (loginError) {
-            loginError.textContent = 'Erro ao conectar. Tente novamente.';
-            loginError.style.display = 'block';
-        }
-        showLoading(false);
-    }
-}
-
-/**
- * Manipula o logout
- */
-async function handleLogout() {
-    try {
-        showLoading(true);
-        
-        const response = await fetch('/api/logout', {
-            method: 'POST'
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Logout bem-sucedido
-            window.location.href = '/';
-        } else {
-            showError('Erro ao sair: ' + (data.message || 'Tente novamente.'));
-        }
-        
-        showLoading(false);
-    } catch (error) {
-        console.error('Erro ao realizar logout:', error);
-        showError('Erro ao sair. Tente novamente.');
-        showLoading(false);
-    }
-}
-
-/**
- * Alterna a visibilidade da senha (mostrar/esconder)
- */
-function togglePasswordVisibility() {
-    const passwordField = document.getElementById('password');
-    const toggleIcon = togglePasswordButton.querySelector('i');
-    
-    if (!passwordField || !toggleIcon) return;
-    
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleIcon.classList.remove('fa-eye');
-        toggleIcon.classList.add('fa-eye-slash');
-    } else {
-        passwordField.type = 'password';
-        toggleIcon.classList.remove('fa-eye-slash');
-        toggleIcon.classList.add('fa-eye');
     }
 }
 
@@ -256,5 +98,66 @@ function setupMobileMenu() {
             // Executar logout
             handleLogout();
         });
+    }
+}
+
+/**
+ * Manipula o envio do formulário de login
+ * @param {Event} event - Evento de submit
+ */
+async function handleLogin(event) {
+    event.preventDefault();
+    const password = passwordInput.value;
+
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            window.location.reload();
+        } else {
+            loginError.textContent = data.message || 'Senha incorreta. Tente novamente.';
+            loginError.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Erro no login:', error);
+        loginError.textContent = 'Erro ao tentar fazer login. Tente novamente.';
+        loginError.style.display = 'block';
+    }
+}
+
+/**
+ * Manipula o logout
+ */
+async function handleLogout() {
+    try {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            // Handle non-ok response (e.g., show error message)
+            console.error("Logout failed:", response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro no logout:', error);
+    }
+}
+
+/**
+ * Exibe/oculta o modal de login
+ * @param {boolean} show - Se deve mostrar ou esconder o modal
+ */
+function toggleLoginModal(show) {
+    if (loginModal) {
+        loginModal.style.display = show ? 'block' : 'none';
     }
 }

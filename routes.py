@@ -475,28 +475,37 @@ def create_match(session_id):
 @login_required
 def end_match(match_id):
     """API para encerrar uma partida."""
-    match = Match.query.get_or_404(match_id)
-    data = request.json
-    
-    if not match.is_active:
-        return jsonify({'success': False, 'message': 'Esta partida já está encerrada.'}), 400
-    
-    # Atualizar o resultado
-    winner_team = data.get('winner_team')  # 'orange', 'black' ou null para empate
-    
-    # Garantir que winner_team seja uma string válida ou None
-    if winner_team not in ['orange', 'black', None]:
-        if winner_team == "":
-            winner_team = None
-        elif not isinstance(winner_team, str):
+    try:
+        match = Match.query.get_or_404(match_id)
+        data = request.json
+        
+        if not match.is_active:
+            return jsonify({'success': False, 'message': 'Esta partida já está encerrada.'}), 400
+        
+        winner_team = data.get('winner_team')
+        
+        if winner_team not in ['orange', 'black', None, '']:
             return jsonify({'success': False, 'message': 'Valor inválido para winner_team'}), 400
-    
-    print(f"Recebido winner_team: {winner_team}")
-    match.winner_team = winner_team
-    match.is_active = False
-    match.end_time = datetime.now()
-    
-    db.session.commit()
+            
+        match.winner_team = None if winner_team == '' else winner_team
+        match.is_active = False
+        match.end_time = datetime.now()
+        
+        db.session.commit()
+        
+        log_event('match_end', 
+                 f'Partida encerrada com sucesso: {match.winner_team or "Empate"}',
+                 session_id=match.session_id,
+                 match_id=match.id)
+        
+        update_global_stats()
+        
+        return jsonify({'success': True, 'match': match.to_dict()})
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Erro ao encerrar partida: {str(e)}")
+        return jsonify({'success': False, 'message': 'Erro ao encerrar a partida.'}), 500
     
     # Registrar no log
     result_desc = "Empate" if not winner_team else f"Vitória do time {'Laranja' if winner_team == 'orange' else 'Preto'}"
