@@ -1424,3 +1424,19 @@ a:hover, a:focus {
 .mobile-menu-button {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+/* Modal de Login */
+.modal {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-content {
+    border: none;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+#toggle-password {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
