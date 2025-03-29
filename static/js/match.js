@@ -438,9 +438,10 @@ function startTimer() {
 function pauseTimer() {
     if (!timer.isRunning) return;
     
-    // Habilitar/desabilitar botões
-    startTimerButton.disabled = false;
-    pauseTimerButton.disabled = true;
+    // Habilitar botão de iniciar se existir
+    if (startTimerButton) {
+        startTimerButton.disabled = false;
+    }
     
     // Parar o intervalo
     clearInterval(timer.interval);
@@ -465,10 +466,10 @@ function resetTimer() {
         matchTimerElement.textContent = formatTime(timer.seconds);
     }
     
-    // Resetar botões
-    startTimerButton.disabled = false;
-    pauseTimerButton.disabled = true;
-    resetTimerButton.disabled = true;
+    // Resetar botão de iniciar se existir
+    if (startTimerButton) {
+        startTimerButton.disabled = false;
+    }
 }
 
 /**
@@ -744,17 +745,24 @@ async function handleEndMatch() {
  * Desabilita os controles da partida (quando encerrada)
  */
 function disableMatchControls() {
-    // Desabilitar botões de controle
-    if (startTimerButton) startTimerButton.disabled = true;
-    if (pauseTimerButton) pauseTimerButton.disabled = true;
-    if (resetTimerButton) resetTimerButton.disabled = true;
+    // Desabilitar botão de iniciar
+    if (startTimerButton) {
+        startTimerButton.disabled = true;
+    }
     
     // Desabilitar botões de gol
-    if (orangeGoalButton) orangeGoalButton.disabled = true;
-    if (blackGoalButton) blackGoalButton.disabled = true;
+    if (orangeGoalButton) {
+        orangeGoalButton.disabled = true;
+    }
+    
+    if (blackGoalButton) {
+        blackGoalButton.disabled = true;
+    }
     
     // Desabilitar botão de encerrar
-    if (endMatchButton) endMatchButton.disabled = true;
+    if (endMatchButton) {
+        endMatchButton.disabled = true;
+    }
     
     // Remover botões de excluir gol
     const deleteButtons = document.querySelectorAll('.delete-goal-btn');
