@@ -1,65 +1,61 @@
+
 /**
  * Configurações - Futsal de Domingo
- * Script responsável pelo gerenciamento das configurações do sistema
- * 
- * Autor: Raphael Nugas
- * Data: 2023
  */
 
-// Elementos do DOM que serão manipulados
+// Elementos do DOM
 const settingsForm = document.getElementById('settings-form');
-const matchDurationField = document.getElementById('match-duration');
-const masterPasswordField = document.getElementById('master-password');
+const matchDurationInput = document.getElementById('match-duration');
+const masterPasswordInput = document.getElementById('master-password');
 const togglePasswordButton = document.getElementById('toggle-password');
+const resetDatabaseButton = document.getElementById('reset-database');
 const logsTableBody = document.getElementById('logs-table-body');
 const logsLoader = document.getElementById('logs-loader');
-const noLogsElement = document.getElementById('no-logs');
+const noLogs = document.getElementById('no-logs');
 const successModal = document.getElementById('success-modal');
 const closeSuccessModal = document.getElementById('close-success-modal');
-const successMessage = document.getElementById('success-message');
 const confirmSuccessButton = document.getElementById('confirm-success');
-
-// Estado da aplicação
-let settings = null;
-let logs = [];
+const successMessage = document.getElementById('success-message');
 
 /**
  * Inicialização
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Carregar dados
     loadSettings();
     loadLogs();
-    
+
     // Configurar eventos
     setupEventListeners();
+
+    if (togglePasswordButton && masterPasswordInput) {
+        togglePasswordButton.addEventListener('click', function() {
+            const type = masterPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            masterPasswordInput.setAttribute('type', type);
+            togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+    }
 });
 
 /**
- * Configura os listeners de eventos
+ * Configura os event listeners
  */
 function setupEventListeners() {
-    // Evento para o formulário de configurações
     if (settingsForm) {
-        settingsForm.addEventListener('submit', handleSaveSettings);
+        settingsForm.addEventListener('submit', handleSettingsSubmit);
     }
-    
-    // Evento para mostrar/ocultar senha
-    if (togglePasswordButton) {
-        togglePasswordButton.addEventListener('click', togglePasswordVisibility);
+
+    if (resetDatabaseButton) {
+        resetDatabaseButton.addEventListener('click', resetDatabase);
     }
-    
-    // Eventos para o modal de sucesso
+
     if (closeSuccessModal) {
-        closeSuccessModal.addEventListener('click', () => toggleModal('success-modal', false));
+        closeSuccessModal.addEventListener('click', () => successModal.style.display = 'none');
     }
-    
+
     if (confirmSuccessButton) {
-        confirmSuccessButton.addEventListener('click', () => toggleModal('success-modal', false));
+        confirmSuccessButton.addEventListener('click', () => successModal.style.display = 'none');
     }
-    
-    // Fechar modal ao clicar fora
-    setupModalOutsideClick('success-modal');
 }
 
 /**
@@ -67,21 +63,76 @@ function setupEventListeners() {
  */
 async function loadSettings() {
     try {
-        showLoading(true);
-        
         const response = await fetch('/api/settings');
-        settings = await response.json();
-        
-        // Preencher campos do formulário
-        if (matchDurationField) {
-            matchDurationField.value = settings.match_duration || 10;
+        if (!response.ok) throw new Error('Erro ao carregar configurações');
+
+        const settings = await response.json();
+        if (settings) {
+            matchDurationInput.value = settings.match_duration || '';
         }
-        
-        showLoading(false);
     } catch (error) {
         console.error('Erro ao carregar configurações:', error);
-        showError('Não foi possível carregar as configurações do sistema.');
-        showLoading(false);
+        showError('Erro ao carregar configurações');
+    }
+}
+
+/**
+ * Salva as configurações do sistema
+ */
+async function handleSettingsSubmit(event) {
+    event.preventDefault();
+    
+    const data = {
+        match_duration: parseInt(matchDurationInput.value),
+        master_password: masterPasswordInput.value
+    };
+
+    try {
+        const response = await fetch('/api/settings', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error('Erro ao salvar configurações');
+
+        showSuccess('Configurações salvas com sucesso!');
+    } catch (error) {
+        console.error('Erro ao salvar configurações:', error);
+        showError('Erro ao salvar configurações');
+    }
+}
+
+/**
+ * Reseta o banco de dados
+ */
+async function resetDatabase() {
+    if (!confirm('ATENÇÃO: Esta ação irá apagar todos os dados do sistema! Deseja continuar?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/reset-database', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Erro ao resetar banco de dados');
+
+        const data = await response.json();
+        if (data.success) {
+            showSuccess('Banco de dados resetado com sucesso!');
+            setTimeout(() => window.location.reload(), 1500);
+        } else {
+            throw new Error(data.message || 'Erro ao resetar banco de dados');
+        }
+    } catch (error) {
+        console.error('Erro ao resetar banco de dados:', error);
+        showError('Erro ao resetar banco de dados');
     }
 }
 
@@ -93,24 +144,16 @@ async function loadLogs() {
         if (logsLoader) {
             logsLoader.style.display = 'flex';
         }
-        
+
         const response = await fetch('/api/logs');
-        logs = await response.json();
-        
-        // Atualizar tabela de logs
-        updateLogsTable();
-        
-        if (logsLoader) {
-            logsLoader.style.display = 'none';
-        }
+        if (!response.ok) throw new Error('Erro ao carregar logs');
+
+        const logs = await response.json();
+        updateLogsTable(logs);
     } catch (error) {
         console.error('Erro ao carregar logs:', error);
-        
-        if (noLogsElement) {
-            noLogsElement.style.display = 'block';
-            noLogsElement.textContent = 'Erro ao carregar logs. Tente novamente.';
-        }
-        
+        showError('Erro ao carregar logs');
+    } finally {
         if (logsLoader) {
             logsLoader.style.display = 'none';
         }
@@ -120,108 +163,59 @@ async function loadLogs() {
 /**
  * Atualiza a tabela de logs
  */
-function updateLogsTable() {
-    if (!logsTableBody || !noLogsElement) return;
-    
-    if (logs.length === 0) {
-        logsTableBody.innerHTML = '';
-        noLogsElement.style.display = 'block';
+function updateLogsTable(logs) {
+    if (!logsTableBody) return;
+
+    if (!logs || logs.length === 0) {
+        if (noLogs) noLogs.style.display = 'block';
         return;
     }
-    
-    noLogsElement.style.display = 'none';
-    logsTableBody.innerHTML = '';
-    
-    // Criar linha para cada log
-    logs.forEach(log => {
-        const row = document.createElement('tr');
-        
-        const timestamp = new Date(log.timestamp);
-        const formattedDate = formatDate(log.timestamp, true);
-        
-        row.innerHTML = `
-            <td>${formattedDate}</td>
+
+    logsTableBody.innerHTML = logs.map(log => `
+        <tr>
+            <td>${formatDate(log.timestamp)}</td>
             <td>${formatEventType(log.event_type)}</td>
-            <td>${log.description || ''}</td>
-        `;
-        
-        logsTableBody.appendChild(row);
-    });
+            <td>${log.description || '-'}</td>
+        </tr>
+    `).join('');
 }
 
 /**
- * Manipula o envio do formulário de configurações
+ * Exibe mensagem de sucesso
  */
-async function handleSaveSettings(event) {
-    event.preventDefault();
-    
-    const matchDuration = parseInt(matchDurationField.value);
-    const masterPassword = masterPasswordField.value;
-    
-    // Validar campos
-    if (isNaN(matchDuration) || matchDuration < 1 || matchDuration > 60) {
-        showError('A duração da partida deve ser entre 1 e 60 minutos.');
-        return;
+function showSuccess(message) {
+    if (successMessage && successModal) {
+        successMessage.textContent = message;
+        successModal.style.display = 'flex';
     }
-    
-    // Preparar dados
-    const data = {
-        match_duration: matchDuration
+}
+
+/**
+ * Exibe mensagem de erro
+ */
+function showError(message) {
+    alert(message);
+}
+
+/**
+ * Formata data para exibição
+ */
+function formatDate(timestamp) {
+    return new Date(timestamp).toLocaleString();
+}
+
+/**
+ * Formata tipo de evento para exibição
+ */
+function formatEventType(eventType) {
+    const eventTypeMap = {
+        'session_start': 'Início de Sessão',
+        'session_end': 'Fim de Sessão',
+        'match_start': 'Início de Partida',
+        'match_end': 'Fim de Partida',
+        'goal': 'Gol',
+        'goal_deleted': 'Gol Removido',
+        'players_updated': 'Jogadores Atualizados'
     };
-    
-    // Adicionar senha mestra se foi preenchida
-    if (masterPassword) {
-        data.master_password = masterPassword;
-    }
-    
-    try {
-        showLoading(true);
-        
-        const response = await fetch('/api/settings', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        
-        const responseData = await response.json();
-        
-        if (responseData.success) {
-            // Limpar campo de senha
-            if (masterPasswordField) {
-                masterPasswordField.value = '';
-            }
-            
-            // Mostrar mensagem de sucesso
-            if (successMessage) {
-                successMessage.textContent = 'Configurações salvas com sucesso!';
-            }
-            
-            toggleModal('success-modal', true);
-        } else {
-            showError(responseData.message || 'Erro ao salvar configurações.');
-        }
-        
-        showLoading(false);
-    } catch (error) {
-        console.error('Erro ao salvar configurações:', error);
-        showError('Erro ao conectar com o servidor. Tente novamente.');
-        showLoading(false);
-    }
-}
-
-/**
- * Alterna a visibilidade da senha
- */
-function togglePasswordVisibility() {
-    if (!masterPasswordField || !togglePasswordButton) return;
-    
-    if (masterPasswordField.type === 'password') {
-        masterPasswordField.type = 'text';
-        togglePasswordButton.innerHTML = '<i class="fas fa-eye-slash"></i>';
-    } else {
-        masterPasswordField.type = 'password';
-        togglePasswordButton.innerHTML = '<i class="fas fa-eye"></i>';
-    }
+    return eventTypeMap[eventType] || eventType;
 }
