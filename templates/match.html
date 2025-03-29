@@ -89,72 +89,82 @@
 </div>
 
 <!-- Modal Marcar Gol -->
-<div id="goal-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Marcar Gol - <span id="goal-team-name"></span></h5>
-            <button id="close-goal-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="goal-form">
-                <input type="hidden" id="goal-team" name="team">
-                
-                <div class="form-group mb-3">
-                    <label for="goal-scorer" class="form-label">Quem marcou o gol?</label>
-                    <select id="goal-scorer" name="scorer_id" class="form-control" required>
-                        <option value="">-- Selecione o Jogador --</option>
-                        <!-- Opções serão carregadas via JavaScript -->
-                    </select>
-                </div>
-                
-                <div class="form-group mb-3">
-                    <label for="goal-assistant" class="form-label">Quem deu a assistência? (opcional)</label>
-                    <select id="goal-assistant" name="assistant_id" class="form-control">
-                        <option value="">-- Sem Assistência --</option>
-                        <!-- Opções serão carregadas via JavaScript -->
-                    </select>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" id="cancel-goal" class="btn btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Confirmar Gol</button>
-                </div>
-            </form>
+<div id="goal-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
+                <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Marcar Gol - <span id="goal-team-name"></span></h5>
+                <button id="close-goal-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="goal-form">
+                    <input type="hidden" id="goal-team" name="team">
+                    
+                    <div class="form-group mb-3">
+                        <label for="goal-scorer" class="form-label">Quem marcou o gol?</label>
+                        <select id="goal-scorer" name="scorer_id" class="form-control" required>
+                            <option value="">-- Selecione o Jogador --</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="goal-assistant" class="form-label">Quem deu a assistência? (opcional)</label>
+                        <select id="goal-assistant" name="assistant_id" class="form-control">
+                            <option value="">-- Sem Assistência --</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" id="cancel-goal" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar Gol</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Confirmação Remover Gol -->
-<div id="delete-goal-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Remover Gol</h5>
-            <button id="close-delete-goal-modal" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>Tem certeza que deseja remover este gol?</p>
-            <p id="delete-goal-info"></p>
-            
-            <div class="modal-footer">
-                <button type="button" id="cancel-delete-goal" class="btn btn-secondary">Cancelar</button>
-                <button type="button" id="confirm-delete-goal" class="btn btn-danger">Remover</button>
+<div id="delete-goal-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header" style="background-color: rgba(220, 53, 69, 0.1);">
+                <h5 class="modal-title" style="color: var(--danger); font-weight: bold;">Remover Gol</h5>
+                <button id="close-delete-goal-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p>Tem certeza que deseja remover este gol?</p>
+                <p id="delete-goal-info" class="border-start border-3 border-danger ps-2 fw-bold"></p>
+                
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="button" id="cancel-delete-goal" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirm-delete-goal" class="btn btn-danger">Remover</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Tempo Esgotado -->
-<div id="time-up-modal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Tempo Esgotado!</h5>
-        </div>
-        <div class="modal-body">
-            <p class="text-center">O tempo regulamentar acabou!</p>
-            <p class="text-center">Aguarde a bola sair de campo para encerrar a partida.</p>
-            
-            <div class="modal-footer">
-                <button type="button" id="close-time-up-modal" class="btn btn-primary">OK</button>
+<div id="time-up-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header" style="background-color: rgba(25, 135, 84, 0.1);">
+                <h5 class="modal-title" style="color: var(--success); font-weight: bold;">Tempo Esgotado!</h5>
+                <button id="close-time-up-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="text-center mb-3">
+                    <i class="fas fa-stopwatch fa-4x text-success mb-3"></i>
+                    <p class="fw-bold fs-5">O tempo regulamentar acabou!</p>
+                    <p>Aguarde a bola sair de campo para encerrar a partida.</p>
+                </div>
+                
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="button" id="close-time-up-modal-btn" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>

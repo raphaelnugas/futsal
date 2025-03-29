@@ -173,11 +173,7 @@ function setupEventListeners() {
         closeTimeUpModal.addEventListener('click', () => toggleModal('time-up-modal', false));
     }
     
-    // Fechar modais ao clicar fora
-    setupModalOutsideClick('goal-modal');
-    setupModalOutsideClick('end-match-modal');
-    setupModalOutsideClick('delete-goal-modal');
-    setupModalOutsideClick('time-up-modal');
+    // Modais Bootstrap fecham automaticamente ao clicar fora
     
     // Confirmar antes de deixar a página se o timer estiver rodando
     window.addEventListener('beforeunload', (event) => {

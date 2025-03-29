@@ -95,7 +95,7 @@ function showSuccess(message) {
 }
 
 /**
- * Exibe ou oculta um modal
+ * Exibe ou oculta um modal usando Bootstrap Modal
  * @param {string} modalId - ID do modal a ser exibido/ocultado
  * @param {boolean} show - Se true, exibe o modal; se false, oculta
  */
@@ -106,12 +106,33 @@ function toggleModal(modalId, show) {
         return;
     }
     
+    // Verificar se o modal já tem uma instância Bootstrap
+    let bsModal = modal.bsModal;
+    
+    // Se não existir, criar uma nova instância
+    if (!bsModal) {
+        try {
+            bsModal = new bootstrap.Modal(modal);
+            // Armazenar a referência para uso futuro
+            modal.bsModal = bsModal;
+        } catch (error) {
+            console.error(`Erro ao criar instância do Bootstrap Modal para ${modalId}:`, error);
+            // Fallback para o comportamento anterior caso o Bootstrap falhe
+            if (show) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            return;
+        }
+    }
+    
     if (show) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Previne rolagem do fundo
+        bsModal.show();
     } else {
-        modal.classList.remove('active');
-        document.body.style.overflow = ''; // Restaura rolagem do fundo
+        bsModal.hide();
     }
 }
 
@@ -203,18 +224,14 @@ function getTextColorForBackground(color) {
 }
 
 /**
- * Adiciona evento para fechar um modal ao clicar fora
+ * Adiciona evento para fechar um modal ao clicar fora (não necessário com Bootstrap Modal)
+ * Esta função agora é apenas um wrapper mantido para compatibilidade
  * @param {string} modalId - ID do modal
  */
 function setupModalOutsideClick(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            toggleModal(modalId, false);
-        }
-    });
+    // Bootstrap Modal já tem esse comportamento por padrão
+    // Mantido apenas para compatibilidade com código existente
+    console.info(`setupModalOutsideClick não é mais necessário para o modal ${modalId}`);
 }
 
 /**
