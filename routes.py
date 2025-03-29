@@ -291,25 +291,43 @@ def get_next_sundays():
     """API para obter os próximos domingos para o calendário."""
     today = date.today()
     
-    # Se hoje é domingo (6), days_ahead deve ser 0 (hoje)
-    # Se hoje é segunda (0), days_ahead deve ser 6 (próximo domingo)
-    days_ahead = (6 - today.weekday()) % 7  # Garante que se hoje for domingo, days_ahead = 0
+    # Se hoje é domingo (weekday=6), days_ahead deve ser 0 (hoje)
+    # Se hoje é segunda (weekday=0), days_ahead deve ser 6 (próximo domingo)
+    days_ahead = (7 - today.weekday()) % 7  # 7 em vez de 6 para corrigir o cálculo
     
     # Se hoje for domingo, considere o domingo de hoje
     next_sunday = today + timedelta(days=days_ahead)
     
     # Gerar 10 domingos a partir do próximo (ou do atual, se for domingo)
-    sundays = []
+    future_sundays = []
     for i in range(10):
         sunday = next_sunday + timedelta(days=i*7)
         
         # Verificar se já existe uma sessão para este domingo
         session_exists = Session.query.filter_by(date=sunday).first() is not None
         
-        sundays.append({
+        future_sundays.append({
             'date': sunday.isoformat(),
             'exists': session_exists
         })
+    
+    # Gerar 10 domingos passados (até 10 semanas atrás)
+    past_sundays = []
+    for i in range(1, 11):  # Começa em 1 para não incluir o próximo domingo novamente
+        past_sunday = next_sunday - timedelta(days=i*7)
+        
+        # Verificar se já existe uma sessão para este domingo
+        session_exists = Session.query.filter_by(date=past_sunday).first() is not None
+        
+        # Só adiciona domingos passados se já existir sessão
+        if session_exists:
+            past_sundays.append({
+                'date': past_sunday.isoformat(),
+                'exists': True
+            })
+    
+    # Combinar os próximos domingos com domingos passados que têm sessão
+    sundays = future_sundays + past_sundays
     
     return jsonify(sundays)
 
