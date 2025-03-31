@@ -52,44 +52,8 @@
         </div>
     </div>
 
-    <!-- General Stats Cards -->
-    <div class="row mb-4">
-        <div class="col-6 col-md-3 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 id="total-players">-</h3>
-                    <p class="text-muted">Jogadores</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 id="total-sessions">-</h3>
-                    <p class="text-muted">Domingos</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 id="total-matches">-</h3>
-                    <p class="text-muted">Partidas</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3 id="total-goals">-</h3>
-                    <p class="text-muted">Gols</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Statistics Table -->
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
             <h4 class="card-title">Classificação Geral</h4>
             <div class="filter-buttons">
@@ -112,7 +76,6 @@
             </div>
         </div>
         <div class="card-body">
-
             <div class="table-responsive">
                 <table id="stats-table" class="table table-hover">
                     <thead>
@@ -148,6 +111,26 @@
                     <div class="spinner spinner-dark"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- General Stats Cards - Versão compacta abaixo da tabela -->
+    <div class="stats-summary-cards">
+        <div class="stats-card-sm">
+            <h3 id="total-players">-</h3>
+            <p>Jogadores</p>
+        </div>
+        <div class="stats-card-sm">
+            <h3 id="total-sessions">-</h3>
+            <p>Domingos</p>
+        </div>
+        <div class="stats-card-sm">
+            <h3 id="total-matches">-</h3>
+            <p>Partidas</p>
+        </div>
+        <div class="stats-card-sm">
+            <h3 id="total-goals">-</h3>
+            <p>Gols</p>
         </div>
     </div>
 </div>

@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Sempre rodar o servidor em D:\Futsal2\futsal> venv\Scripts\activate ; python run.py

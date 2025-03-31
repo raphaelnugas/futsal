@@ -2,9 +2,9 @@
 
 {% block title %}Gerenciar Jogadores | Futsal de Domingo{% endblock %}
 
+{% block extra_css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -35,30 +35,52 @@
 </div>
 
 <!-- Modal Adicionar Jogador -->
-<div id="add-player-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+<div id="add-player-modal" class="modal fade" tabindex="-1" aria-labelledby="addPlayerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow">
             <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
-                <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Adicionar Jogador</h5>
+                <h5 class="modal-title" id="addPlayerModalLabel" style="color: var(--orange); font-weight: bold;">Adicionar Jogador</h5>
                 <button id="close-add-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
                 <form id="add-player-form">
-                    <div class="text-center mb-4">
-                        <div class="player-photo-preview mx-auto" id="photo-preview">
-                            <div class="photo-placeholder">Foto</div>
+                    <div id="add-avatar-container" class="avatar-container avatar-normal">
+                        <!-- Círculo para mostrar avatar/iniciais e abrir seletor -->
+                        <div id="add-avatar-circle" class="avatar-circle">
+                            <div class="avatar-initials">JD</div>
                         </div>
-                        <input type="file" id="player-photo" name="player_photo" class="d-none" accept="image/*">
-                        <div id="photo-editor-controls" class="mt-2" style="display: none;">
-                            <div class="d-flex justify-content-center gap-2">
-                                <button type="button" id="zoom-in" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
-                                <button type="button" id="zoom-out" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
-                                <button type="button" id="rotate-cw" class="btn btn-sm btn-outline-secondary"><i class="fas fa-redo"></i></button>
-                                <button type="button" id="reset-photo" class="btn btn-sm btn-outline-secondary">Resetar</button>
-                            </div>
+                        
+                        <!-- Container de edição (aparece após selecionar foto) -->
+                        <div id="add-avatar-editor" class="avatar-edit-container">
+                            <!-- A imagem será inserida aqui pelo JavaScript -->
                         </div>
-                        <input type="hidden" id="photo-data" name="photo_data">
+                        
+                        <!-- Controles de edição -->
+                        <div id="add-avatar-controls" class="avatar-controls">
+                            <button type="button" id="add-zoom-in" class="btn btn-outline-secondary">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button type="button" id="add-zoom-out" class="btn btn-outline-secondary">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button type="button" id="add-rotate" class="btn btn-outline-secondary">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button type="button" id="add-reset" class="btn btn-outline-secondary">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Botão de confirmar edição -->
+                        <button type="button" id="add-avatar-confirm" class="avatar-confirm">Confirmar</button>
+                        
+                        <!-- Input oculto para o arquivo -->
+                        <input type="file" id="add-avatar-input" accept="image/*" class="d-none">
+                        
+                        <!-- Input oculto para os dados da imagem processada -->
+                        <input type="hidden" id="add-avatar-data" name="photo_data">
                     </div>
+                    
                     <div class="form-group mb-3">
                         <label for="player-name" class="form-label">Nome do Jogador</label>
                         <input type="text" id="player-name" name="name" class="form-control" required>
@@ -68,7 +90,7 @@
                         <label for="is-goalkeeper" class="form-check-label">É goleiro?</label>
                     </div>
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="button" id="cancel-add" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </form>
@@ -78,30 +100,52 @@
 </div>
 
 <!-- Modal Editar Jogador -->
-<div id="edit-player-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+<div id="edit-player-modal" class="modal fade" tabindex="-1" aria-labelledby="editPlayerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow">
             <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
-                <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Editar Jogador</h5>
+                <h5 class="modal-title" id="editPlayerModalLabel" style="color: var(--orange); font-weight: bold;">Editar Jogador</h5>
                 <button id="close-edit-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
                 <form id="edit-player-form">
-                    <div class="text-center mb-4">
-                        <div class="player-photo-preview mx-auto" id="edit-photo-preview">
-                            <div class="photo-placeholder">Foto</div>
+                    <div id="edit-avatar-container" class="avatar-container avatar-normal">
+                        <!-- Círculo para mostrar avatar/iniciais e abrir seletor -->
+                        <div id="edit-avatar-circle" class="avatar-circle">
+                            <div class="avatar-initials">JD</div>
                         </div>
-                        <input type="file" id="edit-player-photo" name="player_photo" class="d-none" accept="image/*">
-                        <div id="edit-photo-editor-controls" class="mt-2" style="display: none;">
-                            <div class="d-flex justify-content-center gap-2">
-                                <button type="button" id="edit-zoom-in" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
-                                <button type="button" id="edit-zoom-out" class="btn btn-sm btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
-                                <button type="button" id="edit-rotate-cw" class="btn btn-sm btn-outline-secondary"><i class="fas fa-redo"></i></button>
-                                <button type="button" id="edit-reset-photo" class="btn btn-sm btn-outline-secondary">Resetar</button>
-                            </div>
+                        
+                        <!-- Container de edição (aparece após selecionar foto) -->
+                        <div id="edit-avatar-editor" class="avatar-edit-container">
+                            <!-- A imagem será inserida aqui pelo JavaScript -->
                         </div>
-                        <input type="hidden" id="edit-photo-data" name="photo_data">
+                        
+                        <!-- Controles de edição -->
+                        <div id="edit-avatar-controls" class="avatar-controls">
+                            <button type="button" id="edit-zoom-in" class="btn btn-outline-secondary">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button type="button" id="edit-zoom-out" class="btn btn-outline-secondary">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button type="button" id="edit-rotate" class="btn btn-outline-secondary">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button type="button" id="edit-reset" class="btn btn-outline-secondary">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Botão de confirmar edição -->
+                        <button type="button" id="edit-avatar-confirm" class="avatar-confirm">Confirmar</button>
+                        
+                        <!-- Input oculto para o arquivo -->
+                        <input type="file" id="edit-avatar-input" accept="image/*" class="d-none">
+                        
+                        <!-- Input oculto para os dados da imagem processada -->
+                        <input type="hidden" id="edit-avatar-data" name="photo_data">
                     </div>
+                    
                     <div class="form-group mb-3">
                         <label for="edit-player-name" class="form-label">Nome do Jogador</label>
                         <input type="text" id="edit-player-name" name="name" class="form-control" required>
@@ -111,7 +155,7 @@
                         <label for="edit-is-goalkeeper" class="form-check-label">É goleiro?</label>
                     </div>
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="button" id="cancel-edit" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Atualizar</button>
                     </div>
                 </form>
@@ -122,5 +166,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='js/players.js') }}"></script>
 {% endblock %}

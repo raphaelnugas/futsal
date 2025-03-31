@@ -17,30 +17,38 @@ const closeEditModalButton = document.getElementById('close-edit-modal');
 const addPlayerButton = document.getElementById('add-player-button');
 const searchPlayerInput = document.getElementById('search-player');
 const loadingElement = document.getElementById('loading');
-const playerPhotoInput = document.getElementById('player-photo');
-const photoPreview = document.getElementById('photo-preview');
-const photoEditorControls = document.getElementById('photo-editor-controls');
-const editPlayerPhotoInput = document.getElementById('edit-player-photo');
-const editPhotoPreview = document.getElementById('edit-photo-preview');
-const editPhotoEditorControls = document.getElementById('edit-photo-editor-controls');
+
+// Elementos do editor de avatar - Adicionar
+const addAvatarContainer = document.getElementById('add-avatar-container');
+const addAvatarCircle = document.getElementById('add-avatar-circle');
+const addAvatarEditor = document.getElementById('add-avatar-editor');
+const addAvatarInput = document.getElementById('add-avatar-input');
+const addAvatarData = document.getElementById('add-avatar-data');
+const addAvatarControls = document.getElementById('add-avatar-controls');
+const addAvatarConfirm = document.getElementById('add-avatar-confirm');
+const addZoomIn = document.getElementById('add-zoom-in');
+const addZoomOut = document.getElementById('add-zoom-out');
+const addRotate = document.getElementById('add-rotate');
+const addReset = document.getElementById('add-reset');
+
+// Elementos do editor de avatar - Editar
+const editAvatarContainer = document.getElementById('edit-avatar-container');
+const editAvatarCircle = document.getElementById('edit-avatar-circle');
+const editAvatarEditor = document.getElementById('edit-avatar-editor');
+const editAvatarInput = document.getElementById('edit-avatar-input');
+const editAvatarData = document.getElementById('edit-avatar-data');
+const editAvatarControls = document.getElementById('edit-avatar-controls');
+const editAvatarConfirm = document.getElementById('edit-avatar-confirm');
+const editZoomIn = document.getElementById('edit-zoom-in');
+const editZoomOut = document.getElementById('edit-zoom-out');
+const editRotate = document.getElementById('edit-rotate');
+const editReset = document.getElementById('edit-reset');
 
 // Estado da aplicação
 let players = [];
 let currentEditingPlayer = null;
-let currentPhotoState = {
-    zoom: 1,
-    rotation: 0,
-    photoData: null,
-    offsetX: 0,
-    offsetY: 0
-};
-let currentEditPhotoState = {
-    zoom: 1,
-    rotation: 0,
-    photoData: null,
-    offsetX: 0,
-    offsetY: 0
-};
+let addAvatarCropper = null;
+let editAvatarCropper = null;
 
 /**
  * Inicialização da página de jogadores
@@ -91,541 +99,450 @@ function setupEventListeners() {
         searchPlayerInput.addEventListener('input', filterPlayers);
     }
 
-    // Eventos para upload de foto e manipulação de imagem
-    if (playerPhotoInput) {
-        playerPhotoInput.addEventListener('change', handlePhotoUpload);
-    }
+    // Configurar eventos de avatar
+    setupAvatarEvents();
 
-    if (editPlayerPhotoInput) {
-        editPlayerPhotoInput.addEventListener('change', handleEditPhotoUpload);
-    }
+    // Limpar estado ao fechar modais
+    $(addPlayerModal).on('hidden.bs.modal', function () {
+        resetAddAvatarEditor();
+        resetAddPlayerForm();
+    });
 
-    // Eventos de clique nos círculos de foto para abrir o seletor de arquivo
-    if (photoPreview) {
-        photoPreview.addEventListener('click', () => {
-            playerPhotoInput.click();
-        });
-    }
-
-    if (editPhotoPreview) {
-        editPhotoPreview.addEventListener('click', () => {
-            editPlayerPhotoInput.click();
-        });
-    }
-
-    // Eventos para controles de edição de foto
-    setupPhotoEditorControls();
-
-    // Os modais Bootstrap fecham automaticamente ao clicar fora
+    $(editPlayerModal).on('hidden.bs.modal', function () {
+        resetEditAvatarEditor();
+        resetEditPlayerForm();
+    });
 }
 
 /**
- * Configura os controles do editor de fotos
+ * Configura os eventos relacionados ao upload e edição de avatar
  */
-function setupPhotoEditorControls() {
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-
-    // Controles do modo de adicionar
-    const zoomInButton = document.getElementById('zoom-in');
-    const zoomOutButton = document.getElementById('zoom-out');
-    const rotateCwButton = document.getElementById('rotate-cw');
-    const resetPhotoButton = document.getElementById('reset-photo');
-
-    if (zoomInButton) {
-        zoomInButton.addEventListener('click', () => {
-            currentPhotoState.zoom *= 1.1;
-            updatePhotoPreview();
+function setupAvatarEvents() {
+    // Adicionar Jogador - Avatar
+    if (addAvatarCircle) {
+        addAvatarCircle.onclick = function() {
+            addAvatarInput.click();
+        };
+    }
+    
+    if (addAvatarInput) {
+        addAvatarInput.addEventListener('change', function(e) {
+            handleAvatarUpload(e, 'add');
         });
     }
-
-    if (zoomOutButton) {
-        zoomOutButton.addEventListener('click', () => {
-            currentPhotoState.zoom *= 0.9;
-            updatePhotoPreview();
+    
+    if (addAvatarConfirm) {
+        addAvatarConfirm.addEventListener('click', function() {
+            finishAvatarEdit('add');
         });
     }
-
-    if (rotateCwButton) {
-        rotateCwButton.addEventListener('click', () => {
-            currentPhotoState.rotation += 90;
-            updatePhotoPreview();
+    
+    // Botões de controle - Adicionar
+    if (addZoomIn) {
+        addZoomIn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (addAvatarCropper) addAvatarCropper.zoom(0.1);
         });
     }
-
-    if (resetPhotoButton) {
-        resetPhotoButton.addEventListener('click', () => {
-            currentPhotoState.zoom = 1;
-            currentPhotoState.rotation = 0;
-            currentPhotoState.offsetX = 0;
-            currentPhotoState.offsetY = 0;
-            updatePhotoPreview();
+    
+    if (addZoomOut) {
+        addZoomOut.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (addAvatarCropper) addAvatarCropper.zoom(-0.1);
         });
     }
+    
+    if (addRotate) {
+        addRotate.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (addAvatarCropper) addAvatarCropper.rotate(90);
+        });
+    }
+    
+    if (addReset) {
+        addReset.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (addAvatarCropper) addAvatarCropper.reset();
+        });
+    }
+    
+    // Editar Jogador - Avatar
+    if (editAvatarCircle) {
+        editAvatarCircle.onclick = function() {
+            editAvatarInput.click();
+        };
+    }
+    
+    if (editAvatarInput) {
+        editAvatarInput.addEventListener('change', function(e) {
+            handleAvatarUpload(e, 'edit');
+        });
+    }
+    
+    if (editAvatarConfirm) {
+        editAvatarConfirm.addEventListener('click', function() {
+            finishAvatarEdit('edit');
+        });
+    }
+    
+    // Botões de controle - Editar
+    if (editZoomIn) {
+        editZoomIn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (editAvatarCropper) editAvatarCropper.zoom(0.1);
+        });
+    }
+    
+    if (editZoomOut) {
+        editZoomOut.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (editAvatarCropper) editAvatarCropper.zoom(-0.1);
+        });
+    }
+    
+    if (editRotate) {
+        editRotate.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (editAvatarCropper) editAvatarCropper.rotate(90);
+        });
+    }
+    
+    if (editReset) {
+        editReset.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (editAvatarCropper) editAvatarCropper.reset();
+        });
+    }
+}
 
-    // Configurar Cropper.js para manipulação da imagem
-    const photoPreviewElement = document.querySelector('.player-photo-preview img');
-    if (photoPreviewElement) {
-        const cropper = new Cropper(photoPreviewElement, {
-            aspectRatio: 1,
-            viewMode: 1,
-            dragMode: 'move',
-            autoCropArea: 1,
+/**
+ * Manipula o upload de avatar
+ * @param {Event} event - Evento do upload
+ * @param {string} mode - Modo: 'add' ou 'edit'
+ */
+function handleAvatarUpload(event, mode) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const container = mode === 'add' ? addAvatarContainer : editAvatarContainer;
+    const editor = mode === 'add' ? addAvatarEditor : editAvatarEditor;
+    
+    // Limpar cropper existente
+    if (mode === 'add' && addAvatarCropper) {
+        addAvatarCropper.destroy();
+        addAvatarCropper = null;
+    } else if (mode === 'edit' && editAvatarCropper) {
+        editAvatarCropper.destroy();
+        editAvatarCropper = null;
+    }
+    
+    // Ler o arquivo
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        // Entrar no modo de edição
+        container.classList.remove('avatar-normal');
+        container.classList.add('avatar-editing');
+        
+        // Criar e inserir a imagem no editor
+        editor.innerHTML = `<img src="${e.target.result}" crossorigin="anonymous">`;
+        
+        // Adicionar guia circular antes de inicializar o cropper
+        // isso ajuda a visualizar onde a imagem será recortada
+        addCircularGuide(editor);
+        
+        // Obter dimensões do container para definir tamanho ideal do cropper
+        const containerWidth = editor.clientWidth;
+        const containerHeight = editor.clientHeight;
+        
+        // Inicializar o Cropper com configurações melhoradas
+        const image = editor.querySelector('img');
+        const cropperOptions = {
+            aspectRatio: 1, // Manter proporção 1:1 para círculo
+            viewMode: 1, // Restringir cropper à imagem
+            dragMode: 'move', // Permitir mover a imagem
+            guides: false, // Sem guias
+            center: true, // Mostrar indicador de centro
+            highlight: false, // Sem destaque na área de corte
+            background: false, // Sem fundo xadrez
+            autoCropArea: 0.9, // Ajustar para 90% da área
+            responsive: true,
             restore: false,
-            modal: true,
-            guides: false,
-            highlight: false,
-            cropBoxMovable: false,
-            cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,
-        });
-        
-        // Atualizar controles de zoom
-        if (zoomInButton) {
-            zoomInButton.addEventListener('click', () => {
-                cropper.zoom(0.1);
-            });
-        }
-        
-        if (zoomOutButton) {
-            zoomOutButton.addEventListener('click', () => {
-                cropper.zoom(-0.1);
-            });
-        }
-        
-        if (rotateCwButton) {
-            rotateCwButton.addEventListener('click', () => {
-                cropper.rotate(90);
-            });
-        }
-        
-        if (resetPhotoButton) {
-            resetPhotoButton.addEventListener('click', () => {
-                cropper.reset();
-            });
-        }
-    }
-
-
-    // Controles do modo de editar
-    const editZoomInButton = document.getElementById('edit-zoom-in');
-    const editZoomOutButton = document.getElementById('edit-zoom-out');
-    const editRotateCwButton = document.getElementById('edit-rotate-cw');
-    const editResetPhotoButton = document.getElementById('edit-reset-photo');
-
-    if (editZoomInButton) {
-        editZoomInButton.addEventListener('click', () => {
-            currentEditPhotoState.zoom *= 1.1;
-            updateEditPhotoPreview();
-        });
-    }
-
-    if (editZoomOutButton) {
-        editZoomOutButton.addEventListener('click', () => {
-            currentEditPhotoState.zoom *= 0.9;
-            updateEditPhotoPreview();
-        });
-    }
-
-    if (editRotateCwButton) {
-        editRotateCwButton.addEventListener('click', () => {
-            currentEditPhotoState.rotation += 90;
-            updateEditPhotoPreview();
-        });
-    }
-
-    if (editResetPhotoButton) {
-        editResetPhotoButton.addEventListener('click', () => {
-            currentEditPhotoState.zoom = 1;
-            currentEditPhotoState.rotation = 0;
-            currentEditPhotoState.offsetX = 0;
-            currentEditPhotoState.offsetY = 0;
-            updateEditPhotoPreview();
-        });
-    }
-
-    // Adicionar controles de movimentação da imagem
-    const editPhotoPreviewElement = document.querySelector('.edit-player-photo-preview img');
-    if (editPhotoPreviewElement) {
-        editPhotoPreviewElement.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX - currentEditPhotoState.offsetX;
-            startY = e.clientY - currentEditPhotoState.offsetY;
-            editPhotoPreviewElement.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            currentEditPhotoState.offsetX = e.clientX - startX;
-            currentEditPhotoState.offsetY = e.clientY - startY;
-            updateEditPhotoPreview();
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            if (editPhotoPreviewElement) {
-                editPhotoPreviewElement.style.cursor = 'grab';
+            checkCrossOrigin: false,
+            checkOrientation: false, // Impedir manipulações automáticas
+            modal: true, // Manter modal
+            movable: true, // Permitir movimento
+            rotatable: true, // Permitir rotação
+            scalable: false, // Impedir escalabilidade
+            zoomable: true, // Permitir zoom
+            zoomOnTouch: true,
+            zoomOnWheel: true,
+            wheelZoomRatio: 0.05, // Ajuste fino para zoom com roda do mouse
+            cropBoxMovable: false, // Impedir mover a área de corte
+            cropBoxResizable: false, // Impedir redimensionar a área de corte
+            toggleDragModeOnDblclick: false, // Não alternar modo de arrastar no duplo clique
+            minContainerWidth: 200,
+            minContainerHeight: 200,
+            minCanvasWidth: 200,
+            minCanvasHeight: 200,
+            minCropBoxWidth: 150,
+            minCropBoxHeight: 150,
+            ready: function(event) {
+                // Quando o cropper estiver pronto
+                const cropper = this.cropper;
+                
+                // Tamanho fixo para o crop box
+                const cropBoxSize = 150;
+                
+                // Forçar o tamanho e formato do crop box
+                const cropBoxData = {
+                    width: cropBoxSize,
+                    height: cropBoxSize,
+                    left: (containerWidth - cropBoxSize) / 2,
+                    top: (containerHeight - cropBoxSize) / 2
+                };
+                
+                // Primeiramente, desabilitamos o cropper para evitar eventos
+                cropper.disable();
+                
+                // Aplicamos as configurações fixas
+                cropper.setCropBoxData(cropBoxData);
+                
+                // Reabilitamos para permitir movimentação da imagem
+                cropper.enable();
+                
+                // Remover a guia circular depois que o cropper estiver pronto
+                // para evitar elementos visuais duplicados
+                const existingGuide = editor.querySelector('.circular-guide');
+                if (existingGuide) {
+                    existingGuide.remove();
+                }
+                
+                // Adicionar classe para garantir formato circular
+                const cropBox = cropper.cropBox;
+                if (cropBox) {
+                    cropBox.classList.add('circular-cropbox');
+                }
             }
-        });
-    }
-}
-
-/**
- * Manipula o upload de foto no formulário de adicionar
- */
-function handlePhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-        // Resetar o estado da foto
-        currentPhotoState = {
-            zoom: 1,
-            rotation: 0,
-            photoData: null,
-            offsetX: 0,
-            offsetY: 0
         };
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-                // Armazenar os dados da imagem original
-                currentPhotoState.photoData = e.target.result;
-
-                // Atualizar a visualização
-                updatePhotoPreview();
-
-                // Mostrar controles de edição
-                if (photoEditorControls) {
-                    photoEditorControls.style.display = 'block';
-                }
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        // Esconder controles se nenhum arquivo for selecionado
-        if (photoEditorControls) {
-            photoEditorControls.style.display = 'none';
+        
+        // Criar o cropper com as opções definidas
+        if (mode === 'add') {
+            addAvatarCropper = new Cropper(image, cropperOptions);
+        } else {
+            editAvatarCropper = new Cropper(image, cropperOptions);
         }
-
-        // Limpar visualização
-        if (photoPreview) {
-            photoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
-        }
-    }
+    };
+    
+    reader.readAsDataURL(file);
 }
 
 /**
- * Manipula o upload de foto no formulário de editar
+ * Finaliza a edição do avatar e salva os dados
+ * @param {string} mode - Modo: 'add' ou 'edit'
  */
-function handleEditPhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-        // Resetar o estado da foto
-        currentEditPhotoState = {
-            zoom: 1,
-            rotation: 0,
-            photoData: null,
-            offsetX: 0,
-            offsetY: 0
-        };
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-                // Armazenar os dados da imagem original
-                currentEditPhotoState.photoData = e.target.result;
-
-                // Atualizar a visualização
-                updateEditPhotoPreview();
-
-                // Mostrar controles de edição
-                if (editPhotoEditorControls) {
-                    editPhotoEditorControls.style.display = 'block';
-                }
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        // Esconder controles se nenhum arquivo for selecionado
-        if (editPhotoEditorControls) {
-            editPhotoEditorControls.style.display = 'none';
-        }
-
-        // Limpar visualização
-        if (editPhotoPreview) {
-            editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
-        }
-    }
-}
-
-/**
- * Atualiza a visualização da foto com base no estado atual (escala e rotação)
- */
-function updatePhotoPreview() {
-    if (!photoPreview || !currentPhotoState.photoData) return;
-
-    // Limpar a visualização atual
-    photoPreview.innerHTML = '';
-
-    // Criar a imagem
-    const img = document.createElement('img');
-    img.src = currentPhotoState.photoData;
-    img.style.transform = `rotate(${currentPhotoState.rotation}deg) scale(${currentPhotoState.zoom}) translate(${currentPhotoState.offsetX}px, ${currentPhotoState.offsetY}px)`;
-    img.style.cursor = 'grab';
-    img.classList.add('player-photo-preview');
-
-    // Adicionar a imagem ao contêiner
-    photoPreview.appendChild(img);
-
-    // Atualizar o campo oculto com os dados processados da imagem
-    updatePhotoDataField();
-}
-
-/**
- * Atualiza a visualização da foto no modo de edição
- */
-function updateEditPhotoPreview() {
-    if (!editPhotoPreview || !currentEditPhotoState.photoData) return;
-
-    // Limpar a visualização atual
-    editPhotoPreview.innerHTML = '';
-
-    // Criar a imagem
-    const img = document.createElement('img');
-    img.src = currentEditPhotoState.photoData;
-    img.style.transform = `rotate(${currentEditPhotoState.rotation}deg) scale(${currentEditPhotoState.zoom}) translate(${currentEditPhotoState.offsetX}px, ${currentEditPhotoState.offsetY}px)`;
-    img.style.cursor = 'grab';
-    img.classList.add('edit-player-photo-preview');
-
-    // Adicionar a imagem ao contêiner
-    editPhotoPreview.appendChild(img);
-
-    // Atualizar o campo oculto com os dados processados da imagem
-    updateEditPhotoDataField();
-}
-
-/**
- * Atualiza o campo oculto com os dados da imagem processada
- */
-function updatePhotoDataField() {
-    const photoDataField = document.getElementById('photo-data');
-    if (!photoDataField || !currentPhotoState.photoData) return;
-
-    photoDataField.value = JSON.stringify({
-        data: currentPhotoState.photoData,
-        zoom: currentPhotoState.zoom,
-        rotation: currentPhotoState.rotation,
-        offsetX: currentPhotoState.offsetX,
-        offsetY: currentPhotoState.offsetY
-    });
-}
-
-/**
- * Atualiza o campo oculto com os dados da imagem processada no modo de edição
- */
-function updateEditPhotoDataField() {
-    const photoDataField = document.getElementById('edit-photo-data');
-    if (!photoDataField || !currentEditPhotoState.photoData) return;
-
-    photoDataField.value = JSON.stringify({
-        data: currentEditPhotoState.photoData,
-        zoom: currentEditPhotoState.zoom,
-        rotation: currentEditPhotoState.rotation,
-        offsetX: currentEditPhotoState.offsetX,
-        offsetY: currentEditPhotoState.offsetY
-    });
-}
-
-/**
- * Carrega a lista de jogadores da API
- */
-async function loadPlayers() {
+function finishAvatarEdit(mode) {
+    const container = mode === 'add' ? addAvatarContainer : editAvatarContainer;
+    const circle = mode === 'add' ? addAvatarCircle : editAvatarCircle;
+    const dataField = mode === 'add' ? addAvatarData : editAvatarData;
+    const cropper = mode === 'add' ? addAvatarCropper : editAvatarCropper;
+    const input = mode === 'add' ? addAvatarInput : editAvatarInput;
+    
+    if (!cropper) return;
+    
     try {
-        showLoading(true);
-
-        const response = await fetch('/api/players');
-        players = await response.json();
-
-        // Ordenar jogadores por nome
-        players.sort((a, b) => a.name.localeCompare(b.name));
-
-        // Renderizar lista
-        renderPlayerList(players);
-
-        showLoading(false);
+        // Obter a imagem recortada com alta qualidade
+        const canvas = cropper.getCroppedCanvas({
+            width: 400, // Usar uma resolução maior para evitar desfoque
+            height: 400,
+            minWidth: 400,
+            minHeight: 400,
+            maxWidth: 800, // Limite máximo para não sobrecarregar
+            maxHeight: 800,
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high',
+            fillColor: '#fff'
+        });
+        
+        if (!canvas) {
+            throw new Error('Não foi possível gerar a imagem recortada');
+        }
+        
+        // Converter para data URL com qualidade máxima
+        const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+        
+        // Atualizar o campo oculto
+        if (dataField) dataField.value = dataUrl;
+        
+        // Atualizar o avatar com a nova imagem
+        circle.innerHTML = `<img src="${dataUrl}" alt="Avatar">`;
+        
+        // Garantir que a imagem tenha boa qualidade e aparência
+        const img = circle.querySelector('img');
+        if (img) {
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '50%';
+        }
+        
+        // Voltar ao modo normal
+        container.classList.remove('avatar-editing');
+        container.classList.add('avatar-normal');
+        
+        // Destruir o cropper
+        cropper.destroy();
+        if (mode === 'add') {
+            addAvatarCropper = null;
+        } else {
+            editAvatarCropper = null;
+        }
+        
+        // IMPORTANTE: Limpar o valor do input file para garantir que o evento change 
+        // dispare novamente mesmo se o mesmo arquivo for selecionado
+        input.value = '';
+        
+        // Restaurar a funcionalidade de clique para o avatar
+        circle.onclick = function() {
+            input.click();
+        };
     } catch (error) {
-        console.error('Erro ao carregar jogadores:', error);
-        showError('Não foi possível carregar a lista de jogadores.');
-        showLoading(false);
+        console.error('Erro ao processar imagem:', error);
+        showError('Erro ao processar a imagem. Tente novamente.');
+        
+        // Garantir limpeza mesmo em caso de erro
+        if (cropper) {
+            try {
+                cropper.destroy();
+            } catch (e) {
+                console.error('Erro ao destruir cropper:', e);
+            }
+        }
+        
+        // Limpar referências e input
+        if (mode === 'add') {
+            addAvatarCropper = null;
+        } else {
+            editAvatarCropper = null;
+        }
+        
+        // Limpar o valor do input mesmo em caso de erro
+        input.value = '';
     }
 }
 
 /**
- * Renderiza a lista de jogadores
+ * Limpa o editor de avatar - Adicionar
  */
-function renderPlayerList(playerList) {
-    if (!playerListElement) return;
-
-    playerListElement.innerHTML = '';
-
-    if (playerList.length === 0) {
-        playerListElement.innerHTML = `
-            <div class="text-center py-3">
-                <p class="text-muted">Nenhum jogador cadastrado.</p>
-            </div>
-        `;
-        return;
+function resetAddAvatarEditor() {
+    // Destruir cropper se existir
+    if (addAvatarCropper) {
+        try {
+            addAvatarCropper.destroy();
+        } catch (e) {
+            console.error('Erro ao destruir cropper:', e);
+        }
+        addAvatarCropper = null;
     }
-
-    playerList.forEach(player => {
-        const playerCard = document.createElement('div');
-        playerCard.className = 'card mb-2';
-        playerCard.dataset.playerId = player.id;
-
-        // Obter iniciais para exibir no avatar, se não tiver foto
-        const initials = getPlayerInitials(player.name);
-
-        playerCard.innerHTML = `
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="player-avatar mr-3">
-                        ${player.photo_url 
-                            ? `<img src="${player.photo_url}" alt="${player.name}" class="img-fluid">` 
-                            : initials
-                        }
-                    </div>
-                    <div class="player-info">
-                        <h5 class="card-title mb-1">${player.name}</h5>
-                        <p class="card-text">
-                            ${player.is_goalkeeper 
-                                ? '<span class="badge badge-blue">Goleiro</span>' 
-                                : '<span class="badge badge-orange">Jogador</span>'
-                            }
-                        </p>
-                    </div>
-                    <div class="ml-auto">
-                        <button class="btn btn-sm btn-outline-primary mr-1 edit-player-btn" data-player-id="${player.id}">
-                            <i class="fas fa-edit"></i> Editar
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger delete-player-btn" data-player-id="${player.id}">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        playerListElement.appendChild(playerCard);
-
-        // Adicionar eventos aos botões
-        const editButton = playerCard.querySelector('.edit-player-btn');
-        const deleteButton = playerCard.querySelector('.delete-player-btn');
-
-        editButton.addEventListener('click', () => openEditModal(player));
-        deleteButton.addEventListener('click', () => confirmDeletePlayer(player));
-    });
-}
-
-/**
- * Obtém as iniciais do nome do jogador para exibir no avatar
- */
-function getPlayerInitials(name) {
-    if (!name) return '?';
-
-    const nameParts = name.split(' ');
-    if (nameParts.length === 1) {
-        return nameParts[0].substring(0, 2).toUpperCase();
-    } else {
-        return (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
+    
+    // Restaurar classe normal
+    if (addAvatarContainer) {
+        addAvatarContainer.classList.remove('avatar-editing');
+        addAvatarContainer.classList.add('avatar-normal');
+    }
+    
+    // Limpar avatar
+    if (addAvatarCircle) {
+        // Resetar para mostrar iniciais genéricas
+        addAvatarCircle.innerHTML = '<div class="avatar-initials">JD</div>';
+        
+        // Garantir que o evento de clique esteja funcionando
+        addAvatarCircle.onclick = function() {
+            addAvatarInput.click();
+        };
+    }
+    
+    // Limpar editor
+    if (addAvatarEditor) {
+        addAvatarEditor.innerHTML = '';
+    }
+    
+    // Limpar dados
+    if (addAvatarData) {
+        addAvatarData.value = '';
+    }
+    
+    // Limpar input file - CRUCIAL para permitir selecionar o mesmo arquivo novamente
+    if (addAvatarInput) {
+        addAvatarInput.value = '';
     }
 }
 
 /**
- * Filtra jogadores com base no texto de busca
+ * Limpa o editor de avatar - Editar
  */
-function filterPlayers() {
-    const searchText = searchPlayerInput.value.toLowerCase();
-
-    if (!searchText) {
-        renderPlayerList(players);
-        return;
+function resetEditAvatarEditor() {
+    // Destruir cropper se existir
+    if (editAvatarCropper) {
+        try {
+            editAvatarCropper.destroy();
+        } catch (e) {
+            console.error('Erro ao destruir cropper:', e);
+        }
+        editAvatarCropper = null;
     }
-
-    const filteredPlayers = players.filter(player => 
-        player.name.toLowerCase().includes(searchText)
-    );
-
-    renderPlayerList(filteredPlayers);
-}
-
-/**
- * Exibe/oculta o modal de adicionar jogador
- */
-function toggleAddModal(show) {
-    if (!addPlayerModal) return;
-
-    // Utilizar a função compartilhada toggleModal
-    toggleModal('add-player-modal', show);
-
-    if (show) {
-        // Resetar formulário
-        if (addPlayerForm) addPlayerForm.reset();
-        // Focar no campo de nome
-        setTimeout(() => {
-            document.getElementById('player-name').focus();
-        }, 100);
+    
+    // Restaurar classe normal
+    if (editAvatarContainer) {
+        editAvatarContainer.classList.remove('avatar-editing');
+        editAvatarContainer.classList.add('avatar-normal');
     }
-}
-
-/**
- * Exibe/oculta o modal de editar jogador
- */
-function toggleEditModal(show) {
-    if (!editPlayerModal) return;
-
-    // Utilizar a função compartilhada toggleModal
-    toggleModal('edit-player-modal', show);
-
-    if (!show) {
-        currentEditingPlayer = null;
+    
+    // Limpar avatar ou definir iniciais
+    if (editAvatarCircle) {
+        // Resetar para mostrar iniciais genéricas
+        editAvatarCircle.innerHTML = '<div class="avatar-initials">JD</div>';
+        
+        // Garantir que o evento de clique esteja funcionando
+        editAvatarCircle.onclick = function() {
+            editAvatarInput.click();
+        };
+    }
+    
+    // Limpar editor
+    if (editAvatarEditor) {
+        editAvatarEditor.innerHTML = '';
+    }
+    
+    // Limpar dados
+    if (editAvatarData) {
+        editAvatarData.value = '';
+    }
+    
+    // Limpar input file - CRUCIAL para permitir selecionar o mesmo arquivo novamente
+    if (editAvatarInput) {
+        editAvatarInput.value = '';
     }
 }
 
 /**
- * Abre o modal de edição com os dados do jogador
+ * Limpa o formulário de adicionar jogador
  */
-function openEditModal(player) {
-    currentEditingPlayer = player;
-
-    if (!editPlayerForm) return;
-
-    // Preencher o formulário com os dados do jogador
-    const nameField = editPlayerForm.querySelector('#edit-player-name');
-    const isGoalkeeperField = editPlayerForm.querySelector('#edit-is-goalkeeper');
-
-    if (nameField) nameField.value = player.name;
-    if (isGoalkeeperField) isGoalkeeperField.checked = player.is_goalkeeper;
-
-    // Se o jogador já tiver uma foto, exibi-la na prévia
-    if (player.photo_url && editPhotoPreview) {
-        editPhotoPreview.innerHTML = `<img src="${player.photo_url}" alt="${player.name}">`;
-    } else if (editPhotoPreview) {
-        // Se não tiver foto, mostrar espaço para placeholder
-        editPhotoPreview.innerHTML = '<div class="photo-placeholder">Foto</div>';
+function resetAddPlayerForm() {
+    if (addPlayerForm) {
+        addPlayerForm.reset();
     }
+}
 
-    // Esconder controles de edição de foto até que uma nova foto seja selecionada
-    if (editPhotoEditorControls) {
-        editPhotoEditorControls.style.display = 'none';
+/**
+ * Limpa o formulário de editar jogador
+ */
+function resetEditPlayerForm() {
+    if (editPlayerForm) {
+        editPlayerForm.reset();
     }
-
-    // Exibir o modal
-    toggleEditModal(true);
+    
+    // Limpar jogador atual
+    currentEditingPlayer = null;
 }
 
 /**
@@ -636,7 +553,7 @@ async function handleAddPlayer(event) {
 
     const nameField = document.getElementById('player-name');
     const isGoalkeeperField = document.getElementById('is-goalkeeper');
-    const photoDataField = document.getElementById('photo-data');
+    const photoDataField = document.getElementById('add-avatar-data');
 
     // Validar campos
     if (!nameField.value.trim()) {
@@ -665,17 +582,22 @@ async function handleAddPlayer(event) {
 
         const data = await response.json();
 
-        if (data.success) {
-            // Adicionar jogador à lista
+        // Verificar o formato da resposta para lidar com diferentes APIs
+        if (data.success && data.player) {
+            // Formato mais comum: {success: true, player: {...}}
             players.push(data.player);
-            // Atualizar a lista
             renderPlayerList(players);
-            // Fechar o modal
             toggleAddModal(false);
-            // Exibir mensagem de sucesso
+            showSuccess('Jogador adicionado com sucesso!');
+        } else if (data.id) {
+            // A API retornou diretamente o jogador criado
+            players.push(data);
+            renderPlayerList(players);
+            toggleAddModal(false);
             showSuccess('Jogador adicionado com sucesso!');
         } else {
-            showError(data.message || 'Erro ao adicionar jogador.');
+            // Tratar erro
+            showError(data.message || data.error || 'Erro ao adicionar jogador.');
         }
 
         showLoading(false);
@@ -699,7 +621,7 @@ async function handleEditPlayer(event) {
 
     const nameField = document.getElementById('edit-player-name');
     const isGoalkeeperField = document.getElementById('edit-is-goalkeeper');
-    const photoDataField = document.getElementById('edit-photo-data');
+    const photoDataField = document.getElementById('edit-avatar-data');
 
     // Validar campos
     if (!nameField.value.trim()) {
@@ -728,21 +650,20 @@ async function handleEditPlayer(event) {
 
         const data = await response.json();
 
-        if (data.success) {
-            // Atualizar o jogador na lista
-            const index = players.findIndex(p => p.id === currentEditingPlayer.id);
-            if (index !== -1) {
-                players[index] = data.player;
-            }
-
-            // Atualizar a lista
-            renderPlayerList(players);
-            // Fechar o modal
+        // Verificar o formato da resposta para lidar com diferentes APIs
+        if (data.success && data.player) {
+            // Formato comum: {success: true, player: {...}}
+            updatePlayerInList(data.player);
             toggleEditModal(false);
-            // Exibir mensagem de sucesso
+            showSuccess('Jogador atualizado com sucesso!');
+        } else if (data.id) {
+            // A API retornou diretamente o jogador atualizado
+            updatePlayerInList(data);
+            toggleEditModal(false);
             showSuccess('Jogador atualizado com sucesso!');
         } else {
-            showError(data.message || 'Erro ao atualizar jogador.');
+            // Tratar erro
+            showError(data.message || data.error || 'Erro ao atualizar jogador.');
         }
 
         showLoading(false);
@@ -754,38 +675,289 @@ async function handleEditPlayer(event) {
 }
 
 /**
- * Confirma e executa a exclusão de um jogador
+ * Atualiza um jogador na lista mantendo a ordem
  */
-function confirmDeletePlayer(player) {
-    if (confirm(`Tem certeza que deseja excluir o jogador "${player.name}"? Esta ação não pode ser desfeita.`)) {
-        deletePlayer(player.id);
+function updatePlayerInList(updatedPlayer) {
+    const index = players.findIndex(p => p.id === updatedPlayer.id);
+    if (index !== -1) {
+        players[index] = updatedPlayer;
+    }
+    
+    // Reordenar e renderizar
+    players.sort((a, b) => a.name.localeCompare(b.name));
+    renderPlayerList(players);
+}
+
+/**
+ * Carrega jogadores da API
+ */
+async function loadPlayers() {
+    try {
+        showLoading(true);
+        
+        console.log('Carregando jogadores da API...');
+        const response = await fetch('/api/players');
+        
+        console.log('Resposta da API:', response.status, response.statusText);
+        console.log('Headers:', [...response.headers.entries()]);
+        
+        const data = await response.json();
+        console.log('Dados recebidos:', data);
+        
+        // Verificar a estrutura da resposta e obter a lista de jogadores
+        // Algumas APIs retornam diretamente o array, outras usam um objeto com uma propriedade players
+        if (Array.isArray(data)) {
+            // A API retornou diretamente um array de jogadores
+            console.log('Formato: Array de jogadores');
+            players = data;
+        } else if (data.success && data.players) {
+            // A API retornou um objeto com success e players
+            console.log('Formato: Objeto com success e players');
+            players = data.players;
+        } else if (data.players) {
+            // A API retornou um objeto com players, mas sem success
+            console.log('Formato: Objeto com players');
+            players = data.players;
+        } else {
+            // Outro formato, possivelmente erro
+            console.error('Formato de resposta inesperado:', data);
+            showError('Erro ao carregar jogadores: formato de resposta inválido.');
+            players = [];
+        }
+        
+        console.log('Jogadores processados:', players.length);
+        
+        // Ordenar jogadores por nome para melhor visualização
+        players.sort((a, b) => a.name.localeCompare(b.name));
+        
+        // Atualizar a interface
+        renderPlayerList(players);
+        
+        showLoading(false);
+    } catch (error) {
+        console.error('Erro ao carregar jogadores:', error);
+        showError('Erro ao conectar com o servidor. Tente novamente.');
+        showLoading(false);
     }
 }
 
 /**
- * Exclui um jogador via API
+ * Renderiza a lista de jogadores na interface
  */
-async function deletePlayer(playerId) {
+function renderPlayerList(players) {
+    console.log('Renderizando lista de jogadores:', players?.length || 0);
+    
+    if (!playerListElement) {
+        console.error('Elemento playerListElement não encontrado!');
+        return;
+    }
+
+    // Limpar a lista atual
+    playerListElement.innerHTML = '';
+
+    if (!players || players.length === 0) {
+        console.log('Nenhum jogador para mostrar');
+        playerListElement.innerHTML = '<div class="alert alert-info">Nenhum jogador encontrado.</div>';
+        return;
+    }
+
+    console.log('Criando cards para', players.length, 'jogadores');
+    players.forEach((player, index) => {
+        if (!player || !player.id) {
+            console.warn(`Jogador inválido no índice ${index}:`, player);
+            return;
+        }
+        
+        try {
+            const playerCard = document.createElement('div');
+            playerCard.className = 'player-card';
+
+            // Criar o elemento de foto com iniciais ou imagem
+            const photoHTML = player.photo_url 
+                ? `<img src="${player.photo_url}" alt="${player.name}">`
+                : `<div class="avatar-initials">${getPlayerInitials(player.name)}</div>`;
+
+            playerCard.innerHTML = `
+                <div class="player-photo">
+                    ${photoHTML}
+                </div>
+                <div class="player-name">${player.name}</div>
+                <div class="player-role">${player.is_goalkeeper ? 'Goleiro' : 'Jogador de linha'}</div>
+                <div class="player-actions">
+                    <button class="btn btn-sm btn-secondary edit-player" data-id="${player.id}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger delete-player" data-id="${player.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+            // Adicionar eventos para os botões
+            const editButton = playerCard.querySelector('.edit-player');
+            const deleteButton = playerCard.querySelector('.delete-player');
+
+            if (editButton) {
+                editButton.addEventListener('click', () => {
+                    openEditModal(player);
+                });
+            }
+
+            if (deleteButton) {
+                deleteButton.addEventListener('click', () => {
+                    confirmDeletePlayer(player);
+                });
+            }
+
+            playerListElement.appendChild(playerCard);
+        } catch (error) {
+            console.error(`Erro ao renderizar jogador ${player?.name || index}:`, error);
+        }
+    });
+    
+    console.log('Renderização concluída');
+}
+
+/**
+ * Obtém as iniciais do nome do jogador para exibir no avatar
+ */
+function getPlayerInitials(name) {
+    if (!name) return '?';
+
+    const nameParts = name.split(' ');
+    if (nameParts.length === 1) {
+        return nameParts[0].substring(0, 2).toUpperCase();
+    } else {
+        return (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
+    }
+}
+
+/**
+ * Filtra a lista de jogadores com base no texto de busca
+ */
+function filterPlayers() {
+    if (!searchPlayerInput || !players) return;
+    
+    const searchTerm = searchPlayerInput.value.trim().toLowerCase();
+    
+    if (!searchTerm) {
+        // Se o termo de busca estiver vazio, mostrar todos os jogadores
+        renderPlayerList(players);
+        return;
+    }
+    
+    // Filtrar jogadores que contêm o termo de busca no nome
+    const filteredPlayers = players.filter(player => 
+        player.name.toLowerCase().includes(searchTerm)
+    );
+    
+    // Renderizar a lista filtrada
+    renderPlayerList(filteredPlayers);
+}
+
+/**
+ * Exibe/oculta o modal de adicionar jogador
+ */
+function toggleAddModal(show) {
+    if (!addPlayerModal) return;
+
+    // Utilizar a função compartilhada toggleModal
+    toggleModal('add-player-modal', show);
+
+    if (show) {
+        // Resetar formulário
+        resetAddPlayerForm();
+        resetAddAvatarEditor();
+        
+        // Atualizar as iniciais com base em "JD" (jogador demo)
+        if (addAvatarCircle) {
+            addAvatarCircle.innerHTML = '<div class="avatar-initials">JD</div>';
+        }
+        
+        // Focar no campo de nome
+        setTimeout(() => {
+            document.getElementById('player-name').focus();
+        }, 100);
+    }
+}
+
+/**
+ * Exibe/oculta o modal de editar jogador
+ */
+function toggleEditModal(show) {
+    if (!editPlayerModal) return;
+
+    // Utilizar a função compartilhada toggleModal
+    toggleModal('edit-player-modal', show);
+
+    if (!show) {
+        currentEditingPlayer = null;
+    }
+}
+
+/**
+ * Exibe um diálogo de confirmação para excluir jogador
+ */
+function confirmDeletePlayer(player) {
+    if (!player) return;
+    
+    // Confirmar exclusão
+    if (confirm(`Tem certeza que deseja excluir o jogador ${player.name}?`)) {
+        handleDeletePlayer(player.id);
+    }
+}
+
+/**
+ * Processa a exclusão de um jogador
+ */
+async function handleDeletePlayer(playerId) {
+    if (!playerId) return;
+    
     try {
         showLoading(true);
-
+        
+        // Enviar para a API
         const response = await fetch(`/api/players/${playerId}`, {
             method: 'DELETE'
         });
-
-        const data = await response.json();
-
-        if (data.success) {
+        
+        // Verificar se a API retornou uma resposta JSON
+        let success = response.ok;
+        let message = '';
+        
+        try {
+            // Tentar parsear o JSON, mas pode falhar se a resposta não for JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const data = await response.json();
+                
+                // Algumas APIs usam um campo "success"
+                if (typeof data.success === 'boolean') {
+                    success = data.success;
+                }
+                
+                // Capturar mensagem de erro, se houver
+                message = data.message || data.error || '';
+            }
+        } catch (jsonError) {
+            // Se ocorrer erro no parse, mantemos o valor de "success" baseado em response.ok
+            console.warn("Resposta não é JSON ou ocorreu erro no parse:", jsonError);
+        }
+        
+        if (success) {
             // Remover jogador da lista
-            players = players.filter(player => player.id !== playerId);
-            // Atualizar a lista
+            players = players.filter(p => p.id !== playerId);
+            
+            // Atualizar a interface
             renderPlayerList(players);
-            // Exibir mensagem de sucesso
+            
+            // Mostrar mensagem de sucesso
             showSuccess('Jogador excluído com sucesso!');
         } else {
-            showError(data.message || 'Erro ao excluir jogador.');
+            // Exibir mensagem de erro
+            showError(message || 'Erro ao excluir jogador.');
         }
-
+        
         showLoading(false);
     } catch (error) {
         console.error('Erro ao excluir jogador:', error);
@@ -795,35 +967,152 @@ async function deletePlayer(playerId) {
 }
 
 /**
- * Mostra/oculta o indicador de carregamento
+ * Exibe uma mensagem de sucesso
+ */
+function showSuccess(message) {
+    const alertElement = document.createElement('div');
+    alertElement.className = 'alert alert-success';
+    alertElement.innerHTML = message;
+    
+    document.body.appendChild(alertElement);
+    
+    // Auto-remover após 3 segundos
+    setTimeout(() => {
+        alertElement.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(alertElement);
+        }, 300);
+    }, 3000);
+}
+
+/**
+ * Exibe uma mensagem de erro
+ */
+function showError(message) {
+    const alertElement = document.createElement('div');
+    alertElement.className = 'alert alert-danger';
+    alertElement.innerHTML = message;
+    
+    document.body.appendChild(alertElement);
+    
+    // Auto-remover após 3 segundos
+    setTimeout(() => {
+        alertElement.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(alertElement);
+        }, 300);
+    }, 3000);
+}
+
+/**
+ * Exibe/oculta o indicador de carregamento
  */
 function showLoading(show) {
-    if (loadingElement) {
-        loadingElement.style.display = show ? 'flex' : 'none';
+    if (!loadingElement) return;
+    
+    loadingElement.style.display = show ? 'flex' : 'none';
+}
+
+/**
+ * Abre o modal de edição com os dados do jogador
+ */
+function openEditModal(player) {
+    // Limpar o estado anterior
+    resetEditAvatarEditor();
+    resetEditPlayerForm();
+    
+    // Definir o jogador atual sendo editado
+    currentEditingPlayer = player;
+
+    if (!editPlayerForm) return;
+
+    // Preencher o formulário com os dados do jogador
+    const nameField = editPlayerForm.querySelector('#edit-player-name');
+    const isGoalkeeperField = editPlayerForm.querySelector('#edit-is-goalkeeper');
+
+    if (nameField) nameField.value = player.name;
+    if (isGoalkeeperField) isGoalkeeperField.checked = player.is_goalkeeper;
+
+    // Atualizar o avatar
+    if (editAvatarCircle) {
+        if (player.photo_url) {
+            // Se tiver foto, exibir no avatar
+            editAvatarCircle.innerHTML = `<img src="${player.photo_url}" alt="${player.name}">`;
+        } else {
+            // Se não tiver, mostrar iniciais
+            const initials = getPlayerInitials(player.name);
+            editAvatarCircle.innerHTML = `<div class="avatar-initials">${initials}</div>`;
+        }
+    }
+
+    // Exibir o modal
+    toggleEditModal(true);
+}
+
+/**
+ * Abre/fecha um modal usando a API do Bootstrap
+ * @param {string} modalId - ID do modal
+ * @param {boolean} show - true para abrir, false para fechar
+ */
+function toggleModal(modalId, show) {
+    const modalElement = document.getElementById(modalId);
+    if (!modalElement) return;
+    
+    if (window.bootstrap) {
+        // Usar a API do Bootstrap 5
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        
+        if (show) {
+            if (!modalInstance) {
+                new bootstrap.Modal(modalElement).show();
+            } else {
+                modalInstance.show();
+            }
+        } else {
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        }
+    } else {
+        // Fallback para uso do jQuery (Bootstrap 4)
+        try {
+            if (show) {
+                $(modalElement).modal('show');
+            } else {
+                $(modalElement).modal('hide');
+            }
+        } catch (error) {
+            console.error('Erro ao manipular modal:', error);
+        }
     }
 }
 
 /**
- * Exibe mensagem de erro
+ * Adiciona uma guia circular ao editor de avatar
+ * @param {HTMLElement} editorContainer - Contêiner do editor
+ * @param {number} size - Tamanho da guia em pixels
  */
-function showError(message) {
-    alert(`Erro: ${message}`);
-}
-
-/**
- * Exibe mensagem de sucesso
- */
-function showSuccess(message) {
-    // Adicionar um elemento de alerta que desaparece após alguns segundos
-    const alertElement = document.createElement('div');
-    alertElement.className = 'alert alert-success';
-    alertElement.textContent = message;
-
-    // Adicionar ao topo da página
-    document.body.insertBefore(alertElement, document.body.firstChild);
-
-    // Remover após 3 segundos
-    setTimeout(() => {
-        alertElement.remove();
-    }, 3000);
+function addCircularGuide(editorContainer, size = 150) {
+    // Remover qualquer guia existente
+    const existingGuide = editorContainer.querySelector('.circular-guide');
+    if (existingGuide) {
+        existingGuide.remove();
+    }
+    
+    // Criar elemento de guia
+    const guide = document.createElement('div');
+    guide.className = 'circular-guide';
+    guide.style.width = `${size}px`;
+    guide.style.height = `${size}px`;
+    
+    // Posicionar no centro do editor
+    const editorRect = editorContainer.getBoundingClientRect();
+    guide.style.left = `${(editorRect.width - size) / 2}px`;
+    guide.style.top = `${(editorRect.height - size) / 2}px`;
+    
+    // Adicionar ao editor
+    editorContainer.appendChild(guide);
+    
+    // Retornar para possível uso posterior
+    return guide;
 }

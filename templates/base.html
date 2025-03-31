@@ -26,6 +26,7 @@
                 {% if session.authenticated %}
                 <a href="/sessions" class="nav-btn nav-btn-orange mr-2"><i class="fas fa-calendar-alt"></i> Sessões</a>
                 <a href="/players" class="nav-btn nav-btn-black mr-2"><i class="fas fa-users"></i> Jogadores</a>
+                <a href="/historical-stats" class="nav-btn nav-btn-purple mr-2"><i class="fas fa-history"></i> Ajustes</a>
                 <a href="/settings" class="nav-btn nav-btn-blue mr-2"><i class="fas fa-cog"></i> Config</a>
                 <button id="logout-button" class="nav-btn nav-btn-red"><i class="fas fa-sign-out-alt"></i> Sair</button>
                 {% else %}
@@ -45,6 +46,7 @@
                     {% if session.authenticated %}
                     <a href="/sessions" class="mobile-menu-item"><i class="fas fa-calendar-alt"></i> Sessões</a>
                     <a href="/players" class="mobile-menu-item"><i class="fas fa-users"></i> Jogadores</a>
+                    <a href="/historical-stats" class="mobile-menu-item"><i class="fas fa-history"></i> Ajustes</a>
                     <a href="/settings" class="mobile-menu-item"><i class="fas fa-cog"></i> Config</a>
                     <a href="/" class="mobile-menu-item"><i class="fas fa-trophy"></i> Rankings</a>
                     <button id="mobile-logout-button" class="mobile-menu-item mobile-menu-button">
@@ -83,12 +85,12 @@
         </div>
     </div>
 
-    <!-- Login Modal (Versão Simplificada) -->
-    <div id="login-modal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none; background-color: rgba(0, 0, 0, 0.5);">
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content shadow">
                 <div class="modal-header" style="background-color: rgba(255, 127, 42, 0.1);">
-                    <h5 class="modal-title" style="color: var(--orange); font-weight: bold;">Acesso ao Sistema</h5>
+                    <h5 class="modal-title" id="loginModalLabel" style="color: var(--orange); font-weight: bold;">Acesso ao Sistema</h5>
                     <button id="close-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -101,8 +103,8 @@
                             </div>
                             <label for="password" class="form-label">Senha Mestra</label>
                             <div class="input-group">
-                                <input type="password" id="password" name="password" class="form-control form-control-lg">
-                                <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                                <input type="password" id="password" name="password" class="form-control form-control-lg" autocomplete="current-password">
+                                <button class="btn btn-outline-secondary" type="button" id="toggle-password" tabindex="-1">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>

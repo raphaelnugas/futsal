@@ -1,0 +1,1164 @@
+2025-03-30 11:00:59,935 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,944 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:00:59,952 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,960 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,960 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:00:59,965 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:00:59,975 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,975 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,981 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:00:59,982 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:00:59,991 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 11:00:59,997 - futsal_app - ERROR - ERRO: Porta 5000 está em uso por outro processo! Execute 'python check_port.py'
+2025-03-30 11:01:05,438 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,438 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,444 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,444 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,449 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,452 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,452 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,453 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 11:01:05,456 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,460 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 11:01:05,463 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,467 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 11:01:05,468 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,469 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,479 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,483 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 11:01:05,494 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,494 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,494 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 11:01:05,495 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 11:01:05,506 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,507 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 11:01:05,510 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 11:01:05,511 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:43,735 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,737 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,741 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,747 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,747 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,748 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\run.py', reloading
+2025-03-30 18:07:43,901 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,905 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,909 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:43,909 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,911 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,912 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:43,913 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,914 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:43,915 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:43,917 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:43,919 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:43,920 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:44,413 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,413 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,415 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,416 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,418 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,418 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,419 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,419 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,423 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,423 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,426 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,430 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,430 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:44,430 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:44,430 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:44,431 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,431 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,435 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:44,435 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,435 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:44,436 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:44,439 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:44,443 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:44,447 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:07:55,699 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:55,705 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:56,127 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:56,127 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:56,150 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://192.168.18.55:5002
+2025-03-30 18:07:56,150 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 18:07:56,151 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 18:07:56,224 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 18:07:56,231 - futsal_app - INFO - Porta 5002 está disponível
+2025-03-30 18:07:56,642 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 18:07:56,642 - futsal_app - INFO - Iniciando servidor na porta 5002
+2025-03-30 18:07:56,653 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 18:07:56,657 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 18:08:23,090 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 18:08:23] "GET / HTTP/1.1" 200 -
+2025-03-30 18:08:23,153 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 18:08:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-30 18:08:35,853 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 18:08:35] "GET /test HTTP/1.1" 200 -
+2025-03-30 18:08:38,903 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 18:08:38] "GET / HTTP/1.1" 200 -
+2025-03-30 18:08:41,541 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 18:08:41] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 19:07:51,763 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 19:07:51,778 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 19:07:53,389 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 19:07:53,389 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 19:07:53,460 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 19:07:53,460 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 19:07:53,465 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 19:07:53,541 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 19:07:53,546 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 19:07:53,956 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 19:07:53,957 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 19:07:53,968 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 19:07:53,973 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 19:08:09,520 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:09] "GET / HTTP/1.1" 200 -
+2025-03-30 19:08:09,607 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:09] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-30 19:08:09,768 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:09] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:09,853 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:09] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2025-03-30 19:08:09,853 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:09] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:10,188 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-30 19:08:10,200 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:10] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 19:08:10,455 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:10] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 19:08:29,291 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "POST /api/login HTTP/1.1" 200 -
+2025-03-30 19:08:29,623 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "GET / HTTP/1.1" 200 -
+2025-03-30 19:08:29,634 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 19:08:29,883 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:29,938 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:29,939 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:29] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:30,250 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:30] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 19:08:30,519 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:30] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 19:08:36,635 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:36] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 19:08:36,937 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 19:08:36,961 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:36] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:36,962 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:36] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:08:37,285 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:37] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 19:08:37,295 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:37] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 19:08:37,314 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:08:37] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:12,468 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:12] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:12,791 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:12] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:29,989 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:29] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:30,319 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:30] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:43,905 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:43] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:09:44,231 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:09:44] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:03,634 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:03] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:03,956 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:03] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:12,772 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:12] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:13,106 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:13] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:28,928 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:28] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:29,246 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:29] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:39,802 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:39] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:10:40,127 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:10:40] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:06,269 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:06] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:06,600 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:06] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:14,634 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:14] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:14,956 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:14] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:24,745 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:24] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:11:25,066 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:11:25] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:13:49,053 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:13:49] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:13:49,300 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:13:49] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:13:59,324 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:13:59] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:13:59,643 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:13:59] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:10,561 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:10] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:10,828 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:10] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:22,721 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:22] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:23,041 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:23] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:34,365 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:34] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:34,688 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:34] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:44,202 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:44] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:44,537 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:44] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:58,638 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:58] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:15:58,971 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:15:58] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:07,128 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:07] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:07,453 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:07] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:21,709 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:21] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:22,038 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:22] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:28,343 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:28] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:28,685 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:28] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:43,871 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:43] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:44,195 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:44] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:56,380 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:56] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:16:56,705 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:16:56] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:09,165 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:09] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:09,492 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:09] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:22,740 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:22] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:23,076 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:23] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:50,913 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:50] "POST /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:17:51,235 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:17:51] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 19:28:32,665 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "GET / HTTP/1.1" 200 -
+2025-03-30 19:28:32,747 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 19:28:32,931 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:28:32,983 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:28:32,983 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 19:28:32,992 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:32] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 19:28:33,328 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:28:33] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 19:31:50,450 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "GET /players HTTP/1.1" 200 -
+2025-03-30 19:31:50,525 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 19:31:50,696 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:31:50,777 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "[36mGET /static/js/players.js HTTP/1.1[0m" 304 -
+2025-03-30 19:31:50,777 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:31:50,800 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:31:50] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 19:51:19,391 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "GET / HTTP/1.1" 200 -
+2025-03-30 19:51:19,470 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 19:51:19,633 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 19:51:19,715 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 19:51:19,716 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 19:51:19,731 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:19] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 19:51:20,063 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 19:51:20] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 21:14:57,336 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:14:57,342 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:14:57,809 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:14:57,809 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:14:57,833 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 21:14:57,833 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 21:14:57,833 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:14:57,908 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:14:57,914 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:14:58,315 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:14:58,315 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:14:58,326 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:14:58,330 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:15:06,191 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "GET / HTTP/1.1" 200 -
+2025-03-30 21:15:06,201 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-30 21:15:06,441 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:15:06,506 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:15:06,506 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 21:15:06,510 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "GET /static/images/Banner2.png HTTP/1.1" 200 -
+2025-03-30 21:15:06,830 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:06] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 21:15:07,153 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:07] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 21:15:59,414 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:15:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:17:44,666 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:17:44,672 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:17:45,114 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:17:45,114 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:17:45,135 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 21:17:45,135 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 21:17:45,136 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:17:45,210 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:17:45,215 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:17:45,626 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:17:45,626 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:17:45,636 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:17:45,640 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:17:57,698 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:57] "GET / HTTP/1.1" 200 -
+2025-03-30 21:17:57,707 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:57] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-30 21:17:57,949 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:57] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:17:58,015 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:58] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:17:58,016 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:58] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 21:17:58,019 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:58] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:17:58,337 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:58] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 21:17:58,664 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:17:58] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 21:19:59,615 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:19:59] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:19:59,681 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:19:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:19:59,867 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:19:59] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:19:59,932 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:19:59] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:19:59,933 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:19:59] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:20:00,017 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:20:00] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 21:20:00,252 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:20:00] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:20:00,260 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:20:00] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 21:24:21,251 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:24:21,309 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:21,381 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:21,387 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:21,706 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:24:21,707 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:24:21,760 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:21,768 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:21,832 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:21,838 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:21,840 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:21,845 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:21,861 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:21,861 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:21,873 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:24:21,878 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:24:22,260 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:22,260 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:22,260 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:22,260 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:22,272 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:24:22,272 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:24:22,276 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:24:22,276 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:24:36,368 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\models.py', reloading
+2025-03-30 21:24:36,368 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\models.py', reloading
+2025-03-30 21:24:36,420 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:36,420 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:36,494 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:36,494 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:36,500 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:36,500 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:36,922 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:36,922 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:36,923 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:36,923 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:36,935 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:24:36,939 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:24:36,939 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:24:36,971 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\models.py', reloading
+2025-03-30 21:24:37,020 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:24:37,088 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:24:37,094 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:24:37,498 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:24:37,498 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:24:37,509 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:24:37,513 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:13,052 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:25:13,125 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:25:13,309 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:13,373 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:13,451 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:25:13,695 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:25:13,750 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:13] "[35m[1mGET /api/historical-stats HTTP/1.1[0m" 500 -
+2025-03-30 21:25:20,097 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:25:20,105 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:25:20,347 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:20,414 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:20,742 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:25:20,751 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:20] "[35m[1mGET /api/historical-stats HTTP/1.1[0m" 500 -
+2025-03-30 21:25:28,975 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:28] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:25:29,289 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:25:29,289 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:29] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:29,290 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:29] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:25:29,615 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:29] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:25:29,623 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:25:29] "[35m[1mGET /api/historical-stats HTTP/1.1[0m" 500 -
+2025-03-30 21:25:35,276 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:35,278 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:35,339 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:35,339 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:35,413 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:35,413 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:35,419 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:35,419 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:35,833 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:35,855 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:35,855 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:35,870 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:35,873 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:35,873 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:35,874 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:35,885 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:35,887 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:35,889 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:35,958 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:35,964 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:36,370 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:36,370 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:36,381 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:36,385 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:36,895 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:36,910 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:36,947 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:36,962 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:37,018 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:37,024 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:37,031 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:37,036 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:37,430 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:37,430 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:37,441 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:37,441 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:37,441 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:37,445 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:37,452 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:37,458 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:53,488 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:53,536 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:53,542 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:53,556 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:53,595 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:53,608 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:53,611 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:53,617 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:53,667 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:53,673 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:53,679 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:53,685 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:54,049 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:54,049 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:54,061 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:54,065 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:54,097 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:54,097 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:54,099 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:54,099 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:54,109 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:54,110 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:54,113 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:54,114 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:55,085 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:55,132 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:55,133 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:55,135 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:25:55,186 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:55,190 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:25:55,207 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:55,214 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:55,257 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:55,259 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:25:55,262 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:55,265 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:25:55,631 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:55,631 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:55,643 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:55,647 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:55,674 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:55,674 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:25:55,674 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:55,674 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:25:55,685 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:55,686 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:25:55,689 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:25:55,690 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:22,804 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:22,851 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:22,851 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:22,852 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:22,903 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:22,908 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:22,924 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:22,929 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:22,974 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:22,978 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:22,979 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:22,983 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:23,384 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:23,384 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:23,395 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:23,400 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:23,416 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:23,426 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:23,426 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:23,426 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:23,427 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:23,438 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:23,439 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:23,443 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:23,444 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:23,468 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:23,540 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:23,545 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:23,968 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:23,968 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:23,979 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:23,983 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:43,568 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:43,569 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:43,619 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:43,619 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:43,691 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:43,693 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:43,696 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:43,698 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:44,102 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:44,132 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:44,132 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:44,133 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:44,133 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:44,145 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:44,145 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:44,149 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:44,149 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:44,159 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:44,229 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:44,235 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:44,644 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:44,644 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:44,656 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:44,660 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:45,680 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:45,735 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:45,807 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:45,813 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:46,175 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:46,176 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:46,227 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:46,227 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:46,229 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:46,229 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:46,239 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:46,243 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:46,301 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:46,302 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:46,307 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:46,307 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:46,735 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:46,735 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:46,737 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:46,737 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:46,747 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:46,749 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:46,751 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:46,753 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:26:47,262 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 21:26:47,311 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:26:47,380 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:26:47,385 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:26:47,791 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:26:47,791 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:26:47,802 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:26:47,805 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:53,829 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:53,832 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:53,832 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:53,886 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:53,887 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:53,888 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:53,963 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:53,968 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:53,974 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:53,975 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:53,979 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:53,980 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:54,445 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:54,445 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:54,445 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:54,445 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:54,446 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:54,446 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:54,460 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:54,460 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:54,460 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:54,465 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:54,465 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:54,465 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:55,489 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:55,490 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:55,490 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-30 21:48:55,546 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:55,559 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:55,559 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:48:55,619 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:55,624 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:55,630 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:55,630 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:48:55,636 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:55,636 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:48:56,070 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:56,070 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:56,081 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:56,085 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:56,085 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:56,086 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:56,097 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:56,099 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:48:56,099 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:48:56,101 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:48:56,110 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:48:56,114 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:49:18,823 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:49:18,828 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:49:19,229 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:49:19,229 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:49:19,250 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 21:49:19,250 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 21:49:19,250 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 21:49:19,324 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 21:49:19,330 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 21:49:19,733 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 21:49:19,733 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 21:49:19,744 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 21:49:19,748 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 21:49:31,785 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:31] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:49:31,856 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:49:32,044 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:32] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:49:32,110 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:32] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:49:32,184 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:32] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:49:32,428 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:32] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:49:32,447 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:49:32] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 21:52:46,339 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:52:46] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:53:01,556 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:01] "GET / HTTP/1.1" 200 -
+2025-03-30 21:53:01,866 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:53:01,873 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:01] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:53:01,874 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:01] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:53:01,874 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:01] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 21:53:02,188 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:02] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:53:02,200 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:02] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 21:53:02,535 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:02] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 21:53:29,968 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:29] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 21:53:30,272 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 21:53:30,285 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 21:53:30,286 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 21:53:30,598 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 21:53:30,600 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 21:53:30,621 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:30] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 21:53:59,350 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:53:59] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:54:30,892 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:54:30] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:54:57,570 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:54:57] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:55:15,823 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:55:15] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:55:46,492 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:55:46] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:56:10,873 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:56:10] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:56:35,916 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:56:35] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:56:54,986 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:56:54] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:57:15,848 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:57:15] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:57:36,184 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:57:36] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:57:59,351 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:57:59] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:58:15,916 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:58:15] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:58:38,001 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:58:38] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:59:02,634 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:59:02] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:59:37,300 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:59:37] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 21:59:58,151 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 21:59:58] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:00:21,552 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:00:21] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:00:37,906 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:00:37] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:01:12,270 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "GET / HTTP/1.1" 200 -
+2025-03-30 22:01:12,357 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:01:12,522 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:01:12,586 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:01:12,587 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:01:12,587 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:01:12,677 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 22:01:12,908 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:12] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:01:23,238 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "GET /historical-stats HTTP/1.1" 200 -
+2025-03-30 22:01:23,546 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:01:23,554 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:01:23,554 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:01:23,875 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 22:01:23,894 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:23] "GET /api/historical-stats HTTP/1.1" 200 -
+2025-03-30 22:01:40,407 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:01:40] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:02:21,266 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:02:21] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:03:02,659 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:03:02] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:03:48,820 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:03:48] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:04:24,668 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:24] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:04:42,264 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:42] "POST /api/retroactive-matches HTTP/1.1" 200 -
+2025-03-30 22:04:49,606 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:49] "GET / HTTP/1.1" 200 -
+2025-03-30 22:04:49,915 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:04:49,922 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:49] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:04:49,923 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:49] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:04:49,923 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:49] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:04:50,235 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:50] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:04:50,240 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:50] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 22:04:50,563 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:04:50] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:06:25,450 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "GET /sessions HTTP/1.1" 200 -
+2025-03-30 22:06:25,558 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:06:25,698 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:25,777 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:25,777 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "[36mGET /static/js/sessions_calendar.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:25,779 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:06:25,883 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:25] "GET /api/sessions/next-sundays HTTP/1.1" 200 -
+2025-03-30 22:06:26,099 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:26] "GET /api/sessions HTTP/1.1" 200 -
+2025-03-30 22:06:27,728 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:27] "GET /session/2025-03-23 HTTP/1.1" 200 -
+2025-03-30 22:06:28,031 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:06:28,047 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:28,048 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:28,048 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "[36mGET /static/js/session.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:28,356 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "GET /api/sessions/2025-03-23 HTTP/1.1" 200 -
+2025-03-30 22:06:28,628 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "GET /api/players HTTP/1.1" 200 -
+2025-03-30 22:06:28,667 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:28] "GET /api/sessions/2/matches HTTP/1.1" 200 -
+2025-03-30 22:06:34,204 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "GET /match/1 HTTP/1.1" 200 -
+2025-03-30 22:06:34,504 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:06:34,521 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:34,521 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:34,522 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "[36mGET /static/js/match.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:34,833 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "GET /api/settings HTTP/1.1" 200 -
+2025-03-30 22:06:34,838 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:34] "GET /api/matches/1 HTTP/1.1" 200 -
+2025-03-30 22:06:35,087 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:35] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:36,092 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:36] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:36,438 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-30 22:06:37,092 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:37] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:38,408 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:38] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:39,091 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:39] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:40,406 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:40] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:41,093 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:41] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:42,410 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:42] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:43,094 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:43] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:44,396 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:44] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:45,095 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:45] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:46,405 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:46] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:47,105 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:47] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:48,409 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:48] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:49,091 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:49] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:50,406 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:50] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:51,101 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:51] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:52,403 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:52] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:53,092 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:53] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:54,406 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:54] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:55,092 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:55] "GET /api/matches/1/timer HTTP/1.1" 200 -
+2025-03-30 22:06:56,094 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:56] "POST /api/matches/1/timer/pause HTTP/1.1" 200 -
+2025-03-30 22:06:56,120 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:56] "POST /api/matches/1/end HTTP/1.1" 200 -
+2025-03-30 22:06:58,140 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "[32mGET /session/2 HTTP/1.1[0m" 302 -
+2025-03-30 22:06:58,438 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "GET / HTTP/1.1" 200 -
+2025-03-30 22:06:58,757 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:06:58,757 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:58,760 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:58,760 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:58] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:06:59,010 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:59] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-30 22:06:59,085 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:06:59] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:27:55,402 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:27:55,404 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:27:55,406 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:27:55,407 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:27:55,467 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:27:55,470 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:27:55,475 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:27:55,490 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:27:55,548 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:27:55,548 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:27:55,553 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:27:55,554 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:27:55,554 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:27:55,559 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:27:55,562 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:27:55,568 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:27:56,043 - futsal_app - ERROR - Erro ao importar a aplicação Flask: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,044 - futsal_app - ERROR - Erro ao importar a aplicação Flask: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,045 - futsal_app - ERROR - Erro ao importar a aplicação Flask: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,046 - futsal_app - ERROR - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,046 - futsal_app - ERROR - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,046 - futsal_app - ERROR - Erro ao importar a aplicação Flask: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,047 - futsal_app - ERROR - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,047 - futsal_app - CRITICAL - Erro não tratado: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,047 - futsal_app - CRITICAL - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,047 - futsal_app - CRITICAL - Erro não tratado: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,047 - futsal_app - CRITICAL - Erro não tratado: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,048 - futsal_app - CRITICAL - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,048 - futsal_app - CRITICAL - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,048 - futsal_app - ERROR - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:27:56,049 - futsal_app - CRITICAL - Erro não tratado: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:27:56,049 - futsal_app - CRITICAL - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:38:49,716 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:38:49,722 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:38:50,158 - futsal_app - ERROR - Erro ao importar a aplicação Flask: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:38:50,160 - futsal_app - ERROR - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer, PlayerSession
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:38:50,161 - futsal_app - CRITICAL - Erro não tratado: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+2025-03-30 22:38:50,161 - futsal_app - CRITICAL - Traceback (most recent call last):
+  File "D:\Futsal2\futsal\run.py", line 46, in <module>
+    from app import app
+  File "D:\Futsal2\futsal\app.py", line 59, in <module>
+    from routes import *
+  File "D:\Futsal2\futsal\routes.py", line 7, in <module>
+    from models import Player, Session, Match, PlayerMatch, Goal, Settings, EventLog, GlobalStats, HistoricalStat, MatchPlayer, PlayerSession
+ImportError: cannot import name 'MatchPlayer' from 'models' (D:\Futsal2\futsal\models.py)
+
+2025-03-30 22:41:13,020 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:41:13,026 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:41:13,507 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:41:13,508 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:41:13,530 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:41:13,531 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:41:13,531 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:41:13,606 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:41:13,611 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:41:14,030 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:41:14,030 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:41:14,041 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:41:14,045 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:41:27,155 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:41:27,161 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:41:27,580 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:41:27,581 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:41:27,602 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:41:27,602 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:41:27,603 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:41:27,677 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:41:27,682 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:41:28,088 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:41:28,088 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:41:28,099 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:41:28,103 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:43:22,509 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:43:22,524 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:43:24,296 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:43:24,296 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:43:24,418 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:43:24,419 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:43:24,425 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:43:24,548 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:43:24,556 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:43:25,200 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:43:25,200 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:43:25,213 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:43:25,218 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:43:28,436 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:28] "GET / HTTP/1.1" 200 -
+2025-03-30 22:43:28,556 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:28] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-30 22:43:28,665 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:28] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:43:28,778 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:28] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:43:28,782 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:28] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:43:29,021 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:29] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-30 22:43:29,123 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:29] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:43:29,342 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:29] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:43:29,653 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-30 22:43:40,857 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:43:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:44:20,876 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:20] "GET / HTTP/1.1" 200 -
+2025-03-30 22:44:21,191 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:44:21,192 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:44:21,193 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:44:21,196 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:44:21,528 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:44:21,551 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-30 22:44:21,772 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:44:21] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:45:27,961 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:45:28,021 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:45:28,094 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:45:28,100 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:45:28,550 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:45:28,550 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:45:28,562 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:45:28,566 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:45:29,586 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-30 22:45:29,637 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:45:29,709 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:45:29,714 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:45:30,144 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:45:30,145 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:45:30,156 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:45:30,160 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:45:39,075 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:45:39,081 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:45:39,493 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:45:39,494 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:45:39,514 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:45:39,514 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:45:39,515 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:45:39,590 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:45:39,595 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:45:40,022 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:45:40,022 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:45:40,033 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:45:40,038 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:45:42,995 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:42] "GET / HTTP/1.1" 200 -
+2025-03-30 22:45:43,079 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:45:43,243 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:45:43,315 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:45:43,315 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:45:43,414 - app - ERROR - Erro ao gerar estatísticas do dashboard: (sqlite3.OperationalError) no such column: match.sequence_number
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "match".id AS match_id, "match".session_id AS match_session_id, "match".start_time AS match_start_time, "match".end_time AS match_end_time, "match".orange_score AS match_orange_score, "match".black_score AS match_black_score, "match".winner_team AS match_winner_team, "match".is_active AS match_is_active, "match".match_number AS match_match_number, "match".created_at AS match_created_at, "match".timer_seconds AS match_timer_seconds, "match".timer_status AS match_timer_status, "match".timer_last_updated AS match_timer_last_updated, "match".sequence_number AS match_sequence_number 
+FROM "match") AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-30 22:45:43,453 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-30 22:45:43,645 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:45:43,761 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:45:43] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-30 22:46:06,855 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:46:06,860 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:46:07,262 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:46:07,263 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:46:07,283 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:46:07,283 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:46:07,284 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:46:07,356 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:46:07,361 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:46:07,759 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:46:07,759 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:46:07,769 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:46:07,774 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:46:11,563 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:11] "GET / HTTP/1.1" 200 -
+2025-03-30 22:46:11,574 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-30 22:46:11,829 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:11] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:46:11,883 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:11] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:46:11,883 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:11] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:46:12,205 - app - ERROR - Erro ao gerar estatísticas do dashboard: (sqlite3.OperationalError) no such column: match.sequence_number
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "match".id AS match_id, "match".session_id AS match_session_id, "match".start_time AS match_start_time, "match".end_time AS match_end_time, "match".orange_score AS match_orange_score, "match".black_score AS match_black_score, "match".winner_team AS match_winner_team, "match".is_active AS match_is_active, "match".match_number AS match_match_number, "match".created_at AS match_created_at, "match".timer_seconds AS match_timer_seconds, "match".timer_status AS match_timer_status, "match".timer_last_updated AS match_timer_last_updated, "match".sequence_number AS match_sequence_number 
+FROM "match") AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-30 22:46:12,224 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:12] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-30 22:46:12,464 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:46:12] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:48:16,561 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:48:16,567 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:48:16,974 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:48:16,974 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:48:16,995 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-30 22:48:16,995 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 22:48:16,996 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 22:48:17,067 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-30 22:48:17,073 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-30 22:48:17,468 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-30 22:48:17,468 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-30 22:48:17,480 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 22:48:17,484 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-30 22:48:22,510 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "GET / HTTP/1.1" 200 -
+2025-03-30 22:48:22,582 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-30 22:48:22,823 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-30 22:48:22,824 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-30 22:48:22,824 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-30 22:48:22,906 - app - ERROR - Erro ao gerar estatísticas do dashboard: (sqlite3.OperationalError) no such column: match.sequence_number
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "match".id AS match_id, "match".session_id AS match_session_id, "match".start_time AS match_start_time, "match".end_time AS match_end_time, "match".orange_score AS match_orange_score, "match".black_score AS match_black_score, "match".winner_team AS match_winner_team, "match".is_active AS match_is_active, "match".match_number AS match_match_number, "match".created_at AS match_created_at, "match".timer_seconds AS match_timer_seconds, "match".timer_status AS match_timer_status, "match".timer_last_updated AS match_timer_last_updated, "match".sequence_number AS match_sequence_number 
+FROM "match") AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-30 22:48:22,931 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:22] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-30 22:48:23,158 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:23] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-30 22:48:23,245 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 22:48:23] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:18:52,593 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "GET / HTTP/1.1" 200 -
+2025-03-31 00:18:52,606 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:18:52,843 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:18:52,909 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-31 00:18:52,910 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:18:52,938 - app - ERROR - Erro ao gerar estatísticas do dashboard: (sqlite3.OperationalError) no such column: match.sequence_number
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "match".id AS match_id, "match".session_id AS match_session_id, "match".start_time AS match_start_time, "match".end_time AS match_end_time, "match".orange_score AS match_orange_score, "match".black_score AS match_black_score, "match".winner_team AS match_winner_team, "match".is_active AS match_is_active, "match".match_number AS match_match_number, "match".created_at AS match_created_at, "match".timer_seconds AS match_timer_seconds, "match".timer_status AS match_timer_status, "match".timer_last_updated AS match_timer_last_updated, "match".sequence_number AS match_sequence_number 
+FROM "match") AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-31 00:18:52,956 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:52] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-31 00:18:53,240 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:53] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-31 00:18:53,276 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:18:53] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:19:04,779 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:04,785 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:05,230 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:05,230 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:05,255 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-31 00:19:05,255 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 00:19:05,256 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:19:05,331 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:05,337 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:05,730 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:05,731 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:05,742 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:19:05,746 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:19:08,707 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:08] "GET / HTTP/1.1" 200 -
+2025-03-31 00:19:08,716 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:08] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-31 00:19:08,957 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:08] "GET /static/js/auth.js HTTP/1.1" 200 -
+2025-03-31 00:19:09,023 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "GET /static/js/utils.js HTTP/1.1" 200 -
+2025-03-31 00:19:09,023 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2025-03-31 00:19:09,057 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "GET /static/images/Banner2.png HTTP/1.1" 200 -
+2025-03-31 00:19:09,346 - app - ERROR - Erro ao gerar estatísticas do dashboard: (sqlite3.OperationalError) no such column: match.sequence_number
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT "match".id AS match_id, "match".session_id AS match_session_id, "match".start_time AS match_start_time, "match".end_time AS match_end_time, "match".orange_score AS match_orange_score, "match".black_score AS match_black_score, "match".winner_team AS match_winner_team, "match".is_active AS match_is_active, "match".match_number AS match_match_number, "match".created_at AS match_created_at, "match".timer_seconds AS match_timer_seconds, "match".timer_status AS match_timer_status, "match".timer_last_updated AS match_timer_last_updated, "match".sequence_number AS match_sequence_number 
+FROM "match") AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-31 00:19:09,364 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "[35m[1mGET /api/stats/dashboard HTTP/1.1[0m" 500 -
+2025-03-31 00:19:09,371 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-31 00:19:09,687 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:19:09] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-31 00:19:51,035 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-31 00:19:51,036 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\routes.py', reloading
+2025-03-31 00:19:51,086 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:19:51,092 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:19:51,157 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:51,158 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:51,162 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:51,164 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:51,576 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:51,576 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:51,576 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:51,577 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:51,588 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:19:51,588 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:19:51,592 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:19:51,592 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:19:53,620 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-31 00:19:53,620 - werkzeug - INFO -  * Detected change in 'D:\\Futsal2\\futsal\\apply_migration.py', reloading
+2025-03-31 00:19:53,671 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:19:53,742 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:53,743 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:19:53,748 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:53,748 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:19:54,156 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:54,157 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:54,157 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:19:54,157 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:19:54,167 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:19:54,168 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:19:54,172 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:19:54,173 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:20:03,323 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET / HTTP/1.1" 200 -
+2025-03-31 00:20:03,395 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-31 00:20:03,570 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /static/js/auth.js HTTP/1.1" 200 -
+2025-03-31 00:20:03,634 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /static/js/utils.js HTTP/1.1" 200 -
+2025-03-31 00:20:03,635 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2025-03-31 00:20:03,720 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-31 00:20:03,968 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:03] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-31 00:20:04,035 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:04] "GET /static/images/Banner2.png HTTP/1.1" 200 -
+2025-03-31 00:20:04,349 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-31 00:20:10,263 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "POST /api/login HTTP/1.1" 200 -
+2025-03-31 00:20:10,577 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "GET / HTTP/1.1" 200 -
+2025-03-31 00:20:10,586 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:20:10,824 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:20:10,891 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:20:10,892 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:10] "[36mGET /static/js/dashboard.js HTTP/1.1[0m" 304 -
+2025-03-31 00:20:11,204 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:11] "GET /api/stats/dashboard HTTP/1.1" 200 -
+2025-03-31 00:20:11,472 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:20:11] "GET /api/stats/player_list HTTP/1.1" 200 -
+2025-03-31 00:24:13,528 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "GET /sessions HTTP/1.1" 200 -
+2025-03-31 00:24:13,634 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-31 00:24:13,776 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:24:13,843 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:24:13,843 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:24:13,844 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "[36mGET /static/js/sessions_calendar.js HTTP/1.1[0m" 304 -
+2025-03-31 00:24:13,948 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:13] "GET /api/sessions/next-sundays HTTP/1.1" 200 -
+2025-03-31 00:24:14,163 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:14] "GET /api/sessions HTTP/1.1" 200 -
+2025-03-31 00:24:16,559 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:16] "GET /session/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:24:16,861 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:24:16,876 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:16] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:24:16,877 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:16] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:24:16,878 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:16] "GET /static/js/session.js HTTP/1.1" 200 -
+2025-03-31 00:24:17,180 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:17] "GET /api/sessions/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:24:17,189 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:17] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:24:17,503 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:17] "GET /api/players HTTP/1.1" 200 -
+2025-03-31 00:24:17,829 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:17] "GET /api/sessions/2/matches HTTP/1.1" 200 -
+2025-03-31 00:24:18,084 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:24:18] "GET /api/matches/1 HTTP/1.1" 200 -
+2025-03-31 00:25:20,699 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:25:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:30:05,319 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:30:05,325 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:30:05,773 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:30:05,773 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:30:05,796 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-31 00:30:05,796 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 00:30:05,797 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:30:05,872 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:30:05,877 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:30:06,293 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:30:06,293 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:30:06,304 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:30:06,309 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:30:15,161 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "GET /sessions HTTP/1.1" 200 -
+2025-03-31 00:30:15,286 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-31 00:30:15,428 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:30:15,493 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:30:15,493 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "[36mGET /static/js/sessions_calendar.js HTTP/1.1[0m" 304 -
+2025-03-31 00:30:15,504 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "GET /api/sessions/next-sundays HTTP/1.1" 200 -
+2025-03-31 00:30:15,832 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:15] "GET /api/sessions HTTP/1.1" 200 -
+2025-03-31 00:30:23,022 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "GET /session/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:30:23,324 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:30:23,356 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:30:23,357 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:30:23,358 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "GET /static/js/session.js HTTP/1.1" 200 -
+2025-03-31 00:30:23,667 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "GET /api/sessions/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:30:23,937 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "GET /api/players HTTP/1.1" 200 -
+2025-03-31 00:30:23,973 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:23] "GET /api/sessions/2/matches HTTP/1.1" 200 -
+2025-03-31 00:30:24,273 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:30:24] "GET /api/matches/1 HTTP/1.1" 200 -
+2025-03-31 00:30:55,388 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:30:55,394 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:30:55,787 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:30:55,787 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:30:55,811 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.18.55:5000
+2025-03-31 00:30:55,811 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 00:30:55,812 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:30:55,886 - futsal_app - INFO - Iniciando carregamento da aplicação Flask
+2025-03-31 00:30:55,892 - futsal_app - INFO - Porta 5000 está disponível
+2025-03-31 00:30:56,292 - futsal_app - INFO - Aplicação Flask importada com sucesso
+2025-03-31 00:30:56,292 - futsal_app - INFO - Iniciando servidor na porta 5000
+2025-03-31 00:30:56,303 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 00:30:56,307 - werkzeug - INFO -  * Debugger PIN: 352-996-484
+2025-03-31 00:31:53,987 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:53] "POST /api/sessions/2/end HTTP/1.1" 200 -
+2025-03-31 00:31:55,497 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:55] "GET /session/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:31:55,800 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:55] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-31 00:31:55,815 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:55] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:31:55,816 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:55] "[36mGET /static/js/session.js HTTP/1.1[0m" 304 -
+2025-03-31 00:31:55,816 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:55] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:31:56,130 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:56] "GET /api/sessions/2025-03-23 HTTP/1.1" 200 -
+2025-03-31 00:31:56,404 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:56] "GET /api/players HTTP/1.1" 200 -
+2025-03-31 00:31:56,441 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:31:56] "GET /api/sessions/2/matches HTTP/1.1" 200 -
+2025-03-31 00:32:01,538 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:01] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:32:12,286 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "GET /sessions HTTP/1.1" 200 -
+2025-03-31 00:32:12,365 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:32:12,553 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:12,615 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:12,616 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "[36mGET /static/js/sessions_calendar.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:12,625 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "GET /api/sessions/next-sundays HTTP/1.1" 200 -
+2025-03-31 00:32:12,960 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:12] "GET /api/sessions HTTP/1.1" 200 -
+2025-03-31 00:32:38,038 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:38] "[36mGET /static/images/Banner2.png HTTP/1.1[0m" 304 -
+2025-03-31 00:32:39,298 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "GET /sessions HTTP/1.1" 200 -
+2025-03-31 00:32:39,409 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-03-31 00:32:39,564 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "[36mGET /static/js/auth.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:39,611 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "[36mGET /static/js/sessions_calendar.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:39,612 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "[36mGET /static/js/utils.js HTTP/1.1[0m" 304 -
+2025-03-31 00:32:39,622 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "GET /api/sessions/next-sundays HTTP/1.1" 200 -
+2025-03-31 00:32:39,956 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:32:39] "GET /api/sessions HTTP/1.1" 200 -

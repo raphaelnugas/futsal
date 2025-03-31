@@ -1,0 +1,5 @@
+[33mcommit 59cb7a63433dba34261ad831df9d7fa5354af905[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Raphael <raphael.nugas@gmail.com>
+Date:   Mon Mar 31 00:38:25 2025 -0300
+
+    Melhoria na página de sessões: aprimorado o sistema de arrastar e soltar jogadores, adicionado suporte para dispositivos móveis, melhorado o feedback visual e a organização do quadro branco de times

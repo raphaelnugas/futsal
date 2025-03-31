@@ -1,0 +1,11 @@
+# Redirect all requests to the WSGI script
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ cgi-bin/app.cgi/$1 [QSA,L]
+</IfModule>
+
+# Set environment variables
+SetEnv PYTHONPATH /home/username/futsal
+SetEnv DATABASE_URL sqlite:////home/username/futsal/instance/futsal_domingo.db
+SetEnv SESSION_SECRET your_secret_key_here 

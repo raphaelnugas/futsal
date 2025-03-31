@@ -6,17 +6,7 @@
  * Data: 2023
  */
 
-// Elementos do DOM que serão manipulados
-const topScorerElement = document.getElementById('top-scorer');
-const topAssistantElement = document.getElementById('top-assistant');
-const topGoalkeeperElement = document.getElementById('top-goalkeeper');
-const statsTableBody = document.getElementById('stats-table-body');
-const statsLoader = document.getElementById('stats-loader');
-const statsTable = document.getElementById('stats-table');
-const loadingElement = document.getElementById('loading');
-// Autenticação gerenciada pelo auth.js, não declarando os elementos aqui
-
-const filterButtons = document.querySelectorAll('.filter-btn');
+console.log('Dashboard.js: Inicializando script...');
 
 // Estado da aplicação
 let players = [];
@@ -25,6 +15,20 @@ let currentSort = {
     column: 'goals',
     direction: 'desc'
 };
+
+// Funções de acesso aos elementos DOM (só fazem a busca quando chamadas)
+const getElement = (id) => document.getElementById(id);
+const getElements = (selector) => document.querySelectorAll(selector);
+
+// Getters para elementos DOM
+const getTopScorerElement = () => getElement('top-scorer');
+const getTopAssistantElement = () => getElement('top-assistant');
+const getTopGoalkeeperElement = () => getElement('top-goalkeeper');
+const getStatsTableBody = () => getElement('stats-table-body');
+const getStatsLoader = () => getElement('stats-loader');
+const getStatsTable = () => getElement('stats-table');
+const getLoadingElement = () => getElement('loading');
+const getFilterButtons = () => getElements('.filter-btn');
 
 /**
  * Abrevia um nome para exibição em telas menores
@@ -57,11 +61,24 @@ function abbreviateName(name) {
  * Inicialização do Dashboard
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Carregar dados para o dashboard
-    loadDashboardData();
+    console.log('Dashboard.js: DOM carregado, inicializando dashboard');
     
-    // Adicionar eventos aos elementos
-    setupEventListeners();
+    try {
+        // Verificar se estamos na página correta antes de carregar os dados
+        if (getTopScorerElement() && getStatsTableBody()) {
+            console.log('Dashboard.js: Elementos encontrados, carregando dados');
+            
+            // Carregar dados para o dashboard
+            loadDashboardData();
+            
+            // Adicionar eventos aos elementos
+            setupEventListeners();
+        } else {
+            console.log('Dashboard.js: Esta página não contém elementos de dashboard');
+        }
+    } catch (error) {
+        console.error('Dashboard.js: Erro durante inicialização:', error);
+    }
 });
 
 /**
@@ -73,22 +90,22 @@ function setupEventListeners() {
 
     
     // Eventos para os botões de filtro
-    if (filterButtons) {
-        filterButtons.forEach(button => {
+    if (getFilterButtons()) {
+        getFilterButtons().forEach(button => {
             button.addEventListener('click', () => {
                 const column = button.getAttribute('data-filter');
                 sortTable(column);
                 
                 // Atualizar classe ativa nos botões
-                filterButtons.forEach(btn => btn.classList.remove('active'));
+                getFilterButtons().forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
             });
         });
     }
     
     // Eventos para clicar nas colunas da tabela
-    if (statsTable) {
-        const headers = statsTable.querySelectorAll('th');
+    if (getStatsTable()) {
+        const headers = getStatsTable().querySelectorAll('th');
         headers.forEach(header => {
             if (header.getAttribute('data-sort')) {
                 header.addEventListener('click', () => {
@@ -104,45 +121,12 @@ function setupEventListeners() {
  * Carrega os dados do dashboard a partir da API
  */
 async function loadDashboardData() {
+    console.log('Dashboard.js: Carregando dados do dashboard...');
+    
+    showLoading(true);
+    
     try {
-        showLoading(true);
-        
-        // Carregar estatísticas do dashboard
-        const dashboardResponse = await fetch('/api/stats/dashboard');
-        dashboardData = await dashboardResponse.json();
-        
-        if (!dashboardData) {
-            dashboardData = {
-                total_players: 0,
-                total_sessions: 0,
-                total_matches: 0,
-                total_goals: 0,
-                avg_goals_per_match: 0,
-                top_scorer: null,
-                top_assistant: null,
-                top_goalkeeper: null
-            };
-        }
-        
-        // Carregar lista de jogadores com estatísticas
-        const playersResponse = await fetch('/api/stats/player_list');
-        players = await playersResponse.json();
-        
-        if (!Array.isArray(players)) {
-            players = [];
-        }
-        
-        // Atualizar a UI com os dados
-        updateDashboardUI(dashboardData);
-        updatePlayersTable(players);
-        
-        showLoading(false);
-    } catch (error) {
-        console.error('Erro ao carregar dados do dashboard:', error);
-        showError('Não foi possível carregar os dados. Tente novamente mais tarde.');
-        
-        // Se tiver erro, ainda tentar montar UI com dados vazios
-        players = [];
+        // Inicializar dados vazios por padrão
         dashboardData = {
             total_players: 0,
             total_sessions: 0,
@@ -154,10 +138,65 @@ async function loadDashboardData() {
             top_goalkeeper: null
         };
         
+        players = [];
+        
+        // Tentar carregar estatísticas do dashboard
+        try {
+            console.log('Dashboard.js: Buscando estatísticas do dashboard...');
+            const dashboardResponse = await fetch('/api/stats/dashboard');
+            
+            if (dashboardResponse.ok) {
+                const responseData = await dashboardResponse.json();
+                if (responseData) {
+                    dashboardData = responseData;
+                    console.log('Dashboard.js: Estatísticas do dashboard carregadas com sucesso');
+                }
+            } else {
+                console.error('Dashboard.js: Erro ao buscar estatísticas:', dashboardResponse.status, dashboardResponse.statusText);
+            }
+        } catch (dashboardError) {
+            console.error('Dashboard.js: Erro ao carregar estatísticas do dashboard:', dashboardError);
+        }
+        
+        // Tentar carregar lista de jogadores
+        try {
+            console.log('Dashboard.js: Buscando lista de jogadores...');
+            const playersResponse = await fetch('/api/stats/player_list');
+            
+            if (playersResponse.ok) {
+                const responseData = await playersResponse.json();
+                if (Array.isArray(responseData)) {
+                    players = responseData;
+                    console.log(`Dashboard.js: Lista de jogadores carregada com sucesso (${players.length} jogadores)`);
+                }
+            } else {
+                console.error('Dashboard.js: Erro ao buscar jogadores:', playersResponse.status, playersResponse.statusText);
+            }
+        } catch (playersError) {
+            console.error('Dashboard.js: Erro ao carregar lista de jogadores:', playersError);
+        }
+        
+        // Atualizar a UI com os dados obtidos (mesmo que parciais)
+        console.log('Dashboard.js: Atualizando interface com os dados disponíveis');
         updateDashboardUI(dashboardData);
         updatePlayersTable(players);
         
+    } catch (error) {
+        console.error('Dashboard.js: Erro geral ao carregar dados:', error);
+        
+        // Garantir que a UI seja renderizada mesmo com erro
+        updateDashboardUI(dashboardData);
+        updatePlayersTable(players);
+        
+        // Mostrar mensagem de erro se necessário
+        if (typeof showError === 'function') {
+            showError('Não foi possível carregar os dados completamente. Tente novamente mais tarde.');
+        } else {
+            console.error('Dashboard.js: Função showError não disponível');
+        }
+    } finally {
         showLoading(false);
+        console.log('Dashboard.js: Carregamento de dados concluído');
     }
 }
 
@@ -166,14 +205,25 @@ async function loadDashboardData() {
  */
 function updateDashboardUI(data) {
     // Atualizar destaque de artilheiro
-    if (topScorerElement) {
+    if (getTopScorerElement()) {
         if (data.top_scorer) {
-            topScorerElement.innerHTML = `
-                <div class="highlight-card-value">${data.top_scorer.name}</div>
-                <div>${data.top_scorer.goals} gols</div>
+            const playerName = data.top_scorer.name;
+            const playerInitials = playerName.split(' ').map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase();
+            const playerImage = data.top_scorer.photo_url ? 
+                `<img src="${data.top_scorer.photo_url}" alt="${playerName}" class="highlight-player-avatar">` : 
+                `<div class="highlight-player-avatar highlight-player-initials">${playerInitials}</div>`;
+            
+            getTopScorerElement().innerHTML = `
+                <div class="highlight-player">
+                    ${playerImage}
+                    <div class="highlight-player-info">
+                        <div class="highlight-card-value">${data.top_scorer.name}</div>
+                        <div>${data.top_scorer.goals} gols</div>
+                    </div>
+                </div>
             `;
         } else {
-            topScorerElement.innerHTML = `
+            getTopScorerElement().innerHTML = `
                 <div class="highlight-card-value">Sem dados</div>
                 <div>0 gols</div>
             `;
@@ -181,14 +231,25 @@ function updateDashboardUI(data) {
     }
     
     // Atualizar destaque de assistente
-    if (topAssistantElement) {
+    if (getTopAssistantElement()) {
         if (data.top_assistant) {
-            topAssistantElement.innerHTML = `
-                <div class="highlight-card-value">${data.top_assistant.name}</div>
-                <div>${data.top_assistant.assists} assistências</div>
+            const playerName = data.top_assistant.name;
+            const playerInitials = playerName.split(' ').map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase();
+            const playerImage = data.top_assistant.photo_url ? 
+                `<img src="${data.top_assistant.photo_url}" alt="${playerName}" class="highlight-player-avatar">` : 
+                `<div class="highlight-player-avatar highlight-player-initials">${playerInitials}</div>`;
+            
+            getTopAssistantElement().innerHTML = `
+                <div class="highlight-player">
+                    ${playerImage}
+                    <div class="highlight-player-info">
+                        <div class="highlight-card-value">${data.top_assistant.name}</div>
+                        <div>${data.top_assistant.assists} assistências</div>
+                    </div>
+                </div>
             `;
         } else {
-            topAssistantElement.innerHTML = `
+            getTopAssistantElement().innerHTML = `
                 <div class="highlight-card-value">Sem dados</div>
                 <div>0 assistências</div>
             `;
@@ -196,15 +257,26 @@ function updateDashboardUI(data) {
     }
     
     // Atualizar destaque de goleiro
-    if (topGoalkeeperElement) {
+    if (getTopGoalkeeperElement()) {
         if (data.top_goalkeeper) {
-            topGoalkeeperElement.innerHTML = `
-                <div class="highlight-card-value">${data.top_goalkeeper.name}</div>
-                <div>${data.top_goalkeeper.goals_conceded} gols sofridos</div>
-                <div>Média: ${data.top_goalkeeper.average} por partida</div>
+            const playerName = data.top_goalkeeper.name;
+            const playerInitials = playerName.split(' ').map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase();
+            const playerImage = data.top_goalkeeper.photo_url ? 
+                `<img src="${data.top_goalkeeper.photo_url}" alt="${playerName}" class="highlight-player-avatar">` : 
+                `<div class="highlight-player-avatar highlight-player-initials">${playerInitials}</div>`;
+            
+            getTopGoalkeeperElement().innerHTML = `
+                <div class="highlight-player">
+                    ${playerImage}
+                    <div class="highlight-player-info">
+                        <div class="highlight-card-value">${data.top_goalkeeper.name}</div>
+                        <div>${data.top_goalkeeper.goals_conceded} gols sofridos</div>
+                        <div>Média: ${data.top_goalkeeper.average} por partida</div>
+                    </div>
+                </div>
             `;
         } else {
-            topGoalkeeperElement.innerHTML = `
+            getTopGoalkeeperElement().innerHTML = `
                 <div class="highlight-card-value">Sem dados</div>
                 <div>0 gols sofridos</div>
             `;
@@ -241,13 +313,13 @@ function updateGeneralStats(data) {
  * Atualiza a tabela de jogadores com as estatísticas
  */
 function updatePlayersTable(players) {
-    if (!statsTableBody) return;
+    if (!getStatsTableBody()) return;
     
     // Ordenar jogadores conforme critério atual
     sortPlayerData(players);
     
     // Limpar tabela
-    statsTableBody.innerHTML = '';
+    getStatsTableBody().innerHTML = '';
     
     // Adicionar jogadores à tabela
     players.forEach((player, index) => {
@@ -257,22 +329,37 @@ function updatePlayersTable(players) {
         const playerName = player.name;
         const shortName = abbreviateName(playerName);
         
+        // Definir imagem do jogador ou iniciais se não houver imagem
+        const playerInitials = playerName.split(' ').map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase();
+        const playerImage = player.photo_url ? 
+            `<img src="${player.photo_url}" alt="${playerName}" class="player-avatar-small">` : 
+            `<div class="player-avatar-small player-avatar-initials">${playerInitials}</div>`;
+        
         // Criar células
         row.innerHTML = `
-            <td>${index + 1}</td>
+            <td class="text-center">${index + 1}</td>
             <td>
-                <span class="d-none d-md-inline">${playerName}</span>
-                <span class="d-inline d-md-none player-name-abbr" title="${playerName}">${shortName}</span>
-                ${player.is_goalkeeper ? '<span class="badge badge-blue ml-1">G</span>' : ''}
+                <div class="player-info-row">
+                    <div class="player-avatar-container">
+                        ${playerImage}
+                    </div>
+                    <div class="player-data">
+                        <div class="player-name-cell">
+                            <span class="d-none d-md-inline">${playerName}</span>
+                            <span class="d-inline d-md-none" title="${playerName}">${shortName}</span>
+                            ${player.is_goalkeeper ? '<span class="badge badge-blue ml-1">G</span>' : ''}
+                        </div>
+                    </div>
+                </div>
             </td>
-            <td>${player.goals}</td>
-            <td>${player.assists}</td>
-            <td>${player.is_goalkeeper ? player.goals_conceded : '-'}</td>
-            <td>${player.matches}</td>
-            <td class="d-none d-lg-table-cell">${player.sessions}</td>
+            <td class="text-center">${player.goals}</td>
+            <td class="text-center">${player.assists}</td>
+            <td class="text-center">${player.goals_conceded}</td>
+            <td class="text-center">${player.matches}</td>
+            <td class="text-center d-none d-lg-table-cell">${player.sessions}</td>
         `;
         
-        statsTableBody.appendChild(row);
+        getStatsTableBody().appendChild(row);
     });
 }
 
@@ -305,10 +392,6 @@ function sortPlayerData(data) {
         let valueA = a[currentSort.column];
         let valueB = b[currentSort.column];
         
-        // Tratar casos especiais
-        if (currentSort.column === 'goals_conceded' && !a.is_goalkeeper) valueA = Infinity;
-        if (currentSort.column === 'goals_conceded' && !b.is_goalkeeper) valueB = Infinity;
-        
         // Comparar valores (string ou número)
         if (typeof valueA === 'string' && typeof valueB === 'string') {
             return currentSort.direction === 'asc' 
@@ -326,7 +409,7 @@ function sortPlayerData(data) {
  * Atualiza os indicadores visuais de ordenação da tabela
  */
 function updateSortIndicators() {
-    const headers = statsTable.querySelectorAll('th[data-sort]');
+    const headers = getStatsTable().querySelectorAll('th[data-sort]');
     
     headers.forEach(header => {
         // Remover classes de ordenação
@@ -339,20 +422,18 @@ function updateSortIndicators() {
     });
 }
 
-
-
 // Funções de autenticação gerenciadas pelo auth.js
 
 /**
  * Controla a exibição do indicador de carregamento
  */
 function showLoading(show) {
-    if (statsLoader) {
-        statsLoader.style.display = show ? 'flex' : 'none';
+    if (getStatsLoader()) {
+        getStatsLoader().style.display = show ? 'flex' : 'none';
     }
     
-    if (loadingElement) {
-        loadingElement.style.display = show ? 'flex' : 'none';
+    if (getLoadingElement()) {
+        getLoadingElement().style.display = show ? 'flex' : 'none';
     }
 }
 

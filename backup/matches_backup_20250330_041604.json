@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "session_id": 2,
+        "start_time": "2025-03-30 04:04:41.432044",
+        "end_time": null,
+        "orange_score": 0,
+        "black_score": 0,
+        "winner_team": null,
+        "is_active": 1,
+        "match_number": 1,
+        "created_at": "2025-03-30 04:04:41.432751"
+    }
+]

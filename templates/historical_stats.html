@@ -1,0 +1,554 @@
+{% extends 'base.html' %}
+
+{% block title %}Ajustes | Futsal de Domingo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Ajustes</h1>
+    <p class="mb-4">Gerencie estatísticas históricas e quantidade de partidas dos jogadores.</p>
+
+    <!-- Formulário para lançar partidas retroativas -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="card-title">Lançar Partidas e Sessões Retroativas</h4>
+        </div>
+        <div class="card-body">
+            <form id="retroactive-matches-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="retroactive-player-select" class="form-label">Jogador</label>
+                        <select id="retroactive-player-select" class="form-select" required>
+                            <option value="">-- Selecionar Jogador --</option>
+                            <!-- Jogadores serão adicionados via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="matches-count" class="form-label">Quantidade de Partidas</label>
+                        <input type="number" id="matches-count" class="form-control" min="1" value="1" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="sessions-count" class="form-label">Quantidade de Sessões</label>
+                        <input type="number" id="sessions-count" class="form-control" min="1" value="1" required>
+                        <small class="text-muted">Domingos que o jogador participou</small>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="played-as-goalkeeper" class="form-label">Jogou como goleiro?</label>
+                        <select id="played-as-goalkeeper" class="form-select">
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Lançar Partidas</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Formulário de adição de estatísticas -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="card-title">Adicionar Estatística Histórica</h4>
+        </div>
+        <div class="card-body">
+            <form id="historical-stat-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="player-select" class="form-label">Jogador</label>
+                        <select id="player-select" class="form-select" required>
+                            <option value="">-- Selecionar Jogador --</option>
+                            <!-- Jogadores serão adicionados via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="session-date" class="form-label">Data da Sessão</label>
+                        <input type="date" id="session-date" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="goals" class="form-label">Gols</label>
+                        <input type="number" id="goals" class="form-control" min="0" value="0" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="assists" class="form-label">Assistências</label>
+                        <input type="number" id="assists" class="form-control" min="0" value="0" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="goals-conceded" class="form-label">Gols Sofridos</label>
+                        <input type="number" id="goals-conceded" class="form-control" min="0" value="0" required>
+                        <small class="text-muted">Apenas para goleiros</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar Estatística</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabela de Estatísticas Históricas -->
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Estatísticas Registradas</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Jogador</th>
+                            <th class="text-center">Gols</th>
+                            <th class="text-center">Assistências</th>
+                            <th class="text-center">Gols Sofridos</th>
+                            <th class="text-center">Partidas</th>
+                            <th class="text-center">Sessões</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historical-stats-table-body">
+                        <!-- Dados serão carregados via JavaScript -->
+                    </tbody>
+                </table>
+                <div id="stats-loader" class="loader-container">
+                    <div class="spinner spinner-dark"></div>
+                </div>
+                <div id="no-stats-message" class="alert alert-info mt-3 d-none">
+                    Nenhuma estatística histórica registrada ainda.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let players = [];
+    let historicalStats = [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carregar dados iniciais
+        loadPlayers();
+        loadHistoricalStats();
+
+        // Configurar event listeners
+        setupEventListeners();
+    });
+
+    /**
+     * Configurar event listeners
+     */
+    function setupEventListeners() {
+        // Form de adição de estatística
+        const form = document.getElementById('historical-stat-form');
+        if (form) {
+            form.addEventListener('submit', handleFormSubmit);
+        }
+
+        // Form de partidas retroativas
+        const retroactiveForm = document.getElementById('retroactive-matches-form');
+        if (retroactiveForm) {
+            retroactiveForm.addEventListener('submit', handleRetroactiveFormSubmit);
+        }
+    }
+
+    /**
+     * Carregar lista de jogadores
+     */
+    async function loadPlayers() {
+        try {
+            const response = await fetch('/api/players');
+            players = await response.json();
+            populatePlayerSelect();
+            populateRetroactivePlayerSelect();
+        } catch (error) {
+            console.error('Erro ao carregar jogadores:', error);
+            showError('Erro ao carregar lista de jogadores.');
+        }
+    }
+
+    /**
+     * Preencher o select de jogadores
+     */
+    function populatePlayerSelect() {
+        const playerSelect = document.getElementById('player-select');
+        if (!playerSelect) return;
+
+        // Limpar opções existentes, exceto a primeira
+        while (playerSelect.options.length > 1) {
+            playerSelect.remove(1);
+        }
+
+        // Ordenar jogadores por nome (ordem alfabética)
+        players.sort((a, b) => a.name.localeCompare(b.name));
+
+        // Adicionar jogadores
+        players.forEach(player => {
+            const option = document.createElement('option');
+            option.value = player.id;
+            option.textContent = player.name + (player.is_goalkeeper ? ' (goleiro)' : '');
+            playerSelect.appendChild(option);
+        });
+    }
+
+    /**
+     * Preencher o select de jogadores para o formulário retroativo
+     */
+    function populateRetroactivePlayerSelect() {
+        const playerSelect = document.getElementById('retroactive-player-select');
+        if (!playerSelect) return;
+
+        // Limpar opções existentes, exceto a primeira
+        while (playerSelect.options.length > 1) {
+            playerSelect.remove(1);
+        }
+
+        // Ordenar jogadores por nome (ordem alfabética)
+        players.sort((a, b) => a.name.localeCompare(b.name));
+
+        // Adicionar jogadores
+        players.forEach(player => {
+            const option = document.createElement('option');
+            option.value = player.id;
+            option.textContent = player.name + (player.is_goalkeeper ? ' (goleiro)' : '');
+            playerSelect.appendChild(option);
+        });
+    }
+
+    /**
+     * Carregar estatísticas históricas
+     */
+    async function loadHistoricalStats() {
+        try {
+            showLoading(true, 'stats-loader');
+            const response = await fetch('/api/historical-stats');
+            historicalStats = await response.json();
+            updateStatsTable();
+            showLoading(false, 'stats-loader');
+        } catch (error) {
+            console.error('Erro ao carregar estatísticas históricas:', error);
+            showError('Erro ao carregar estatísticas históricas.');
+            showLoading(false, 'stats-loader');
+        }
+    }
+
+    /**
+     * Atualizar tabela de estatísticas
+     */
+    function updateStatsTable() {
+        const tableBody = document.getElementById('historical-stats-table-body');
+        const noStatsMessage = document.getElementById('no-stats-message');
+        
+        if (!tableBody) return;
+
+        // Limpar tabela
+        tableBody.innerHTML = '';
+
+        // Mostrar mensagem se não houver estatísticas
+        if (historicalStats.length === 0) {
+            if (noStatsMessage) noStatsMessage.classList.remove('d-none');
+            return;
+        } else {
+            if (noStatsMessage) noStatsMessage.classList.add('d-none');
+        }
+
+        // Ordenar por data (mais recente primeiro)
+        historicalStats.sort((a, b) => new Date(b.session_date) - new Date(a.session_date));
+
+        // Adicionar linhas
+        historicalStats.forEach(stat => {
+            const row = document.createElement('tr');
+            
+            // Formatar data corretamente considerando fuso horário
+            // O formato da data é YYYY-MM-DD no JSON
+            const dateParts = stat.session_date.split('-');
+            const year = parseInt(dateParts[0]);
+            const month = parseInt(dateParts[1]) - 1; // Meses em JS começam do 0
+            const day = parseInt(dateParts[2]);
+            
+            // Criar data sem hora para evitar problemas de fuso horário
+            const date = new Date(year, month, day);
+            const formattedDate = date.toLocaleDateString('pt-BR');
+
+            // Determinar o tipo de estatística (partidas retroativas ou estatísticas normais)
+            const isRetroactive = (stat.retroactive_matches > 0 || stat.retroactive_sessions > 0);
+            const entryType = isRetroactive ? 'Partidas retroativas' : 'Estatísticas';
+            
+            row.innerHTML = `
+                <td>${formattedDate}</td>
+                <td>${stat.player_name}</td>
+                <td class="text-center">${stat.goals}</td>
+                <td class="text-center">${stat.assists}</td>
+                <td class="text-center">${stat.goals_conceded}</td>
+                <td class="text-center">${stat.retroactive_matches || 0}</td>
+                <td class="text-center">${stat.retroactive_sessions || 0}</td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-danger delete-stat-btn-direct" data-stat-id="${stat.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            
+            // Destacar partidas retroativas com uma classe diferente
+            if (isRetroactive) {
+                row.classList.add('table-info');
+            }
+            
+            tableBody.appendChild(row);
+        });
+
+        // Adicionar event listeners para botões de exclusão (agora sem confirmação)
+        document.querySelectorAll('.delete-stat-btn-direct').forEach(btn => {
+            btn.addEventListener('click', () => handleDeleteDirect(btn.dataset.statId));
+        });
+    }
+
+    /**
+     * Manipular envio do formulário de partidas retroativas
+     */
+    async function handleRetroactiveFormSubmit(event) {
+        event.preventDefault();
+        
+        const playerSelect = document.getElementById('retroactive-player-select');
+        const matchesCount = document.getElementById('matches-count');
+        const sessionsCount = document.getElementById('sessions-count');
+        const playedAsGoalkeeper = document.getElementById('played-as-goalkeeper');
+        
+        if (!playerSelect.value) {
+            showError('Selecione um jogador.');
+            return;
+        }
+        
+        if (parseInt(matchesCount.value) < 1) {
+            showError('Quantidade de partidas deve ser pelo menos 1.');
+            return;
+        }
+
+        if (parseInt(sessionsCount.value) < 1) {
+            showError('Quantidade de sessões deve ser pelo menos 1.');
+            return;
+        }
+
+        if (parseInt(sessionsCount.value) > parseInt(matchesCount.value)) {
+            showError('Quantidade de sessões não pode ser maior que a quantidade de partidas.');
+            return;
+        }
+        
+        // Preparar dados
+        const data = {
+            player_id: parseInt(playerSelect.value),
+            matches_count: parseInt(matchesCount.value),
+            sessions_count: parseInt(sessionsCount.value),
+            played_as_goalkeeper: playedAsGoalkeeper.value === 'true'
+        };
+        
+        try {
+            showLoading(true);
+            
+            const response = await fetch('/api/retroactive-matches', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Limpar formulário
+                matchesCount.value = '1';
+                sessionsCount.value = '1';
+                playedAsGoalkeeper.value = 'false';
+                
+                showSuccess('Partidas retroativas registradas com sucesso!');
+            } else {
+                showError(result.message || 'Erro ao registrar partidas retroativas.');
+            }
+            
+            showLoading(false);
+        } catch (error) {
+            console.error('Erro ao registrar partidas retroativas:', error);
+            showError('Erro ao conectar com o servidor.');
+            showLoading(false);
+        }
+    }
+
+    /**
+     * Manipular envio do formulário de estatísticas históricas
+     */
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        const playerSelect = document.getElementById('player-select');
+        const sessionDate = document.getElementById('session-date');
+        const goals = document.getElementById('goals');
+        const assists = document.getElementById('assists');
+        const goalsConceded = document.getElementById('goals-conceded');
+        
+        if (!playerSelect.value) {
+            showError('Selecione um jogador.');
+            return;
+        }
+        
+        if (!sessionDate.value) {
+            showError('Selecione uma data.');
+            return;
+        }
+        
+        // Verificar se pelo menos um valor é maior que zero
+        if (parseInt(goals.value) === 0 && parseInt(assists.value) === 0 && parseInt(goalsConceded.value) === 0) {
+            showError('Pelo menos um valor (gols, assistências ou gols sofridos) deve ser maior que zero.');
+            return;
+        }
+        
+        // Verificar se gols sofridos só é preenchido para goleiros
+        const selectedPlayer = players.find(p => p.id === parseInt(playerSelect.value));
+        if (parseInt(goalsConceded.value) > 0 && selectedPlayer && !selectedPlayer.is_goalkeeper) {
+            showError('Gols sofridos só podem ser registrados para goleiros.');
+            return;
+        }
+
+        // Preparar dados
+        const data = {
+            player_id: parseInt(playerSelect.value),
+            session_date: sessionDate.value, // Enviamos a data exata como string ISO
+            goals: parseInt(goals.value),
+            assists: parseInt(assists.value),
+            goals_conceded: parseInt(goalsConceded.value)
+        };
+        
+        try {
+            showLoading(true);
+            
+            const response = await fetch('/api/historical-stats', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Limpar formulário
+                goals.value = '0';
+                assists.value = '0';
+                goalsConceded.value = '0';
+                
+                // Recarregar estatísticas
+                await loadHistoricalStats();
+                
+                showSuccess('Estatística adicionada com sucesso!');
+            } else {
+                showError(result.message || 'Erro ao adicionar estatística.');
+            }
+            
+            showLoading(false);
+        } catch (error) {
+            console.error('Erro ao adicionar estatística:', error);
+            showError('Erro ao conectar com o servidor.');
+            showLoading(false);
+        }
+    }
+
+    /**
+     * Excluir estatística diretamente sem confirmação
+     */
+    async function handleDeleteDirect(statId) {
+        try {
+            showLoading(true);
+            
+            const response = await fetch(`/api/historical-stats/${statId}`, {
+                method: 'DELETE'
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Recarregar estatísticas
+                await loadHistoricalStats();
+                showSuccess('Estatística excluída com sucesso!');
+            } else {
+                showError(result.message || 'Erro ao excluir estatística.');
+            }
+            
+            showLoading(false);
+        } catch (error) {
+            console.error('Erro ao excluir estatística:', error);
+            showError('Erro ao conectar com o servidor.');
+            showLoading(false);
+        }
+    }
+
+    /**
+     * Mostrar mensagem de erro
+     */
+    function showError(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast align-items-center text-white bg-danger border-0';
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        `;
+        
+        const toastContainer = document.querySelector('.toast-container');
+        if (toastContainer) {
+            toastContainer.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        } else {
+            alert(message);
+        }
+    }
+
+    /**
+     * Mostrar mensagem de sucesso
+     */
+    function showSuccess(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast align-items-center text-white bg-success border-0';
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        `;
+        
+        const toastContainer = document.querySelector('.toast-container');
+        if (toastContainer) {
+            toastContainer.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        } else {
+            alert(message);
+        }
+    }
+
+    /**
+     * Mostrar/ocultar indicador de carregamento
+     */
+    function showLoading(show, loaderId = 'stats-loader') {
+        const loader = document.getElementById(loaderId);
+        if (loader) {
+            loader.style.display = show ? 'flex' : 'none';
+        }
+    }
+</script>
+{% endblock %} 

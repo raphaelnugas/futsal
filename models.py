@@ -74,6 +74,9 @@ class Match(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     match_number = db.Column(db.Integer, default=1)  # Número da partida na sessão
     created_at = db.Column(db.DateTime, default=datetime.now)
+    timer_seconds = db.Column(db.Integer, default=0)  # Tempo do cronômetro em segundos
+    timer_status = db.Column(db.String(10), default="stopped")  # "running" ou "stopped"
+    timer_last_updated = db.Column(db.DateTime, default=datetime.now)  # Última atualização do timer
     
     # Relacionamentos
     player_matches = db.relationship('PlayerMatch', backref='match', lazy=True)
@@ -81,6 +84,16 @@ class Match(db.Model):
     
     def to_dict(self):
         """Converte o objeto Match para um dicionário."""
+        # Tratamento especial para timer_last_updated que pode ser string ou datetime
+        timer_last_updated = self.timer_last_updated
+        if timer_last_updated:
+            if isinstance(timer_last_updated, str):
+                timer_last_updated_str = timer_last_updated
+            else:
+                timer_last_updated_str = timer_last_updated.isoformat()
+        else:
+            timer_last_updated_str = None
+            
         return {
             'id': self.id,
             'session_id': self.session_id,
@@ -91,7 +104,10 @@ class Match(db.Model):
             'winner_team': self.winner_team,
             'is_active': self.is_active,
             'match_number': self.match_number,
-            'created_at': self.created_at.isoformat() if self.created_at else None
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'timer_seconds': self.timer_seconds,
+            'timer_status': self.timer_status,
+            'timer_last_updated': timer_last_updated_str
         }
 
 # Tabela de relação entre jogadores e partidas
@@ -183,6 +199,43 @@ class EventLog(db.Model):
             'match_id': self.match_id,
             'description': self.description,
             'timestamp': self.timestamp.isoformat() if self.timestamp else None
+        }
+
+# Modelo para estatísticas históricas
+class HistoricalStat(db.Model):
+    """
+    Modelo que armazena estatísticas históricas de jogadores.
+    Permite o registro de gols, assistências e gols sofridos antes da implementação do sistema.
+    Também permite o registro de partidas e sessões retroativas em quantidade.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('player.id'), nullable=False)
+    session_date = db.Column(db.Date, nullable=False)
+    goals = db.Column(db.Integer, default=0)
+    assists = db.Column(db.Integer, default=0)
+    goals_conceded = db.Column(db.Integer, default=0)
+    retroactive_matches = db.Column(db.Integer, default=0)  # Quantidade de partidas retroativas
+    retroactive_sessions = db.Column(db.Integer, default=0)  # Quantidade de sessões retroativas
+    played_as_goalkeeper = db.Column(db.Boolean, default=False)  # Se jogou como goleiro nas partidas retroativas
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    
+    # Relacionamento
+    player = db.relationship('Player', backref='historical_stats', lazy=True)
+    
+    def to_dict(self):
+        """Converte o objeto HistoricalStat para um dicionário."""
+        return {
+            'id': self.id,
+            'player_id': self.player_id,
+            'player_name': self.player.name if self.player else 'Desconhecido',
+            'session_date': self.session_date.isoformat() if self.session_date else None,
+            'goals': self.goals,
+            'assists': self.assists,
+            'goals_conceded': self.goals_conceded,
+            'retroactive_matches': self.retroactive_matches,
+            'retroactive_sessions': self.retroactive_sessions,
+            'played_as_goalkeeper': self.played_as_goalkeeper,
+            'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
 # Modelo para estatísticas globais (bônus)

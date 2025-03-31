@@ -100,39 +100,42 @@ function showSuccess(message) {
  * @param {boolean} show - Se true, exibe o modal; se false, oculta
  */
 function toggleModal(modalId, show) {
-    const modal = document.getElementById(modalId);
-    if (!modal) {
+    const modalElement = document.getElementById(modalId);
+    if (!modalElement) {
         console.error(`Modal com ID ${modalId} não encontrado`);
         return;
     }
     
-    // Verificar se o modal já tem uma instância Bootstrap
-    let bsModal = modal.bsModal;
-    
-    // Se não existir, criar uma nova instância
-    if (!bsModal) {
-        try {
-            bsModal = new bootstrap.Modal(modal);
-            // Armazenar a referência para uso futuro
-            modal.bsModal = bsModal;
-        } catch (error) {
-            console.error(`Erro ao criar instância do Bootstrap Modal para ${modalId}:`, error);
-            // Fallback para o comportamento anterior caso o Bootstrap falhe
-            if (show) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
+    try {
+        if (show) {
+            // Instanciar o modal com opções padrão
+            const bsModal = new bootstrap.Modal(modalElement, {
+                backdrop: true,
+                keyboard: true
+            });
+            
+            // Corrigir problemas de foco quando o modal for mostrado
+            modalElement.addEventListener('shown.bs.modal', function() {
+                // Focar no primeiro campo de entrada, se houver
+                const firstInput = modalElement.querySelector('input, textarea, button:not(.btn-close)');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }, { once: true });
+            
+            bsModal.show();
+        } else {
+            const bsModal = bootstrap.Modal.getInstance(modalElement);
+            if (bsModal) {
+                // Remover foco de qualquer elemento dentro do modal antes de fechar
+                if (document.activeElement) {
+                    document.activeElement.blur();
+                }
+                bsModal.hide();
             }
-            return;
         }
-    }
-    
-    if (show) {
-        bsModal.show();
-    } else {
-        bsModal.hide();
+    } catch (error) {
+        console.error(`Erro ao manipular o modal ${modalId}:`, error);
     }
 }
 
@@ -252,3 +255,24 @@ function formatEventType(eventType) {
     
     return eventTypeMap[eventType] || eventType;
 }
+
+// Inicialização quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    // Corrija o problema de foco em modais
+    document.querySelectorAll('.modal').forEach(modalElement => {
+        modalElement.addEventListener('shown.bs.modal', function() {
+            // Focar no primeiro campo de entrada, se existir
+            const firstInput = this.querySelector('input:not([type="hidden"]), select, textarea');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 100);
+            }
+        });
+        
+        modalElement.addEventListener('hide.bs.modal', function() {
+            // Remover o foco de qualquer elemento antes de esconder o modal
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+        });
+    });
+});

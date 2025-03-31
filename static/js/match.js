@@ -239,6 +239,27 @@ async function loadMatchData() {
         // Atualizar interface
         updateMatchInterface();
         
+        // Carregar e atualizar estado do cronômetro do servidor
+        const timerResponse = await fetch(`/api/matches/${matchId}/timer`);
+        const timerData = await timerResponse.json();
+        
+        // Atualizar dados do timer local
+        timer.seconds = timerData.timer_seconds;
+        timer.isRunning = timerData.timer_status === 'running';
+        
+        // Atualizar o mostrador do cronômetro
+        if (matchTimerElement) {
+            matchTimerElement.textContent = formatTime(timer.seconds);
+        }
+        
+        // Se o cronômetro estiver em execução no servidor, iniciar a atualização local
+        if (timer.isRunning) {
+            if (startTimerButton) {
+                startTimerButton.disabled = true;
+            }
+            timer.interval = setInterval(updateTimerDisplay, 1000);
+        }
+        
         showLoading(false);
     } catch (error) {
         console.error('Erro ao carregar dados da partida:', error);
@@ -409,10 +430,129 @@ function startTimer() {
         startTimerButton.disabled = true;
     }
     
-    // Iniciar o intervalo
-    timer.isRunning = true;
-    timer.interval = setInterval(() => {
-        timer.seconds++;
+    // Chamar API para iniciar cronômetro no servidor
+    fetch(`/api/matches/${matchId}/timer/start`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            timer.isRunning = true;
+            
+            // Iniciar o intervalo para atualizar a interface (não o tempo, que agora é gerenciado pelo servidor)
+            timer.interval = setInterval(updateTimerDisplay, 1000);
+        } else {
+            showError(data.message || 'Não foi possível iniciar o cronômetro.');
+            // Habilitar o botão novamente em caso de erro
+            if (startTimerButton) {
+                startTimerButton.disabled = false;
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao iniciar cronômetro:', error);
+        showError('Erro ao conectar com o servidor.');
+        // Habilitar o botão novamente em caso de erro
+        if (startTimerButton) {
+            startTimerButton.disabled = false;
+        }
+    });
+}
+
+/**
+ * Pausa o cronômetro
+ */
+function pauseTimer() {
+    if (!timer.isRunning) return;
+    
+    // Habilitar botão de iniciar se existir
+    if (startTimerButton) {
+        startTimerButton.disabled = false;
+    }
+    
+    // Parar o intervalo local
+    clearInterval(timer.interval);
+    
+    // Chamar API para pausar cronômetro no servidor
+    fetch(`/api/matches/${matchId}/timer/pause`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            timer.isRunning = false;
+            
+            // Atualizar contador local com o valor do servidor
+            timer.seconds = data.timer_seconds;
+            if (matchTimerElement) {
+                matchTimerElement.textContent = formatTime(timer.seconds);
+            }
+        } else {
+            showError(data.message || 'Não foi possível pausar o cronômetro.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao pausar cronômetro:', error);
+        showError('Erro ao conectar com o servidor.');
+    });
+}
+
+/**
+ * Reinicia o cronômetro
+ */
+function resetTimer() {
+    // Parar o cronômetro se estiver rodando
+    if (timer.isRunning) {
+        clearInterval(timer.interval);
+        timer.isRunning = false;
+    }
+    
+    // Chamar API para resetar cronômetro no servidor
+    fetch(`/api/matches/${matchId}/timer/reset`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            timer.seconds = 0;
+            timer.alarmed = false;
+            
+            // Atualizar o mostrador
+            if (matchTimerElement) {
+                matchTimerElement.textContent = formatTime(timer.seconds);
+            }
+            
+            // Resetar botão de iniciar se existir
+            if (startTimerButton) {
+                startTimerButton.disabled = false;
+            }
+        } else {
+            showError(data.message || 'Não foi possível resetar o cronômetro.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao resetar cronômetro:', error);
+        showError('Erro ao conectar com o servidor.');
+    });
+}
+
+/**
+ * Atualiza o mostrador do cronômetro com o valor mais recente do servidor
+ */
+function updateTimerDisplay() {
+    fetch(`/api/matches/${matchId}/timer`)
+    .then(response => response.json())
+    .then(data => {
+        timer.seconds = data.timer_seconds;
+        
+        // Parar o temporizador se o servidor indicar que está pausado
+        if (data.timer_status === 'stopped' && timer.isRunning) {
+            clearInterval(timer.interval);
+            timer.isRunning = false;
+            if (startTimerButton) {
+                startTimerButton.disabled = false;
+            }
+        }
         
         // Atualizar o mostrador
         if (matchTimerElement) {
@@ -429,47 +569,10 @@ function startTimer() {
             const timeUpModalBootstrap = new bootstrap.Modal(document.getElementById('time-up-modal'));
             timeUpModalBootstrap.show();
         }
-    }, 1000);
-}
-
-/**
- * Pausa o cronômetro
- */
-function pauseTimer() {
-    if (!timer.isRunning) return;
-    
-    // Habilitar botão de iniciar se existir
-    if (startTimerButton) {
-        startTimerButton.disabled = false;
-    }
-    
-    // Parar o intervalo
-    clearInterval(timer.interval);
-    timer.isRunning = false;
-}
-
-/**
- * Reinicia o cronômetro
- */
-function resetTimer() {
-    // Parar o cronômetro se estiver rodando
-    if (timer.isRunning) {
-        pauseTimer();
-    }
-    
-    // Resetar valores
-    timer.seconds = 0;
-    timer.alarmed = false;
-    
-    // Atualizar o mostrador
-    if (matchTimerElement) {
-        matchTimerElement.textContent = formatTime(timer.seconds);
-    }
-    
-    // Resetar botão de iniciar se existir
-    if (startTimerButton) {
-        startTimerButton.disabled = false;
-    }
+    })
+    .catch(error => {
+        console.error('Erro ao atualizar cronômetro:', error);
+    });
 }
 
 /**

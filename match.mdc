@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- Ao iniciar sessão, os jogadores devem ser lançados no quadro branco a medida que vão chegando no local.
+- Quando houverem 10 jogadores, o botão de sortear times deve aparecer
+- Assincronamente, os usuários podem continuar colocando os nomes no quadro branco, quem está em partida os nomes saem do quadro branco
+- Quando ambos os times Laranja e Preto estiverem completos, podemos iniciar partida
+- Ao iniciar partida, o cronômetro do servidor começa a rodar
+- O usuário controla as marcações de gols
+- Quando um time faz um gol, todo o time adversário deve contabilizar como um gol sofrido na partida
+- Aos 10 minutos o cronômetro deve emitir um alerta de fim da partida
+- Quando a bola sair, o usuário encerra a partida
+- Ao encerrar, é computada a vitória para o time de maior placar
+- Em caso de empate, os times tiram na sorte do par ou ímpar quem permanece
+- Ao confirmar vitória, o usuário deve retornar para a página da sessão automaticamente
+- O time vencedor permanece com todos os jogadores no quadrante
+- O time derrotado se esvazia, os nomes de todos os jogadores derrotados voltam para o quadro branco
