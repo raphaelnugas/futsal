@@ -518,9 +518,8 @@ function displayDrawResult() {
         playerItem.className = 'mb-2';
         playerItem.innerHTML = `
             <div class="d-flex align-items-center">
-                <div class="player-name">
-                    ${player.name}
-                    ${player.played_as_goalkeeper ? '<span class="badge badge-blue ml-1">Goleiro</span>' : ''}
+                <div class="player-name" style="font-size: 0.9rem;">
+                    ${player.played_as_goalkeeper ? `<span class="text-blue">${player.name}</span>` : player.name}
                 </div>
             </div>
         `;
@@ -533,9 +532,8 @@ function displayDrawResult() {
         playerItem.className = 'mb-2';
         playerItem.innerHTML = `
             <div class="d-flex align-items-center">
-                <div class="player-name">
-                    ${player.name}
-                    ${player.played_as_goalkeeper ? '<span class="badge badge-blue ml-1">Goleiro</span>' : ''}
+                <div class="player-name" style="font-size: 0.9rem;">
+                    ${player.played_as_goalkeeper ? `<span class="text-blue">${player.name}</span>` : player.name}
                 </div>
             </div>
         `;
@@ -584,91 +582,54 @@ function setupTeamsView() {
 function updateTeamsView() {
     if (!orangeTeamContainer || !blackTeamContainer) return;
     
-    // Estrutura para time laranja
-    orangeTeamContainer.innerHTML = `
-        <div class="team-header">
-            <h5>Time Laranja <span id="orange-team-count" class="badge badge-orange">${orangeTeam.length}</span></h5>
-            <div class="team-actions">
-                <button id="randomize-teams-button" class="btn btn-sm btn-secondary" title="Reorganizar times aleatoriamente">
-                    <i class="fas fa-random"></i>
-                </button>
-            </div>
-        </div>
-        <div class="goalkeeper-area">
-            <h6>Goleiro</h6>
-            <div class="goalkeeper-dropzone" data-area="orange" data-team="orange">
-                ${orangeTeam.filter(p => p.played_as_goalkeeper).map(player => `
-                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
-                        <div class="player-avatar">${getInitials(player.name)}</div>
-                        <div class="player-info">
-                            <div class="player-name">
-                                ${player.name}
-                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-        <div class="players-area">
-            <h6>Jogadores</h6>
-            <div class="players-dropzone" data-area="orange" data-team="orange">
-                ${orangeTeam.filter(p => !p.played_as_goalkeeper).map(player => `
-                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
-                        <div class="player-avatar">${getInitials(player.name)}</div>
-                        <div class="player-info">
-                            <div class="player-name">
-                                ${player.name}
-                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
+    // Atualizar contenedores de times
+    const orangeGoalkeeperDropzone = document.getElementById('orange-goalkeeper-dropzone');
+    const orangePlayersDropzone = document.getElementById('orange-players-dropzone');
+    const blackGoalkeeperDropzone = document.getElementById('black-goalkeeper-dropzone');
+    const blackPlayersDropzone = document.getElementById('black-players-dropzone');
     
-    // Estrutura para time preto
-    blackTeamContainer.innerHTML = `
-        <div class="team-header">
-            <h5>Time Preto <span id="black-team-count" class="badge badge-dark">${blackTeam.length}</span></h5>
-        </div>
-        <div class="goalkeeper-area">
-            <h6>Goleiro</h6>
-            <div class="goalkeeper-dropzone" data-area="black" data-team="black">
-                ${blackTeam.filter(p => p.played_as_goalkeeper).map(player => `
-                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
-                        <div class="player-avatar">${getInitials(player.name)}</div>
-                        <div class="player-info">
-                            <div class="player-name">
-                                ${player.name}
-                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-        <div class="players-area">
-            <h6>Jogadores</h6>
-            <div class="players-dropzone" data-area="black" data-team="black">
-                ${blackTeam.filter(p => !p.played_as_goalkeeper).map(player => `
-                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
-                        <div class="player-avatar">${getInitials(player.name)}</div>
-                        <div class="player-info">
-                            <div class="player-name">
-                                ${player.name}
-                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
+    // Limpar áreas
+    if (orangeGoalkeeperDropzone) orangeGoalkeeperDropzone.innerHTML = '';
+    if (orangePlayersDropzone) orangePlayersDropzone.innerHTML = '';
+    if (blackGoalkeeperDropzone) blackGoalkeeperDropzone.innerHTML = '';
+    if (blackPlayersDropzone) blackPlayersDropzone.innerHTML = '';
+    
+    // Preencher times
+    if (orangeTeam.length > 0) {
+        // Time laranja
+        orangeTeam.forEach(player => {
+            const playerElement = createPlayerElement(player);
+            if (player.played_as_goalkeeper && orangeGoalkeeperDropzone) {
+                orangeGoalkeeperDropzone.appendChild(playerElement);
+            } else if (orangePlayersDropzone) {
+                orangePlayersDropzone.appendChild(playerElement);
+            }
+        });
+    }
+    
+    if (blackTeam.length > 0) {
+        // Time preto
+        blackTeam.forEach(player => {
+            const playerElement = createPlayerElement(player);
+            if (player.played_as_goalkeeper && blackGoalkeeperDropzone) {
+                blackGoalkeeperDropzone.appendChild(playerElement);
+            } else if (blackPlayersDropzone) {
+                blackPlayersDropzone.appendChild(playerElement);
+            }
+        });
+    }
+    
+    // Atualizar contadores
+    updateTeamsCount();
     
     // Atualizar contadores de vitória
     updateVictoryCounters();
+    
+    // Reconfigurar drag and drop
+    setupDragAndDrop();
+    
+    // Atualizar placeholders para áreas vazias
+    updateDropzonePlaceholders();
 }
 
 /**
@@ -714,36 +675,41 @@ function updateVictoryCounters() {
  * Atualiza a lista de jogadores aguardando
  */
 function updateWaitingPlayers() {
-    if (!waitingPlayersContainer) return;
+    const waitingPlayersList = document.getElementById('waiting-players-list');
+    const noWaitingPlayers = document.getElementById('no-waiting-players');
     
-    // Atualizar container de jogadores aguardando
-    waitingPlayersContainer.innerHTML = `
-        <h5>Jogadores Aguardando <span id="waiting-players-count" class="badge badge-secondary">${waitingPlayers.length}</span></h5>
-        ${waitingPlayers.length === 0 ? 
-            '<p class="text-muted">Não há jogadores aguardando.</p>' : 
-            `<div class="waiting-dropzone" data-area="waiting">
-                ${waitingPlayers.map(player => `
-                    <div class="player-item" draggable="true" data-player-id="${player.id}" data-goalkeeper="${player.is_goalkeeper}">
-                        <div class="player-avatar">${getInitials(player.name)}</div>
-                        <div class="player-info">
-                            <div class="player-name">
-                                ${player.name}
-                                ${player.is_goalkeeper ? '<span class="goalkeeper-badge">Goleiro</span>' : ''}
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>`
-        }
-    `;
+    if (!waitingPlayersList) return;
     
-    // Atualizar evento de randomização após adicionar o botão
-    const randomizeTeamsButton = document.getElementById('randomize-teams-button');
-    if (randomizeTeamsButton) {
-        randomizeTeamsButton.addEventListener('click', randomizeTeams);
+    // Limpar lista atual
+    waitingPlayersList.innerHTML = '';
+    
+    // Mostrar mensagem caso não haja jogadores aguardando
+    if (noWaitingPlayers) {
+        noWaitingPlayers.style.display = waitingPlayers.length === 0 ? 'block' : 'none';
     }
     
-    // Configurar drag-and-drop para os novos elementos
+    // Se não há jogadores aguardando, adicionar um placeholder
+    if (waitingPlayers.length === 0) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'dropzone-placeholder';
+        placeholder.innerHTML = '<i class="fas fa-user-clock"></i> Arraste jogadores para cá';
+        waitingPlayersList.appendChild(placeholder);
+        return;
+    }
+    
+    // Adicionar jogadores à lista
+    waitingPlayers.forEach(player => {
+        const playerElement = createPlayerElement(player);
+        waitingPlayersList.appendChild(playerElement);
+    });
+    
+    // Atualizar o contador de jogadores
+    const waitingCount = document.getElementById('waiting-players-count');
+    if (waitingCount) {
+        waitingCount.textContent = waitingPlayers.length;
+    }
+    
+    // Reconfigurar drag and drop
     setupDragAndDrop();
 }
 
@@ -1256,6 +1222,9 @@ function openEndMatchModal(matchId) {
         drawResolution.style.display = 'block';
     }
     
+    // Configurar os botões de pontuação
+    setupScoreButtons();
+    
     // Abrir o modal usando Bootstrap
     const endMatchModal = new bootstrap.Modal(document.getElementById('end-match-modal'));
     endMatchModal.show();
@@ -1316,13 +1285,75 @@ async function confirmMatchEnd() {
 }
 
 /**
+ * Configurar eventos para botões de pontuação no modal de fim de partida
+ */
+function setupScoreButtons() {
+    const scoreButtons = document.querySelectorAll('.score-btn');
+    
+    scoreButtons.forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            
+            const team = button.getAttribute('data-team');
+            const action = button.getAttribute('data-action');
+            const scoreElement = document.getElementById(`result-${team}-score`);
+            
+            if (!scoreElement) return;
+            
+            let score = parseInt(scoreElement.textContent);
+            
+            if (action === 'increase') {
+                score++;
+            } else if (action === 'decrease' && score > 0) {
+                score--;
+            }
+            
+            scoreElement.textContent = score;
+            
+            // Atualizar texto do vencedor
+            updateWinnerText();
+        });
+    });
+}
+
+/**
+ * Atualizar o texto do vencedor com base nos placares
+ */
+function updateWinnerText() {
+    const orangeScore = parseInt(document.getElementById('result-orange-score').textContent);
+    const blackScore = parseInt(document.getElementById('result-black-score').textContent);
+    const winnerText = document.getElementById('winner-text');
+    const drawResolution = document.getElementById('draw-resolution');
+    
+    if (orangeScore > blackScore) {
+        winnerText.textContent = 'Time Laranja venceu!';
+        winnerText.className = 'text-orange';
+        drawResolution.style.display = 'none';
+        matchResult.winner = 'orange';
+    } else if (blackScore > orangeScore) {
+        winnerText.textContent = 'Time Preto venceu!';
+        winnerText.className = 'text-black';
+        drawResolution.style.display = 'none';
+        matchResult.winner = 'black';
+    } else {
+        winnerText.textContent = 'Empate!';
+        winnerText.className = 'text-muted';
+        drawResolution.style.display = 'block';
+        matchResult.winner = null;
+    }
+}
+
+/**
  * Configuração de drag-and-drop para gerenciamento de times
  */
 
 /**
- * Configura a funcionalidade de drag-and-drop para formação de times
+ * Configura o drag-and-drop para os jogadores
  */
 function setupDragAndDrop() {
+    // Remover eventos anteriores se já existirem
+    removeDragAndDropEvents();
+    
     // Elementos arrastáveis
     const draggableElements = document.querySelectorAll('.player-item');
     
@@ -1332,10 +1363,22 @@ function setupDragAndDrop() {
     // Adicionar eventos para cada elemento arrastável
     draggableElements.forEach(element => {
         element.setAttribute('draggable', 'true');
+        element.setAttribute('title', 'Arraste para mover o jogador');
         
         // Eventos de drag para os elementos
         element.addEventListener('dragstart', dragStart);
         element.addEventListener('dragend', dragEnd);
+        element.addEventListener('touchstart', touchStart, { passive: false });
+        element.addEventListener('touchmove', touchMove, { passive: false });
+        element.addEventListener('touchend', touchEnd);
+        
+        // Adicionar indicador visual de que é arrastável
+        if (!element.querySelector('.drag-handle')) {
+            const dragHandle = document.createElement('div');
+            dragHandle.className = 'drag-handle';
+            dragHandle.innerHTML = '<i class="fas fa-grip-lines"></i>';
+            element.appendChild(dragHandle);
+        }
         
         // Impedir comportamento padrão de links dentro dos elementos arrastáveis
         const links = element.querySelectorAll('a');
@@ -1353,7 +1396,80 @@ function setupDragAndDrop() {
         dropzone.addEventListener('dragover', dragOver);
         dropzone.addEventListener('dragleave', dragLeave);
         dropzone.addEventListener('drop', drop);
+        
+        // Adicionar rótulos para áreas vazias
+        if (dropzone.children.length === 0 && !dropzone.querySelector('.dropzone-placeholder')) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'dropzone-placeholder';
+            
+            if (dropzone.classList.contains('goalkeeper-dropzone')) {
+                placeholder.textContent = 'Arraste um goleiro para cá';
+            } else if (dropzone.classList.contains('players-dropzone')) {
+                placeholder.textContent = 'Arraste jogadores para cá';
+            } else if (dropzone.classList.contains('waiting-dropzone')) {
+                placeholder.textContent = 'Jogadores aguardando';
+            }
+            
+            dropzone.appendChild(placeholder);
+        }
     });
+    
+    // Adicionar instruções visuais
+    addDragInstructions();
+}
+
+/**
+ * Remove eventos de drag and drop anteriores
+ */
+function removeDragAndDropEvents() {
+    const draggableElements = document.querySelectorAll('.player-item');
+    draggableElements.forEach(element => {
+        element.removeEventListener('dragstart', dragStart);
+        element.removeEventListener('dragend', dragEnd);
+        element.removeEventListener('touchstart', touchStart);
+        element.removeEventListener('touchmove', touchMove);
+        element.removeEventListener('touchend', touchEnd);
+    });
+    
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    dropzones.forEach(dropzone => {
+        dropzone.removeEventListener('dragover', dragOver);
+        dropzone.removeEventListener('dragleave', dragLeave);
+        dropzone.removeEventListener('drop', drop);
+    });
+}
+
+/**
+ * Adiciona instruções visuais para drag and drop
+ */
+function addDragInstructions() {
+    // Verificar se já existe
+    if (document.querySelector('.drag-instructions')) return;
+    
+    // Adicionar uma mensagem de instruções
+    const teamsContainer = document.getElementById('teams-container');
+    if (teamsContainer && !teamsContainer.querySelector('.drag-instructions')) {
+        const instructions = document.createElement('div');
+        instructions.className = 'drag-instructions alert alert-info mb-3';
+        instructions.innerHTML = '<i class="fas fa-info-circle"></i> Arraste os jogadores entre os times para reorganizá-los. O goleiro deve ser colocado na área de goleiro.';
+        teamsContainer.insertBefore(instructions, teamsContainer.firstChild);
+        
+        // Adicionar botão para fechar as instruções
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'btn-close';
+        closeBtn.setAttribute('aria-label', 'Fechar');
+        closeBtn.addEventListener('click', () => instructions.remove());
+        instructions.appendChild(closeBtn);
+        
+        // Auto-fechar após alguns segundos
+        setTimeout(() => {
+            if (instructions.parentNode) {
+                instructions.classList.add('fade-out');
+                setTimeout(() => instructions.remove(), 500);
+            }
+        }, 10000);
+    }
 }
 
 /**
@@ -1373,8 +1489,183 @@ function dragStart(e) {
         isGoalkeeper: isGoalkeeper
     }));
     
+    // Criar uma imagem fantasma para arrastar
+    const ghostImage = this.cloneNode(true);
+    ghostImage.style.opacity = '0.6';
+    ghostImage.style.position = 'absolute';
+    ghostImage.style.top = '-1000px';
+    document.body.appendChild(ghostImage);
+    
+    e.dataTransfer.setDragImage(ghostImage, 20, 20);
+    
+    // Remover a imagem fantasma após o início do arrasto
+    setTimeout(() => {
+        document.body.removeChild(ghostImage);
+    }, 0);
+    
+    // Destacar áreas de destino válidas
+    highlightValidDropzones(isGoalkeeper);
+    
     // Efeito de movimento
     e.dataTransfer.effectAllowed = 'move';
+}
+
+/**
+ * Função chamada quando começa um toque (para dispositivos móveis)
+ */
+function touchStart(e) {
+    // Verificar se já existe um elemento sendo arrastado
+    if (document.querySelector('.dragging')) return;
+    
+    const touch = e.touches[0];
+    const element = this;
+    
+    element.classList.add('dragging');
+    element.classList.add('touch-dragging');
+    
+    // Guardar a posição inicial
+    element.initialX = touch.clientX;
+    element.initialY = touch.clientY;
+    
+    // Guardar a posição do elemento
+    const rect = element.getBoundingClientRect();
+    element.offsetX = touch.clientX - rect.left;
+    element.offsetY = touch.clientY - rect.top;
+    
+    // Posicionar o elemento
+    element.style.position = 'fixed';
+    element.style.zIndex = '1000';
+    element.style.width = `${rect.width}px`;
+    
+    // Guardar o elemento atual
+    window.currentDragElement = element;
+    window.currentDragParent = element.parentElement;
+    
+    // Prevenir o comportamento padrão (scroll)
+    e.preventDefault();
+}
+
+/**
+ * Função chamada durante o movimento de toque
+ */
+function touchMove(e) {
+    if (!window.currentDragElement) return;
+    
+    const element = window.currentDragElement;
+    const touch = e.touches[0];
+    
+    // Mover o elemento
+    element.style.left = `${touch.clientX - element.offsetX}px`;
+    element.style.top = `${touch.clientY - element.offsetY}px`;
+    
+    // Verificar se está sobre uma área de destino
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    let targetDropzone = null;
+    
+    dropzones.forEach(dropzone => {
+        const rect = dropzone.getBoundingClientRect();
+        if (
+            touch.clientX >= rect.left && 
+            touch.clientX <= rect.right && 
+            touch.clientY >= rect.top && 
+            touch.clientY <= rect.bottom
+        ) {
+            targetDropzone = dropzone;
+        }
+        
+        // Remover highlight anterior
+        dropzone.classList.remove('drag-over');
+    });
+    
+    // Destacar a área de destino
+    if (targetDropzone) {
+        targetDropzone.classList.add('drag-over');
+        window.currentTargetDropzone = targetDropzone;
+    } else {
+        window.currentTargetDropzone = null;
+    }
+    
+    // Prevenir o comportamento padrão (scroll)
+    e.preventDefault();
+}
+
+/**
+ * Função chamada quando termina um toque
+ */
+function touchEnd(e) {
+    if (!window.currentDragElement) return;
+    
+    const element = window.currentDragElement;
+    
+    // Remover os estilos
+    element.style.position = '';
+    element.style.zIndex = '';
+    element.style.left = '';
+    element.style.top = '';
+    element.style.width = '';
+    
+    element.classList.remove('dragging');
+    element.classList.remove('touch-dragging');
+    
+    // Se tem uma área de destino, mover o elemento
+    if (window.currentTargetDropzone) {
+        const targetDropzone = window.currentTargetDropzone;
+        targetDropzone.classList.remove('drag-over');
+        
+        // Obter informações do jogador
+        const playerId = parseInt(element.getAttribute('data-player-id'));
+        const sourceArea = window.currentDragParent.getAttribute('data-area');
+        const isGoalkeeper = element.getAttribute('data-goalkeeper') === 'true';
+        
+        // Obter informações da área de destino
+        const targetArea = targetDropzone.getAttribute('data-area');
+        const targetTeam = targetDropzone.getAttribute('data-team');
+        const isGoalkeeperZone = targetDropzone.classList.contains('goalkeeper-dropzone');
+        
+        // Validar regras para goleiro
+        if (isGoalkeeperZone && !isGoalkeeper && !confirm('Este jogador não é goleiro. Confirma que deseja colocá-lo como goleiro?')) {
+            // Restaurar ao local original
+            window.currentDragParent.appendChild(element);
+        } else {
+            // Mover o elemento para a área de destino
+            targetDropzone.appendChild(element);
+            
+            // Atualizar os arrays de times
+            updateTeamArrays(playerId, sourceArea, targetArea, targetTeam, isGoalkeeperZone);
+        }
+    } else {
+        // Restaurar ao local original
+        window.currentDragParent.appendChild(element);
+    }
+    
+    // Limpar as variáveis
+    window.currentDragElement = null;
+    window.currentDragParent = null;
+    window.currentTargetDropzone = null;
+    
+    // Remover highlight de todas as áreas
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    dropzones.forEach(dropzone => {
+        dropzone.classList.remove('drag-over');
+    });
+}
+
+/**
+ * Destaca as áreas de destino válidas para um jogador
+ */
+function highlightValidDropzones(isGoalkeeper) {
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    
+    dropzones.forEach(dropzone => {
+        if (dropzone.classList.contains('goalkeeper-dropzone')) {
+            // Adicionar uma classe especial para destacar áreas de goleiro
+            if (isGoalkeeper) {
+                dropzone.classList.add('valid-dropzone');
+            }
+        } else {
+            dropzone.classList.add('valid-dropzone');
+        }
+    });
 }
 
 /**
@@ -1382,6 +1673,16 @@ function dragStart(e) {
  */
 function dragEnd() {
     this.classList.remove('dragging');
+    
+    // Remover destaque de todas as áreas
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    dropzones.forEach(dropzone => {
+        dropzone.classList.remove('drag-over');
+        dropzone.classList.remove('valid-dropzone');
+    });
+    
+    // Ocultar placeholders
+    updateDropzonePlaceholders();
 }
 
 /**
@@ -1420,8 +1721,14 @@ function drop(e) {
     
     // Validar se o jogador pode ser solto nesta área
     // Para área de goleiro, somente goleiros (ou jogadores que possam atuar como goleiro)
-    if (isGoalkeeperZone && !isGoalkeeper && !confirm('Este jogador não é goleiro. Confirma que deseja colocá-lo como goleiro?')) {
-        return;
+    if (isGoalkeeperZone && !isGoalkeeper) {
+        // Verificar se o jogador já atuou como goleiro antes ou pedir confirmação
+        const player = findPlayerById(playerId);
+        if (player && player.can_play_goalkeeper) {
+            // Jogador já jogou como goleiro antes, permitir sem confirmação
+        } else if (!confirm('Este jogador não é goleiro. Confirma que deseja colocá-lo como goleiro?')) {
+            return;
+        }
     }
     
     // Encontrar o elemento arrastado
@@ -1432,8 +1739,61 @@ function drop(e) {
     // Mover o elemento para a área de destino
     this.appendChild(draggedElement);
     
+    // Remover placeholders se existirem
+    const placeholder = this.querySelector('.dropzone-placeholder');
+    if (placeholder) {
+        placeholder.remove();
+    }
+    
     // Atualizar os arrays de times
     updateTeamArrays(playerId, sourceArea, targetArea, targetTeam, isGoalkeeperZone);
+    
+    // Atualizar placeholders
+    updateDropzonePlaceholders();
+}
+
+/**
+ * Atualiza os placeholders para áreas vazias
+ */
+function updateDropzonePlaceholders() {
+    const dropzones = document.querySelectorAll('.goalkeeper-dropzone, .players-dropzone, .waiting-dropzone');
+    
+    dropzones.forEach(dropzone => {
+        // Remover placeholder existente
+        const existingPlaceholder = dropzone.querySelector('.dropzone-placeholder');
+        if (existingPlaceholder) {
+            existingPlaceholder.remove();
+        }
+        
+        // Se não tem filhos que são jogadores, adicionar placeholder
+        const hasPlayers = Array.from(dropzone.children).some(child => child.classList.contains('player-item'));
+        
+        if (!hasPlayers) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'dropzone-placeholder';
+            
+            if (dropzone.classList.contains('goalkeeper-dropzone')) {
+                placeholder.innerHTML = '<i class="fas fa-hands"></i> Área do Goleiro';
+            } else if (dropzone.classList.contains('players-dropzone')) {
+                placeholder.innerHTML = '<i class="fas fa-running"></i> Área de Jogadores';
+            } else if (dropzone.classList.contains('waiting-dropzone') && dropzone.children.length === 0) {
+                placeholder.innerHTML = '<i class="fas fa-user-clock"></i> Arraste jogadores para cá';
+            }
+            
+            dropzone.appendChild(placeholder);
+        }
+    });
+}
+
+/**
+ * Encontra um jogador pelo ID
+ */
+function findPlayerById(playerId) {
+    // Procurar em todos os arrays
+    return allPlayers.find(p => p.id === playerId) || 
+           orangeTeam.find(p => p.id === playerId) || 
+           blackTeam.find(p => p.id === playerId) || 
+           waitingPlayers.find(p => p.id === playerId);
 }
 
 /**
@@ -1567,4 +1927,48 @@ function randomizeTeams() {
     // Atualizar a interface para refletir as mudanças
     updateTeamsView();
     updateWaitingPlayers();
+}
+
+/**
+ * Cria um elemento HTML para um jogador
+ */
+function createPlayerElement(player) {
+    const playerElement = document.createElement('div');
+    playerElement.className = 'player-item';
+    playerElement.setAttribute('draggable', 'true');
+    playerElement.setAttribute('data-player-id', player.id);
+    playerElement.setAttribute('data-goalkeeper', player.is_goalkeeper);
+    
+    // Avatar do jogador (iniciais)
+    const avatarElement = document.createElement('div');
+    avatarElement.className = 'player-avatar';
+    avatarElement.textContent = getInitials(player.name);
+    
+    // Informações do jogador
+    const infoElement = document.createElement('div');
+    infoElement.className = 'player-info';
+    
+    const nameElement = document.createElement('div');
+    nameElement.className = 'player-name';
+    nameElement.textContent = player.name;
+    
+    // Badge de goleiro se aplicável
+    if (player.is_goalkeeper) {
+        const badgeElement = document.createElement('span');
+        badgeElement.className = 'goalkeeper-badge';
+        badgeElement.textContent = 'Goleiro';
+        nameElement.appendChild(badgeElement);
+    }
+    
+    // Draghandle para arrastar
+    const dragHandle = document.createElement('div');
+    dragHandle.className = 'drag-handle';
+    dragHandle.innerHTML = '<i class="fas fa-grip-lines"></i>';
+    
+    infoElement.appendChild(nameElement);
+    playerElement.appendChild(avatarElement);
+    playerElement.appendChild(infoElement);
+    playerElement.appendChild(dragHandle);
+    
+    return playerElement;
 }

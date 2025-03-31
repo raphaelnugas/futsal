@@ -250,20 +250,28 @@ a:hover, a:focus {
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 2px solid var(--orange);
 }
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-image: url('../images/Banner2.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
     display: flex;
     align-items: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--black);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .navbar-brand img {
@@ -271,8 +279,8 @@ a:hover, a:focus {
 }
 
 .navbar-logo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: var(--orange);
     border-radius: 50%;
     margin-right: var(--spacing-sm);
@@ -280,18 +288,19 @@ a:hover, a:focus {
 
 .navbar-nav {
     display: flex;
+    gap: var(--spacing-sm);
     align-items: center;
-    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
 }
 
 .navbar-item {
-    list-style-type: none;
+    margin-left: var(--spacing-sm);
 }
 
 .navbar-link {
-    color: var(--white);
+    color: var(--black);
     font-weight: 500;
-    background-color: var(--orange);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--border-radius-sm);
     transition: all var(--transition-fast);
@@ -300,82 +309,87 @@ a:hover, a:focus {
 }
 
 .navbar-link:hover {
-    background-color: #e66a00;
-    color: var(--white);
+    background-color: var(--light-gray);
+    color: var(--orange);
     text-decoration: none;
 }
 
-/* Botões de navegação modernos */
+/* Botões de navegação */
 .nav-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 50px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    transition: all var(--transition-fast);
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
     text-decoration: none;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    font-size: 14px;
+    font-size: 0.9rem;
+    color: var(--white);
+    background-color: rgba(38, 38, 38, 0.7); /* Fundo semi-transparente para os botões */
+    backdrop-filter: blur(2px); /* Efeito de blur para melhorar a legibilidade */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .nav-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    filter: brightness(1.1);
 }
 
 .nav-btn-orange {
-    background-color: var(--team-orange);
+    background-color: rgba(255, 127, 42, 0.85);
     color: var(--white);
 }
 
 .nav-btn-orange:hover {
-    background-color: #ff8c40;
-    color: var(--white);
+    background-color: rgba(255, 127, 42, 0.95);
 }
 
 .nav-btn-black {
-    background-color: var(--team-black);
+    background-color: rgba(38, 38, 38, 0.85);
     color: var(--white);
 }
 
 .nav-btn-black:hover {
-    background-color: #3c3c3c;
-    color: var(--white);
+    background-color: rgba(38, 38, 38, 0.95);
 }
 
 .nav-btn-blue {
-    background-color: var(--blue);
+    background-color: rgba(13, 110, 253, 0.85);
     color: var(--white);
 }
 
 .nav-btn-blue:hover {
-    background-color: #2980b9;
+    background-color: rgba(13, 110, 253, 0.95);
+}
+
+.nav-btn-purple {
+    background-color: rgba(111, 66, 193, 0.85);
     color: var(--white);
 }
 
+.nav-btn-purple:hover {
+    background-color: rgba(111, 66, 193, 0.95);
+}
+
 .nav-btn-red {
-    background-color: var(--red);
+    background-color: rgba(220, 53, 69, 0.85);
     color: var(--white);
 }
 
 .nav-btn-red:hover {
-    background-color: #c0392b;
-    color: var(--white);
+    background-color: rgba(220, 53, 69, 0.95);
 }
 
 .nav-btn-green {
-    background-color: var(--green);
+    background-color: rgba(40, 167, 69, 0.85);
     color: var(--white);
 }
 
 .nav-btn-green:hover {
-    background-color: #218838;
-    color: var(--white);
+    background-color: rgba(40, 167, 69, 0.95);
 }
 
 /* Seção de conteúdo principal */
@@ -418,65 +432,134 @@ a:hover, a:focus {
 
 /* Cards de destaque (para dashboard) */
 .highlight-card {
+    background-color: var(--white);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    position: relative;
-    overflow: hidden;
-    min-height: 160px;
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    overflow: hidden;
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
 .highlight-card-title {
-    font-size: 1rem;
-    color: var(--white);
-    opacity: 0.9;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin-bottom: var(--spacing-xs);
+    color: var(--black);
 }
 
 .highlight-card-subtitle {
-    font-size: 0.875rem;
-    color: var(--white);
-    opacity: 0.8;
+    font-size: 0.9rem;
+    color: var(--gray);
     margin-bottom: var(--spacing-md);
 }
 
 .highlight-card-value {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--white);
     margin-bottom: var(--spacing-xs);
 }
 
 .highlight-card-icon {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    font-size: 1.5rem;
-    color: var(--white);
-    opacity: 0.3;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
 }
 
+/* Cores para os cards de destaque */
 .card-orange {
-    background-color: var(--team-orange);
-    color: var(--white);
+    border-top: 4px solid var(--orange);
 }
 
 .card-black {
-    background-color: var(--team-black);
-    color: var(--white);
+    border-top: 4px solid var(--black);
 }
 
 .card-purple {
-    background-color: var(--purple);
-    color: var(--white);
+    border-top: 4px solid var(--purple);
 }
 
 .card-blue {
-    background-color: var(--blue);
-    color: var(--white);
+    border-top: 4px solid var(--blue);
+}
+
+/* Estilo para o jogador em destaque */
+.highlight-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.highlight-player-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--orange);
+    object-fit: cover;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+}
+
+.highlight-player-initials {
+    background-color: var(--light-gray);
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight-player-info {
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .highlight-player {
+        flex-direction: row;
+        text-align: left;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .highlight-player-avatar {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0;
+    }
+    
+    .highlight-player-initials {
+        font-size: 22px;
+    }
+    
+    .highlight-player-info {
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .highlight-player-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .highlight-player-initials {
+        font-size: 18px;
+    }
+    
+    .highlight-card-value {
+        font-size: 1.2rem;
+    }
 }
 
 /* Tabelas */
@@ -609,6 +692,11 @@ a:hover, a:focus {
     color: var(--white);
 }
 
+.badge-blue {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
 .badge-success {
     background-color: var(--green);
     color: var(--white);
@@ -642,6 +730,10 @@ a:hover, a:focus {
 
 .text-white {
     color: var(--white);
+}
+
+.text-blue {
+    color: var(--blue);
 }
 
 .text-success {
@@ -746,26 +838,39 @@ a:hover, a:focus {
     padding-left: 15px;
 }
 
-/* Photo Preview */
+/* Estilo para foto de perfil e Cropper.js */
 .player-photo-preview {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #e9ecef;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 0 0 3px rgba(255, 127, 42, 0.2);
     cursor: pointer;
-    margin-bottom: 10px;
-    transition: all 0.2s ease;
+    border: 2px solid #e3e3e3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #f8f9fa;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .player-photo-preview:hover {
-    box-shadow: 0 0 0 3px rgba(255, 127, 42, 0.4);
-    transform: scale(1.02);
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.player-photo-preview.editing {
+    position: relative;
+    overflow: hidden;
+    cursor: move;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.player-photo-preview.editing img {
+    border-radius: 0;
+    max-width: none;
 }
 
 .player-photo-preview img {
@@ -774,46 +879,117 @@ a:hover, a:focus {
     object-fit: cover;
 }
 
-.photo-placeholder {
-    font-size: 14px;
-    color: #6c757d;
-}
-
-.photo-editor-container {
+/* Correções específicas para o Cropper.js */
+.cropper-container {
     position: relative;
     overflow: hidden;
+    direction: ltr;
+    touch-action: none;
+    user-select: none;
+    line-height: 0;
 }
 
-.photo-editor-overlay {
+.cropper-wrap-box,
+.cropper-canvas,
+.cropper-drag-box,
+.cropper-crop-box,
+.cropper-modal {
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    left: 0;
+    max-width: none !important;
+    max-height: none !important;
 }
 
-.player-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #e9ecef;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: #6c757d;
+.cropper-wrap-box {
     overflow: hidden;
 }
 
-.player-avatar img {
+.cropper-drag-box {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cropper-view-box {
+    display: block;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    outline: 1px solid var(--orange);
+    outline-color: rgba(255, 127, 42, 0.75);
+    border-radius: 50% !important;
+}
+
+.cropper-face {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.1;
+    border-radius: 50% !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+}
+
+/* Guias de alinhamento central (cruz) */
+.cropper-crop-box::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+}
+
+.cropper-crop-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+}
+
+/* Ocultar controles de ajuste desnecessários */
+.cropper-point,
+.cropper-line {
+    display: none !important;
+}
+
+/* Melhorias no elemento de imagem dentro do avatar */
+.avatar-circle img {
+    object-fit: cover !important;
+    object-position: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+}
+
+/* Corrigir dimensões da área de edição */
+.avatar-edit-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Garantir que o contêiner de edição seja adequado */
+.avatar-edit-container {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* Melhorar a visualização da área de corte */
+.cropper-crop-box {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
 /* Colunas responsivas */
@@ -843,16 +1019,12 @@ a:hover, a:focus {
 }
 
 .modal {
-    background-color: var(--white);
-    border-radius: var(--border-radius-md);
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-20px);
-    transition: transform var(--transition-normal);
-    border: 1px solid rgba(255, 127, 42, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1055;
 }
 
 .modal-overlay.active .modal {
@@ -948,11 +1120,13 @@ a:hover, a:focus {
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     position: relative;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s ease;
 }
 
 .team-board.team-orange {
     border-color: var(--team-orange);
-    background-color: rgba(255, 127, 42, 0.1);
+    background-color: rgba(255, 127, 42, 0.05);
 }
 
 .team-board.team-black {
@@ -961,11 +1135,16 @@ a:hover, a:focus {
 }
 
 .team-board.winner {
-    box-shadow: 0 0 0 2px var(--green);
+    box-shadow: 0 0 0 3px var(--green);
 }
 
 .team-board.loser {
-    box-shadow: 0 0 0 2px var(--red);
+    box-shadow: 0 0 0 3px var(--red);
+}
+
+.team-board:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
 }
 
 .team-title {
@@ -974,6 +1153,8 @@ a:hover, a:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .team-title.team-orange {
@@ -1023,17 +1204,19 @@ a:hover, a:focus {
     display: flex;
     align-items: center;
     padding: var(--spacing-sm);
-    border-bottom: 1px solid var(--light-gray);
+    border: 1px solid var(--light-gray);
     cursor: grab;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
     background-color: var(--white);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-sm);
     box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1;
+    user-select: none;
 }
 
 .player-item:last-child {
-    border-bottom: none;
     margin-bottom: 0;
 }
 
@@ -1041,49 +1224,139 @@ a:hover, a:focus {
     background-color: rgba(0, 0, 0, 0.02);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+    border-color: rgba(13, 110, 253, 0.3);
 }
 
 .player-item.selected {
     background-color: rgba(255, 127, 42, 0.1);
+    border-color: var(--team-orange);
 }
 
 .player-item.dragging {
-    opacity: 0.7;
+    opacity: 0.8;
     box-shadow: var(--shadow-lg);
     cursor: grabbing;
+    z-index: 100;
+    border: 2px solid rgba(13, 110, 253, 0.5);
+    background-color: rgba(13, 110, 253, 0.05);
+    transform: scale(1.02);
 }
 
 /* Estilização para áreas de arrastar e soltar */
 .goalkeeper-area, .players-area {
     padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .goalkeeper-dropzone, .players-dropzone, .waiting-dropzone {
-    min-height: 60px;
+    min-height: 80px;
     border: 2px dashed rgba(0, 0, 0, 0.1);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-sm);
-    transition: background-color var(--transition-fast);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .team-orange .goalkeeper-dropzone, 
 .team-orange .players-dropzone {
     background-color: rgba(255, 127, 42, 0.05);
+    border-color: rgba(255, 127, 42, 0.3);
 }
 
 .team-black .goalkeeper-dropzone, 
 .team-black .players-dropzone {
     background-color: rgba(38, 38, 38, 0.05);
+    border-color: rgba(38, 38, 38, 0.3);
 }
 
 .waiting-dropzone {
     background-color: rgba(0, 0, 0, 0.02);
+    min-height: 100px;
 }
 
 /* Estado da área quando estiver sobre ela durante o arrasto */
 .drag-over {
     background-color: rgba(109, 189, 255, 0.15) !important;
     border-color: rgba(13, 110, 253, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+    transform: scale(1.01);
+}
+
+.team-orange .drag-over {
+    background-color: rgba(255, 127, 42, 0.15) !important;
+    border-color: rgba(255, 127, 42, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(255, 127, 42, 0.25);
+}
+
+.team-black .drag-over {
+    background-color: rgba(38, 38, 38, 0.15) !important;
+    border-color: rgba(38, 38, 38, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(38, 38, 38, 0.25);
+}
+
+/* Área válida para soltar */
+.valid-dropzone {
+    background-color: rgba(40, 167, 69, 0.05) !important;
+    border-color: rgba(40, 167, 69, 0.3) !important;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.1);
+}
+
+/* Placeholder para áreas vazias */
+.dropzone-placeholder {
+    color: var(--gray);
+    text-align: center;
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
+    opacity: 0.7;
+    user-select: none;
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dropzone-placeholder i {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+    opacity: 0.5;
+}
+
+/* Instruções de drag and drop */
+.drag-instructions {
+    position: relative;
+    padding-right: 40px;
+    transition: opacity 0.5s ease;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--blue);
+}
+
+.drag-instructions.fade-out {
+    opacity: 0;
+}
+
+/* Indicador visual de elemento arrastável */
+.drag-handle {
+    opacity: 0.3;
+    margin-left: var(--spacing-sm);
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    cursor: grab;
+}
+
+.player-item:hover .drag-handle {
+    opacity: 0.7;
+}
+
+/* Estilo para elemento arrastado via touch */
+.touch-dragging {
+    transform: scale(1.05);
+    z-index: 1000;
 }
 
 .player-avatar {
@@ -1114,6 +1387,9 @@ a:hover, a:focus {
     border-radius: 10px;
     font-size: 0.75rem;
     margin-left: var(--spacing-xs);
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
 }
 
 /* Cronômetro para Partida */
@@ -1376,24 +1652,24 @@ a:hover, a:focus {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--orange);
     background-color: white;
-    color: var(--primary);
+    color: var(--orange);
     padding: 0.3rem 0.8rem;
     font-size: 0.85rem;
     transition: all 0.2s ease;
 }
 
 .filter-btn:hover {
-    background-color: rgba(13, 110, 253, 0.1);
-    color: var(--primary);
-    border-color: var(--primary);
+    background-color: rgba(255, 127, 42, 0.1);
+    color: var(--orange);
+    border-color: var(--orange);
 }
 
 .filter-btn.active {
-    background-color: var(--primary);
+    background-color: var(--orange);
     color: white;
-    border-color: var(--primary);
+    border-color: var(--orange);
 }
 
 .filter-btn i {
@@ -1525,39 +1801,47 @@ a:hover, a:focus {
 }
 
 .mobile-dropdown {
-    display: none;
     position: absolute;
-    top: 45px;
     right: 0;
+    top: 100%;
+    width: 220px;
     background-color: var(--white);
     border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-md);
-    min-width: 200px;
-    z-index: 999;
-    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-md);
+    display: none;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    z-index: 1000;
+    background-image: url('../images/Banner2.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .mobile-dropdown.active {
-    display: block;
+    display: flex;
 }
 
 .mobile-menu-item {
-    display: block;
-    padding: 12px 16px;
-    color: var(--black);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    color: var(--white);
     text-decoration: none;
-    transition: background-color var(--transition-fast);
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
     border: none;
-    background: none;
-    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    background-color: rgba(38, 38, 38, 0.8);
+    backdrop-filter: blur(2px);
 }
 
 .mobile-menu-item:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: var(--orange);
+    transform: translateY(-2px);
+    background-color: rgba(38, 38, 38, 0.9);
 }
 
 .mobile-menu-button {
@@ -1566,16 +1850,728 @@ a:hover, a:focus {
 
 /* Modal de Login */
 .modal {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1055;
+}
+
+.modal-backdrop {
+    opacity: 0.7 !important;
+    background-color: #000;
+    z-index: 1050;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+.modal-dialog {
+    max-width: 450px;
+    margin: 1.75rem auto;
+    width: 100%;
+    position: relative;
+    pointer-events: auto;
+    z-index: 1056;
 }
 
 .modal-content {
     border: none;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    pointer-events: auto;
+    outline: 0;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 127, 42, 0.2);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #toggle-password {
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+}
+
+.photo-placeholder {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.photo-editor-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-editor-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6c757d;
+    overflow: hidden;
+}
+
+.player-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Controles de edição de foto */
+.photo-editor-controls, .edit-photo-editor-controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.photo-editor-controls button, .edit-photo-editor-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.photo-placeholder {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.photo-editor-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-editor-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: none;
+}
+
+/* Estilos para o editor de fotos - implementação nova */
+.avatar-container {
+    position: relative;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-container.avatar-normal .avatar-edit-container,
+.avatar-container.avatar-normal .avatar-controls,
+.avatar-container.avatar-normal .avatar-confirm {
+    display: none;
+}
+
+.avatar-container.avatar-editing .avatar-circle {
+    display: none;
+}
+
+.avatar-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--orange);
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-initials {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--orange);
+}
+
+.avatar-edit-container {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.avatar-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.avatar-controls button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.avatar-confirm {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+
+.avatar-confirm:hover {
+    background-color: #e06c00;
+}
+
+/* Ajustes do Cropper.js */
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50% !important;
+}
+
+.cropper-view-box {
+    outline: 0;
+    box-shadow: 0 0 0 1px var(--orange);
+}
+
+.cropper-line,
+.cropper-point {
+    display: none !important;
+}
+
+/* Player Card - Layout do Card de Jogador */
+.player-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.player-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 3px solid var(--orange);
+}
+
+.player-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--black);
+}
+
+.player-role {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.player-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Player List - Layout Grid para Lista de Jogadores */
+#player-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    #player-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    #player-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Classe para garantir formato circular do cropbox */
+.circular-cropbox {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Garantir que o editor exiba corretamente a imagem */
+.avatar-editing .avatar-edit-container {
+    display: block;
+    position: relative;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para o guideline circular */
+.circular-guide {
+    position: absolute;
+    border: 2px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para tabela de classificação responsiva */
+.player-info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-avatar-container {
+    flex-shrink: 0;
+}
+
+.player-avatar-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--orange);
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.player-avatar-initials {
+    background-color: var(--light-gray);
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    line-height: 36px;
+}
+
+.player-data {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.player-name-cell {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.player-stats-summary {
+    font-size: 0.8rem;
+    color: var(--gray);
+    display: flex;
+    gap: 10px;
+}
+
+.player-stats-summary span {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+@media (max-width: 768px) {
+    .player-info-row {
+        gap: 8px;
+    }
+    
+    .player-avatar-small {
+        width: 32px;
+        height: 32px;
+    }
+
+    .player-avatar-initials {
+        font-size: 12px;
+        line-height: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .player-name-cell {
+        max-width: 120px;
+    }
+}
+
+/* Substituição para estilos de coluna na tabela de classificação */
+#stats-table th,
+#stats-table td {
+    padding: 12px 8px;
+    vertical-align: middle;
+}
+
+#stats-table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#stats-table th {
+    background-color: var(--orange);
+    color: white;
+    font-weight: 600;
+    padding: 12px 8px;
+    text-align: center;
+    border: none;
+}
+
+#stats-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+#stats-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+#stats-table tr:nth-child(even) {
+    background-color: rgba(255, 127, 42, 0.05);
+}
+
+#stats-table tr:hover {
+    background-color: rgba(255, 127, 42, 0.1);
+}
+
+#stats-table td {
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 8px;
+}
+
+.col-rank {
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.col-player {
+    width: auto;
+    min-width: 180px;
+}
+
+.col-stats {
+    width: 80px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Melhorias para a tabela responsiva */
+@media (max-width: 576px) {
+    #stats-table {
+        font-size: 0.85rem;
+    }
+    
+    .col-rank {
+        width: 35px;
+    }
+
+    .col-player {
+        max-width: 40%;
+    }
+    
+    .col-stats {
+        width: 15%;
+    }
+}
+
+/* Estilo para o card da classificação */
+.card-header {
+    background-color: white;
+    border-bottom: 2px solid var(--orange);
+    padding: 16px;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+}
+
+.filter-buttons {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.filter-btn {
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid var(--orange);
+    background-color: white;
+    color: var(--orange);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: rgba(255, 127, 42, 0.1);
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.filter-btn.active {
+    background-color: var(--orange);
+    color: white;
+    border-color: var(--orange);
+}
+
+/* Cards estatísticos menores - para colocar abaixo da classificação */
+.stats-summary-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.stats-card-sm {
+    flex: 1;
+    min-width: 120px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.stats-card-sm h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 5px;
+}
+
+.stats-card-sm p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 576px) {
+    .stats-summary-cards {
+        gap: 10px;
+    }
+    
+    .stats-card-sm {
+        padding: 10px;
+        min-width: 100px;
+    }
+    
+    .stats-card-sm h3 {
+        font-size: 20px;
+    }
+    
+    .stats-card-sm p {
+        font-size: 12px;
+    }
+}
+
+#draw-teams-modal .card-header {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+}
+
+#draw-teams-modal .card-body {
+    padding: 0.5rem;
+}
+
+#draw-teams-modal p {
+    font-size: 0.85rem;
+}
+
+#draw-result-container h6 {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+    #draw-teams-modal .modal-title {
+        font-size: 1.1rem;
+    }
+    
+    #draw-teams-modal p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Media query para ocultar a imagem de fundo em dispositivos móveis */
+@media (max-width: 768px) {
+    .navbar-container {
+        background-image: none;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .navbar-brand {
+        color: var(--orange);
+        text-shadow: none;
+    }
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+    .nav-btn {
+        background-color: rgba(38, 38, 38, 1); /* Sem transparência em mobile */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+    
+    .nav-btn-orange {
+        background-color: var(--team-orange);
+    }
+    
+    .nav-btn-black {
+        background-color: var(--team-black);
+    }
+    
+    .nav-btn-blue {
+        background-color: var(--blue);
+    }
+    
+    .nav-btn-purple {
+        background-color: var(--purple);
+    }
+    
+    .nav-btn-red {
+        background-color: var(--red);
+    }
+    
+    .nav-btn-green {
+        background-color: var(--green);
+    }
+}
+
+/* Contador de jogadores em times */
+#orange-team-count, #black-team-count, #waiting-players-count {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--dark);
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* Melhorias no estilo dos dropzones */
+.team-orange .goalkeeper-dropzone {
+    border-color: rgba(255, 127, 42, 0.5);
+    background-color: rgba(255, 127, 42, 0.05);
+}
+
+.team-orange .players-dropzone {
+    border-color: rgba(255, 127, 42, 0.4);
+    background-color: rgba(255, 127, 42, 0.03);
+}
+
+.team-black .goalkeeper-dropzone {
+    border-color: rgba(38, 38, 38, 0.5);
+    background-color: rgba(38, 38, 38, 0.05);
+}
+
+.team-black .players-dropzone {
+    border-color: rgba(38, 38, 38, 0.4);
+    background-color: rgba(38, 38, 38, 0.03);
+}
+
+/* Estilos para os jogadores */
+.player-item .player-name {
+    font-weight: 500;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -23,6 +23,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Quadro de Chegada</h5>
+                <p class="text-muted mb-0 small">Os primeiros 10 jogadores que chegarem formarão os times iniciais</p>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -39,14 +40,20 @@
                 </div>
                 
                 <div class="arrival-board">
-                    <h6 class="mb-3">Jogadores (<span id="arrival-count">0</span>/10)</h6>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0">Jogadores (<span id="arrival-count">0</span>/10)</h6>
+                        <span class="text-muted small">*Ordem de chegada</span>
+                    </div>
                     <ol id="arrival-list" class="arrival-list">
                         <!-- Lista será preenchida via JavaScript -->
                     </ol>
                 </div>
                 
-                <div class="mt-3">
-                    <button id="draw-teams-button" class="btn btn-success btn-lg" disabled>
+                <div class="mt-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Ao completar 10 jogadores, você poderá sortear as equipes.
+                    </div>
+                    <button id="draw-teams-button" class="btn btn-success btn-lg w-100" disabled>
                         <i class="fas fa-random"></i> Sortear Equipes
                     </button>
                 </div>
@@ -56,16 +63,36 @@
     
     <!-- Times Formados -->
     <div id="teams-container" class="mb-4" style="display: none;">
-        <h4 class="mb-3 text-center">Formação de Times <small class="text-muted">(Arraste para reorganizar)</small></h4>
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4 class="mb-0">Formação de Times</h4>
+                <p class="text-muted small mb-0">Arraste os jogadores para reorganizar os times</p>
+            </div>
+        </div>
+        
         <div class="row">
             <!-- Time Laranja -->
             <div class="col-12 col-md-6 mb-3">
                 <div id="orange-team-board" class="team-board team-orange">
-                    <div id="orange-team-container">
-                        <!-- Conteúdo do time laranja será gerado pelo JavaScript -->
+                    <div class="team-title">
+                        <h5>Time Laranja <span id="orange-team-count" class="badge bg-light text-dark">0</span></h5>
+                        <div id="orange-victory-count" class="victory-count">
+                            <!-- Contadores de vitória serão adicionados via JavaScript -->
+                        </div>
                     </div>
-                    <div id="orange-victory-count" class="victory-count">
-                        <!-- Contadores de vitória serão adicionados via JavaScript -->
+                    
+                    <div class="goalkeeper-area">
+                        <label class="form-label"><i class="fas fa-hands"></i> Goleiro</label>
+                        <div id="orange-goalkeeper-dropzone" class="goalkeeper-dropzone" data-area="orange" data-team="orange">
+                            <!-- Conteúdo será gerado via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="players-area">
+                        <label class="form-label"><i class="fas fa-running"></i> Jogadores de Linha</label>
+                        <div id="orange-players-dropzone" class="players-dropzone" data-area="orange" data-team="orange">
+                            <!-- Conteúdo será gerado via JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,20 +100,42 @@
             <!-- Time Preto -->
             <div class="col-12 col-md-6 mb-3">
                 <div id="black-team-board" class="team-board team-black">
-                    <div id="black-team-container">
-                        <!-- Conteúdo do time preto será gerado pelo JavaScript -->
+                    <div class="team-title">
+                        <h5>Time Preto <span id="black-team-count" class="badge bg-light text-dark">0</span></h5>
+                        <div id="black-victory-count" class="victory-count">
+                            <!-- Contadores de vitória serão adicionados via JavaScript -->
+                        </div>
                     </div>
-                    <div id="black-victory-count" class="victory-count">
-                        <!-- Contadores de vitória serão adicionados via JavaScript -->
+                    
+                    <div class="goalkeeper-area">
+                        <label class="form-label"><i class="fas fa-hands"></i> Goleiro</label>
+                        <div id="black-goalkeeper-dropzone" class="goalkeeper-dropzone" data-area="black" data-team="black">
+                            <!-- Conteúdo será gerado via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="players-area">
+                        <label class="form-label"><i class="fas fa-running"></i> Jogadores de Linha</label>
+                        <div id="black-players-dropzone" class="players-dropzone" data-area="black" data-team="black">
+                            <!-- Conteúdo será gerado via JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="d-flex justify-content-center mb-4">
-            <button id="start-match-button" class="btn btn-primary">
-                <i class="fas fa-play-circle"></i> Iniciar Partida
-            </button>
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex flex-column gap-3">
+                    <div class="alert alert-info mb-0">
+                        <i class="fas fa-info-circle"></i> Para iniciar uma partida, cada time precisa ter no mínimo 5 jogadores (1 goleiro + 4 jogadores de linha).
+                    </div>
+                    
+                    <button id="start-match-button" class="btn btn-primary btn-lg" disabled>
+                        <i class="fas fa-play-circle"></i> Iniciar Partida
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -94,11 +143,13 @@
     <div id="waiting-players-container" class="mb-4" style="display: none;">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Jogadores Aguardando</h5>
-                <small class="text-muted">Arraste para os times acima</small>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Jogadores Aguardando <span id="waiting-players-count" class="badge bg-light text-dark">0</span></h5>
+                    <span class="text-muted small">Arraste para os times acima</span>
+                </div>
             </div>
             <div class="card-body">
-                <div id="waiting-players-list" class="waiting-dropzone" data-team="waiting" data-role="any">
+                <div id="waiting-players-list" class="waiting-dropzone" data-area="waiting" data-team="waiting" data-role="any">
                     <!-- Lista será preenchida via JavaScript -->
                 </div>
                 <div id="no-waiting-players" class="text-center py-3" style="display: none;">
@@ -188,7 +239,9 @@
                 <button id="close-draw-teams-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>O sorteio será realizado priorizando os goleiros primeiro e depois os jogadores de linha.</p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> O sorteio será realizado priorizando os goleiros primeiro e depois os jogadores de linha. Os times serão equilibrados com base nas regras de sorteio.
+                </div>
                 
                 <div id="draw-result-container" style="display: none;">
                     <h6 class="mb-3">Resultado do Sorteio</h6>
@@ -235,16 +288,28 @@
             </div>
             <div class="modal-body">
                 <div id="match-result-container">
+                    <div class="alert alert-info mb-3">
+                        <i class="fas fa-info-circle"></i> Registre o resultado final da partida. O time vencedor ganhará um ponto na contagem de vitórias consecutivas.
+                    </div>
+                    
                     <h4 class="text-center mb-3">Resultado</h4>
                     <div class="score-board mb-3">
                         <div class="team-score orange">
                             <span class="team-name">Time Laranja</span>
-                            <span id="result-orange-score" class="team-score-value">0</span>
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-sm btn-outline-dark score-btn" data-team="orange" data-action="decrease">-</button>
+                                <span id="result-orange-score" class="team-score-value">0</span>
+                                <button class="btn btn-sm btn-outline-dark score-btn" data-team="orange" data-action="increase">+</button>
+                            </div>
                         </div>
                         <div class="score-divider">x</div>
                         <div class="team-score black">
                             <span class="team-name">Time Preto</span>
-                            <span id="result-black-score" class="team-score-value">0</span>
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-sm btn-outline-dark score-btn" data-team="black" data-action="decrease">-</button>
+                                <span id="result-black-score" class="team-score-value">0</span>
+                                <button class="btn btn-sm btn-outline-dark score-btn" data-team="black" data-action="increase">+</button>
+                            </div>
                         </div>
                     </div>
                     
@@ -278,8 +343,15 @@
                 <button id="close-end-session-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Tem certeza que deseja encerrar esta sessão? Esta ação não pode ser desfeita.</p>
-                <p>Todas as partidas em andamento serão encerradas automaticamente.</p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i> Tem certeza que deseja encerrar esta sessão? Esta ação não pode ser desfeita.
+                </div>
+                <p>Ao encerrar a sessão:</p>
+                <ul>
+                    <li>Todas as partidas em andamento serão encerradas automaticamente.</li>
+                    <li>As estatísticas dos jogadores serão finalizadas.</li>
+                    <li>Não será possível iniciar novas partidas nesta sessão.</li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" id="cancel-end-session" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
